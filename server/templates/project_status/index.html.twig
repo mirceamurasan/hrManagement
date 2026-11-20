@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project statuses{% endblock %}
+
+{% block body %}
+    <main>
+        <h1>Project statuses</h1>
+        {% for message in app.flashes('success') %}<p role="status">{{ message }}</p>{% endfor %}
+        <p><a href="{{ path('admin_project_status_new') }}">Add a status</a></p>
+        <p><a href="{{ path('admin_public_holiday_index') }}">Manage public holidays</a></p>
+
+        {% if statuses is empty %}
+            <p>No project statuses have been added.</p>
+        {% else %}
+            <table>
+                <thead><tr><th>Name</th><th>Finished</th><th>Active</th><th>Actions</th></tr></thead>
+                <tbody>
+                {% for status in statuses %}
+                    <tr>
+                        <td>{{ status.label }}</td>
+                        <td>{{ status.final ? 'Yes' : 'No' }}</td>
+                        <td>{{ status.trashed ? 'No' : 'Yes' }}</td>
+                        <td><a href="{{ path('admin_project_status_edit', {id: status.id}) }}">Edit</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </main>
+{% endblock %}

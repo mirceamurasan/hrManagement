@@ -58,6 +58,11 @@ class ProjectStatus extends SoftDeletableEntity
         return $this;
     }
 
+    public function setLabel(string $label): self
+    {
+        return $this->rename($label);
+    }
+
     public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;

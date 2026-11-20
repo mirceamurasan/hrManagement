@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add project status{% endblock %}
+
+{% block body %}
+    <main>
+        <h1>Add project status</h1>
+        {{ include('project_status/_form.html.twig', {button_label: 'Create'}) }}
+        <p><a href="{{ path('admin_project_status_index') }}">Back to list</a></p>
+    </main>
+{% endblock %}
