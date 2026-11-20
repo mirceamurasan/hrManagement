@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block title %}Accounts{% endblock %}
+{% block body %}
+    <main>
+        <h1>Accounts</h1>
+        <p><a href="{{ path('admin_account_new') }}">Add account</a></p>
+        <table><thead><tr><th>Email</th><th>Roles</th><th>Access</th><th></th></tr></thead><tbody>
+        {% for account in accounts %}<tr><td>{{ account.email }}</td><td>{{ account.roles|join(', ') }}</td><td>{{ account.active ? 'Active' : 'Disabled' }}</td><td><a href="{{ path('admin_account_edit', {id: account.id}) }}">Edit</a></td></tr>{% else %}<tr><td colspan="4">No accounts.</td></tr>{% endfor %}
+        </tbody></table>
+    </main>
+{% endblock %}
