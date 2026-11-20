@@ -1,0 +1,40 @@
+{% extends "FullSixProjectForecastBundle:Workers:new.html.twig" %}
+{% block title%}
+    <title>Edition Worker</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>{{ 'worker.edit'|trans }} : {{ entity.user.checkedName }}</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('workers_edit', { 'id': entity.id }) }}"
+{% endblock %}
+
+{% block formAction %}
+    {{ parent() }}
+{% endblock %}
+
+{% block password %}
+    {% if entity.user.login  and not entity.user.adLinked %}
+        <a href="{{ path('users_change_password_popup', { 'id': entity.user.login.id }) }}" class="btn password-popup" title="{{ 'user.changePassword.label'|trans }}">
+            {{ 'user.changePassword.label'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+    <h3>{{ 'worker.vacation.label'|trans }}</h3>
+        <a href="{{ path('vacations_new', {'id': entity.id}) }}" class="btn btn-primary vacation-popup">{{ 'common.action.create' |trans }}</a>
+        {% include 'FullSixProjectForecastBundle:Workers:workers_grid.html.twig' with { 'grid': vacationsGrid }%}
+    <h3>{{ 'worker.contract.label'|trans }}</h3>
+        <a href="{{ path('contracts_new', {'id': entity.id}) }}" class="btn btn-primary">{{ 'common.action.create' |trans }}</a>
+        {% include 'FullSixProjectForecastBundle:Workers:workers_grid.html.twig' with { 'grid': contractsGrid }%}
+{% endblock %}
+
+ {% block no_login_message %}
+     {% if entity.user.login is null %}
+         <h4>{{ 'user.notLoginYet'|trans }}</h4>
+     {% endif %}
+ {% endblock %}

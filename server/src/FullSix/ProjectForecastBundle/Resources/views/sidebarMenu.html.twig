@@ -1,0 +1,43 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block children %}
+    {# save current variables #}
+    {% set currentOptions = options %}
+    {% set currentItem = item %}
+    {# update the depth for children #}
+    {% if options.depth is not none %}
+        {% set options = currentOptions|merge({'depth': currentOptions.depth - 1}) %}
+    {% endif %}
+    {% for item in currentItem.children %}
+        {% if item.label == 'Administration' %}
+            <li class="divider"></li>
+        {% endif %}
+        <li {{ macros.attributes(item.attributes) }}>{{ block('linkElement') }}</li>
+        {% if item.label == 'Accueil' %}
+            <li class="divider"></li>
+        {% endif %}
+        {{ block('children') }}
+    {% endfor %}
+    {# restore current variables #}
+    {% set item = currentItem %}
+    {% set options = currentOptions %}
+{% endblock %}
+
+{% block root %}
+    {% import 'knp_menu.html.twig' as macros %}
+    {% set listAttributes = item.attributes %}
+    <ul {{ macros.attributes(listAttributes) }}>
+        {{ block('children') -}}
+    </ul>
+{% endblock %}
+
+{% block linkElement %}
+{% import 'knp_menu.html.twig' as macros %}
+            {% if item.hasChildren %}
+                {{ block('label') }}
+            {% else %}
+                <a href="{{ item.uri }}"{{ macros.attributes(item.linkAttributes) }}>
+                    {{ block('label') }}
+                </a>
+            {% endif %}
+{% endblock %}

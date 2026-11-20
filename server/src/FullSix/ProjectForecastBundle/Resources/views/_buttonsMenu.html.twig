@@ -1,0 +1,22 @@
+<form class="activation" action="{{ path(entityName ~ '_activation', { 'id': entity.id, 'page': returnPage }) }}" method="post">
+    <div class="btn-toolbar">
+        <div class="btn-group">
+            <a href="{{ path(entityName) }}" class="btn" title="{{ 'common.action.back'|trans }}">
+                <i class="icon-arrow-left"></i>
+            </a>
+            <i class="icon-white"></i>
+            {% if app.user is not null and is_granted('ROLE_ADMIN') %}
+                {% if returnPage != "edit"  %}
+                    <a href="{{ path(entityName ~ '_edit', { 'id': entity.id }) }}" class="btn" title="{{ 'common.action.edit'|trans }}">
+                        <i class="icon-edit"></i>
+                    </a>
+                {% endif %}
+                {% if entity.isTrashed == false %}
+                    <button type="submit" class="btn"><i class="icon-pause" title="{{ 'common.action.trash'|trans }}"></i></button>
+                {% else %}
+                    <button type="submit" class="btn"><i class="icon-play" title="{{ 'common.action.activate'|trans }}"></i></button>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</form>

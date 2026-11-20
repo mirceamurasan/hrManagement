@@ -1,0 +1,17 @@
+{% extends "FullSixProjectForecastBundle::form.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Création d'un client</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>Création d'un client</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('customers_create') }}"
+{% endblock %}
+
+{% block backLink %}
+    {{ path('customers') }}
+{% endblock %}

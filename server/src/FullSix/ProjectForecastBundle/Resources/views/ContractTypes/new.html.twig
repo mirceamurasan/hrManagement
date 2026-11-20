@@ -1,0 +1,17 @@
+{% extends "FullSixProjectForecastBundle::form.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Types de contrat</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>{{ 'admin.typeCon.new'|trans }} </h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('contracttypes_create') }}"
+{% endblock %}
+
+{% block backLink %}
+    {{ path('contracttypes') }}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "FullSixProjectForecastBundle::formpartial.html.twig" %}
+
+{% block formTitle %}
+    Add workload
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('tasksloads_create') }}"
+{% endblock %}
+
+{% block form %}
+<tr>
+    <form action="{{ path('tasksloads_create') }}" accept-charset="" method="post" {{ form_enctype(form) }} class="form-horizontal">
+        <td>{{ form_label(form.jobsidjobs) }} {{ form_widget(form.jobsidjobs) }} {{ form_errors(form.jobsidjobs) }}</td>
+        <td>{{ form_label(form.tasksloadsvolume) }} {{ form_widget(form.tasksloadsvolume) }} {{ form_errors(form.tasksloadsvolume) }}</td>
+        <td>{{ form_label(form.tasksloadsworkers) }} {{ form_widget(form.tasksloadsworkers) }} {{ form_errors(form.tasksloadsworkers) }}</td>
+        <td>{{ form_label(form.providersidproviders) }} {{ form_widget(form.providersidproviders) }} {{ form_errors(form.providersidproviders) }}</td>
+        <td style="padding-top: 25px"><button type="submit" class="btn btn-primary">Add</button></td>
+    {{ form_widget(form) }}
+    </form>
+</tr>
+{% endblock %}

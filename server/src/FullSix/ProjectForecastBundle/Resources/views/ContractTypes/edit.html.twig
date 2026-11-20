@@ -1,0 +1,27 @@
+{% extends "FullSixProjectForecastBundle:ContractTypes:new.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Edition d'un métier</title>
+{% endblock %}
+
+ {% block formTitle %}
+    <h1>{{ 'admin.typeCon.edit'|trans }} "{{ entity.contracttypesname }}"</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('contracttypes_update', { 'id': entity.id }) }}"
+{% endblock %}
+
+{% block formAction %}
+    {{ parent() }}
+    <li>
+        <form action="{{ path('contracttypes_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+{% endblock %}
+
+{% block formMenu %}
+    {% include 'FullSixProjectForecastBundle::_buttonsMenu.html.twig' with { 'entityName': 'contracttypes', 'returnPage': 'edit' }%}
+{% endblock %}

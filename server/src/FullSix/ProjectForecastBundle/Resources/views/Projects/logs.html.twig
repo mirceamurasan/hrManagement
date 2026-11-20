@@ -1,0 +1,35 @@
+<table class="logs">
+    <tr>
+        <th>Date</th>
+        <th>User</th>
+        <th>Item</th>
+        <th>Action</th>
+        <th>Details</th>
+        <th>Changed value</th>
+        <th>Previous value</th>
+        <th>New Value</th>
+    </tr>
+    {% if logs|length > 0 %}
+        {% for log in logs %}
+            {% for entry in log %}
+                <tr>
+                    <td>{{ entry.date }}</td>
+                    <td>{{ entry.username }}</td>
+                    <td>{{ entry.entityName }}</td>
+                    <td>{{ entry.action }}</td>
+                    <td>{{ entry.label }}</td>
+                    <td>{{ entry.valKey }}</td>
+                    <td>{{ entry.oldVal }}</td>
+                    <td>{{ entry.newVal }}</td>
+                </tr>
+            {% endfor%}
+            <tr>
+                <td colspan="8">&nbsp;</td>
+            </tr>
+        {% endfor%}
+    {% else %}
+        <tr>
+            <td colspan="8">Aucun log</td>
+        </tr>
+    {% endif %}
+</table>

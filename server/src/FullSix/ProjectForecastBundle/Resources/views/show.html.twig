@@ -1,0 +1,24 @@
+{% extends "FullSixProjectForecastBundle::layout.html.twig" %}
+
+{% block title%}
+{% endblock %}
+
+{% block content %}
+    <h1>{% block elementTitle %}{% endblock %}</h1>
+
+    {% block formMenu %}{% endblock %}
+
+<dl class="elementDetails page-show">
+    {% block elementDetails %}
+    {% endblock %}
+</dl>
+
+    {% block otherDetails %}
+    {% endblock %}
+{% endblock %}
+
+{% block curstomErrorsForm %}
+    <div style="display:none">
+        {{ include("FullSixProjectForecastBundle::_errors.html.twig") }}
+    </div>
+{% endblock %}

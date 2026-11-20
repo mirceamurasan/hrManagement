@@ -1,0 +1,138 @@
+{% extends "FullSixProjectForecastBundle::layout.html.twig" %}
+
+{% block title %}
+    <title>Projects Forecast{% if title is defined %} : {{ title }}{% endif %}</title>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/fullsixprojectforecast/css/reporting.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('bundles/fullsixprojectforecast/css/dayoffs.css') }}" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+    {{ form_start(datas.filterForm)}}
+
+    {{ form_widget(datas.filterForm.jobsSelect) }}
+    {{ form_widget(datas.filterForm.prevWeek) }}
+        <div class="report-week-period">
+            {{ datas.viewingPeriodStartDate|date('D d M Y')  }} au {{ datas.viewingPeriodEndDate|date('D d M Y')  }}
+        </div>
+    {{ form_widget(datas.filterForm.nextWeek) }}
+
+    <br/>{{ form_widget(datas.filterForm.recherche) }}
+    {{ form_rest(datas.filterForm) }}
+    {{ form_end(datas.filterForm) }}
+
+    <div class="legend-table">
+        {{ 'reporting.absences.legend'| trans }}
+        <table class="table table-bordered table-striped legend-table">
+            <tr>
+                <td colspan="2">{{ 'reporting.absences.available'| trans }}</td>
+                <td colspan="2">{{ 'reporting.absences.unavailable'| trans }}</td>
+                <td colspan="2">{{ 'reporting.absences.weekend'| trans }}</td>
+                <td colspan="2">{{ 'reporting.absences.vacation'| trans }}</td>
+                <td colspan="2">{{ 'reporting.absences.publicHoliday'| trans }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="colorAvailable"></td>
+                <td colspan="2" class="colorIndisp"></td>
+                <td colspan="2" class="colorWeekend"></td>
+                <td colspan="2" class="colorVacation"></td>
+                <td colspan="2" class="colorHoliday"></td>
+            </tr>
+        </table>
+    </div>
+    <table id="dayoffsTable" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                {% for date in datas['tabDays'] %}
+                    <th colspan="2">{{ date|date('d/m') }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for workerId, workerInfo in datas['contractPeriods'] %}
+                {% if oldJob is defined and oldJob.jobId != workerInfo.jobId and oldJob != '' %}
+                    <tr class="colorSubtotal">
+                        <td><b>{{ oldJob.jobLabel }} dispo</b></td>
+                        {% for sdate, date in datas['tabDays'] %}
+                            <td><nobr><b>{{ datas['tabNbUsr'][oldJob.jobId][sdate]['M'] }}</b> / {{ datas['tabNbUsr'][oldJob.jobId][sdate]['G'] }}</nobr></td>
+                            <td><nobr><b>{{ datas['tabNbUsr'][oldJob.jobId][sdate]['A'] }}</b> / {{ datas['tabNbUsr'][oldJob.jobId][sdate]['G'] }}</nobr></td>
+                        {% endfor %}
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td>{{ workerInfo.workerDisplayName }}</td>
+                    {% for sdate, date in datas['tabDays'] %}
+                        {# TEST IF the user has contracts #}
+                        {% set hasContracts = false %}
+                        {% for period in workerInfo.periods if hasContracts == false  %}
+                            {% if sdate >= period.startDate|date('Y-m-d') and (sdate <= period.endDate|date('Y-m-d') or period.endDate == NULL) %}
+                                {% set hasContracts = true %}
+                            {% endif %}
+                        {% endfor %}
+                        {# IF USER HAS CONTRACT IN TIME PERIOD #}
+                        {% if hasContracts == true  %}
+                            {# GLOBAL DAYS OFF #}
+                            {% if datas['tabDaysOffGlobal'][sdate] is defined %}
+                                <td colspan="2" class="colorHoliday"></td>
+                                {# WEEKEND #}
+                            {% elseif date|date('N') == 6 or date|date('N') == 7 %}
+                                <td colspan="2" class="colorWeekend"></td>
+                                {# VACATIONS #}
+                            {% elseif datas['tabDaysOffUsers'][workerId] is defined and datas['tabDaysOffUsers'][workerId][sdate] is defined %}{# cp #}
+                                {% if datas['tabDaysOffUsers'][workerId][sdate]['A'] is defined and datas['tabDaysOffUsers'][workerId][sdate]['M'] is defined %}
+                                    {# GONE ALL DAY, PROBABLY AT A BARBAQUE :) #}
+                                    <td colspan="2" class="colorVacation"></td>
+                                {% elseif datas['tabDaysOffUsers'][workerId][sdate]['A'] is defined %}
+                                    {# NOT AVAILABLE IN THE AFTERNOON #}
+                                    <td class="colorAvailable"></td>
+                                    <td class="colorVacation"></td>
+                                {% elseif datas['tabDaysOffUsers'][workerId][sdate]['M'] is defined %}
+                                    {# NOT AVAILABLE IN THE MORNING #}
+                                    <td class="colorVacation"></td>
+                                    <td class="colorAvailable"></td>
+                                {% endif %}
+
+                            {% else %}
+                                {# WITH CONTRACT, AVAILABLE #}
+                                <td colspan="2" class="colorAvailable"></td>
+                            {% endif %}
+                        {% else %}
+                            {# WITHOUT CONTRACT #}
+                            {% if datas['tabDaysOffGlobal'][sdate] is defined %}
+                                <td colspan="2" class="colorHoliday"></td>
+                                {# WEEKEND #}
+                            {% elseif date|date('N') == 6 or date|date('N') == 7 %}
+                                <td colspan="2" class="colorWeekend"></td>
+                            {% else %}
+                                <td colspan="2" class="colorIndisp"></td>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+
+                {% set oldJob = {'jobId' : workerInfo.jobId, 'jobLabel' : workerInfo.jobLabel } %}
+                {# BOTTOM TOTALS #}
+                {% if loop.last %}
+                    {% set jobId = 0 %}
+                    {% set jobLabel = 'None' %}
+                    {% if oldJob %}
+                        {% set jobId = oldJob['jobId'] %}
+                        {% set jobLabel = oldJob['jobLabel'] ~ ' dispo' %}
+                    {% endif %}
+                    <tr class="colorSubtotal">
+                        <td><b>{{ jobLabel }}</b></td>
+                        {% for sdate, date in datas['tabDays'] %}
+                            <td><nobr><b>{{ datas['tabNbUsr'][jobId][sdate]['M'] is defined ? datas['tabNbUsr'][jobId][sdate]['M'] : 0 }}</b> / {{ datas['tabNbUsr'][jobId][sdate]['G'] }}</nobr></td>
+                            <td><nobr><b>{{ datas['tabNbUsr'][jobId][sdate]['A'] is defined ? datas['tabNbUsr'][jobId][sdate]['A'] : 0 }}</b> / {{ datas['tabNbUsr'][jobId][sdate]['G'] }}</nobr></td>
+                        {% endfor %}
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

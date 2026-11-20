@@ -1,0 +1,280 @@
+admin:
+  groups:
+    title: Groups
+  agency:
+    label: Agency
+    title: Agencies
+    show: Agency details
+    edit: Edit Agency
+    new: Create new agency
+    error:
+      cannot_find: Cannot find agency
+      cannotDeactivate:
+        activeCustomers: This agency has active clients.
+        activeEmployers: This agency has active employers.
+  employer:
+    label: Employer
+    cannotActivate:
+      inactiveAgency: The current office of the employer is inactive
+    cannotDeactivate:
+        noContracts: No future contracts
+    title: Employers
+    show: Employer details
+    edit: Edit employer
+    new: Create new employer
+    agency: Agency
+    internal: The persons contracted by the employer <br/> are considered members of the internal team, <br/> because they are linked to an agency
+    external: The persons contracted by the employer <br/> are considered service providers, <br/> because it is not linked to an agency
+  job:
+    label: Job
+    title: Jobs
+    show: Job details
+    edit: Edit job
+    new: Create new job
+    error:
+      cannotDeactivate:
+        futurePeriods: This job still have periods in the future
+        activeTaskloads: There are still active user stories associated with this job.
+  location:
+    label: Location
+    title: Locations
+    show: Location details
+    edit: Edit location
+    new: Create new location
+    address: Address
+    error:
+      duplication: There is already another location with the same name
+      cannotDeactivate:
+        activeTeams: There are still active teams associated with this location.
+  typeCon:
+    label: Contract type
+    title: Contract types
+    show: Contract type details
+    edit: Edit contract type
+    new: Create new contract type
+    internal: Intern Contract
+    external: External contract
+  status:
+    title: Project statuses
+    show: Project status details
+    edit: Edit Project status
+    new: Create new Project status
+    finished: Finished
+    error:
+      cannotDeactivate:
+        activeProjects: There are still active projects with this status.
+  pbHol:
+    title: Global days off
+    show: Holiday details
+    edit: Edit holiday
+    new: Create new holiday
+    error:
+      duplication: There is already another holiday to the same date
+  role:
+    title: Roles
+provider:
+  title: Providers
+  show: Provider details
+  edit: Edit provider
+  new: Create new provider
+keydates:
+    details: Details
+client:
+  title: Customers
+  merge: Merge
+  currentClient: Select customer
+  anotherClient: Merge customer with
+  cannotActivate:
+    alreadyMearged: The current customer is merged into another customer
+    inactiveAgency: The current agency of the customer is inactive
+  selectWorker: Select a worker
+  workers: Workers attached
+  addWorkerTitle: Add a worker
+  projects: Related projects
+  sapIDs: SAP identifiers
+  info:
+    alreadyMearged: The current customer is already merged with another customer
+project:
+  title: Projects
+  clientName: Client name
+  merge: Merge
+  currentProject: Current project
+  anotherProject: Merge project with
+  cannotActivate:
+    alreadyMearged: he current project is merged with another project
+    inactiveCustomer: The project's customer is inactive
+  info:
+    alreadyMearged: This project has already been merged
+  task:
+    cannotActivate:
+      inactiveProject: Project is inactive
+  taskload:
+      cannotActivate:
+        inactiveTask: The task is inactive
+        inactiveJob: The job is inactive
+  infoTech: Technical informations
+  infoGlobal: General informations
+  keyDates: Key dates
+worker:
+  label: Worker
+  yearbook: Workers
+  workers: Workers
+  worker_info: Worker information
+  contract:
+    label: Contracts
+    cannotActivate:
+      inactiveEmployer: The employer is inactive
+      inactiveContractType: The type of contract is inactive
+    period:
+      title: Periods of contracts
+      cannotCreate:
+        inactiveContract: The contract is inactive, so the period cannot be saved
+        invalidRange: The end date can not is after the start date
+        overlapingPeriod: The period overlaps another person's period
+        outVacation: The period includes holidays that are not included in the selected time interval.
+      cannotActivate:
+        inactiveContract: The employer's contract is inactive
+        inactiveJob: The type of contract is inactive
+    title: Contracts
+    show: Contract details
+    edit: Edit contracts
+    new: Create new contract
+  vacation:
+    label: Vacation
+    cannotCreate:
+      invalidRange: The end date cannot be before start date
+      noPeriod: The person has no period of contract for the selected time interval
+      inactivePeriod: The contract period on the selected time interval is inactive
+      alreadyVacation: The person has already filed a vacation on the selected time interval
+    cannotActivate:
+      inactivePeriod: The contractual period containing the holiday period is inactive
+    morning: Morning
+    afternoon: Afternoon
+  title: Human resources
+  show: Human resource details
+  edit: Edit human resource
+  new: Create new human resource
+user:
+  label: User
+  merge: Merge
+  currentUser: Current user
+  anotherUser: Merge user with
+  hire: Hire
+  user_info: User information
+  user_social_info: Social information
+  user_login_info: Login information
+  no_login: The user can not connect to the application
+  notLoginYet: The user can still connect to the application: login information are not defined
+  mergeWith: Merge with
+  mergeError:
+    user: Select user
+    source: Select a value among "source" and "destination"
+    workers: It is not possible to merge two workers
+  firstName: Firstname
+  lastName: Lastname
+  changePassword:
+    label: Change password
+  title: Users
+  show: User details
+  edit: Edit user
+  new: Create new user
+  ADLinked: Active Directory
+  warning:
+    is_dirty: A user with the same user name was imported from LDAP server <br/> You can change the username or merge 2 users
+    existsDirty: When the current user has been imported, there was already a user application side with the same username <br/> You can modify the user's login information on the application side, or merge 2 users
+    adLinked:  The user was imported from LDAP, some fields are not modifiable and password
+    myAccountIsAdLinked: Your user was imported from LDAP, some fields are not modifiable. <br/> You are also not allowed to change your password <br/> Please contact the administrator of your LDAP server
+  account:
+    changePassword: Change password
+login:
+  label:
+    username: Username
+    password: Password
+    samePassword: The passwords are not identical
+    confirmPass: Password confirmation
+    endAccountDate: End date
+team:
+  label: Teams
+  show: Team details
+  edit: Edit team
+  new: Create new team
+  cannotActivate:
+    inactiveLocation: Location of team is inactive
+common:
+  filters: Filters
+  field:
+    label: Label
+    date: Date
+    trashed: Inactive
+    name: Name
+    createdAt: Created at
+    updatedAt: Udated at
+    activeF: Active
+    activeM: Active
+    currentlyActive: Currently active
+    startDate: Start date
+    endDate: End date
+    mergedWith: Merged with
+    infinite: Infinite
+  action:
+    actions: Actions
+    create: New
+    save: Save
+    cancel: Cancel
+    show: Show
+    edit: Edit
+    trash: Trash
+    activate: Activate
+    search: Search
+    reinit: Reinitialize
+    back: Back
+    cannotPerform: Cannot perform action
+  yes: Yes
+  no: No
+reporting:
+  title: Reporting
+  weekly:
+    vacations:
+      title: Vacation
+      startDate: Start date
+      endDate: End date
+      status: Status
+      morning: Morning
+      evening: Evening
+      fullday: Full day
+      none: No holidays in this time period for the selected person.
+    projects:
+      title: Tasks of the week
+      none: There are no tasks for the chosen period
+    options:
+      any: All tasks of the week
+      unassigned: Unassigned tasks of the week
+    buttons:
+      filter: Filter
+      prevWeek: "<< Previous week"
+      nextWeek: "Next week >>"
+    view: Weekly review
+  absences:
+    title: Absences
+    legend: LEGEND
+    weekend: Weekend
+    vacation: Vacation
+    publicHoliday: Public Holiday
+    available: Available
+    unavailable: Unavailable
+  importReports:
+    projects: Project Import Reports
+    users: Users Import Reports
+    csvPath: CSV PATH
+    pdfPath: PDF PATH
+    failReason: Reason of failure
+    countProjectsCreated: Nr of projects created
+    countProjectsUpdated: Nr of projects updated
+    countErrors: Nr of errors
+    countStatusesCreated: Nr of created statuses
+    countClientsCreated: Nr of created customers
+    countUsersCreated: Nr of created users
+    countUsersUpdated: Nr of updated users
+    countUsersMarkedDirty: Nr of dirty marked users
+homepage:
+    welcomeTitle: Welcome to our application

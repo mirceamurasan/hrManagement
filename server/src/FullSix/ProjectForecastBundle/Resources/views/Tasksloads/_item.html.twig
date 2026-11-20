@@ -1,0 +1,31 @@
+<div data-action="{{ path('projects_edit_inplace') }}" class="row-fluid tasksidtasks-line job-for-task-{{ tasksload.tasksidtasks.id }} {{ cycle }}">
+    <div class="span5" ></div>
+    <div class="span1" style="width:30px">
+        {% if app.user is not null and is_granted('ROLE_PM') %}
+        <form class="tasksload-activation" method="POST" action="{{ path('taskloads_activation', {'id': tasksload.id}) }}">
+            {% if tasksload.isTrashed == false %}
+                <button type="submit" class="btn btn-small"><i id="tasksload-activate" class="icon-pause" title="{{ 'common.action.trash'|trans }}"></i></button>
+            {% else %}
+                <button type="submit" class="btn btn-small"><i id="tasksload-activate" class="icon-play" title="{{ 'common.action.activate'|trans }}"></i></button>
+            {% endif %}
+        </form>
+        {% endif %}
+    </div>
+    <div id="Tasksloads_jobsidjobs_{{ tasksload.id }}" class="span1 table-cell editable-field">
+        <span>{{ tasksload.jobsidjobs }}</span>
+    </div>
+    <div id="Tasksloads_tasksloadsvolume_{{ tasksload.id }}" class="span1 table-cell editable-field tasksloadsvolume">
+        <span>{{ tasksload.tasksloadsvolume }}</span>
+    </div>
+    <div id="Tasksloads_tasksloadsworkers_{{ tasksload.id }}" class="span2 table-cell editable-field">
+        <span>{{ tasksload.tasksloadsworkers }}</span>
+    </div>
+    <div id="Tasksloads_providersidproviders_{{ tasksload.id }}" class="span2 table-cell editable-field">
+        <span>{{ tasksload.providersidproviders }}</span>
+    </div>
+
+    <div style="display:none">
+        {{ include("FullSixProjectForecastBundle::_errors.html.twig") }}
+    </div>
+
+</div>

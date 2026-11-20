@@ -1,0 +1,61 @@
+{% extends "FullSixProjectForecastBundle::form.html.twig" %}
+
+{% block title%}
+    <title>Create user/title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>Create user</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('users_create') }}"
+{% endblock %}
+
+{% block backLink %}
+    {{ path('users') }}
+{% endblock %}
+
+{% block formAction %}
+{% endblock %}
+
+{% block formFields %}
+    {{ form_errors(form) }}
+    <fieldset name="User information">
+        <h2>{{ 'user.user_info'|trans }}</h2>
+            {% if message is defined and message is not empty %}
+                <h4 style="color:#d44413" > {{ message|trans|raw }} </h4>
+            {% endif %}
+            {% if entity is defined and entity.adLinked  %}
+                <h5 style="font-style: italic" > {{ 'user.warning.adLinked'|trans|raw }} </h5>
+            {% endif %}
+	<div class="user-info">
+            <div class="left-block">
+                {{ form_row(form.usersfirstname) }}
+                {{ form_row(form.userslastname) }}
+                {{ form_row(form.usersinitials) }}
+                {{ form_row(form.email) }}
+                <fieldset name="Information sociale" class="social-info">
+                    <h2>{{ 'user.user_social_info'|trans }} <span class="arrow underline"></span> </h2>
+                    <div class="social-info-content">
+                        {{ form_row(form.birthDate, { 'attr': {'class': 'has_datepicker'} }) }}
+                        {{ form_row(form.phoneNumber) }}
+                        {{ form_row(form.contactMsn) }}
+                        {{ form_row(form.contactFacebook) }}
+                        {{ form_row(form.contactTwitter) }}
+                        {{ form_row(form.message) }}
+                    </div>
+                </fieldset>
+            </div>
+            <div class="right-block">
+                <fieldset name="Login application">
+                    <h2>{{  'user.user_login_info'|trans }}</h2>
+                    {% block no_login_message %}{% endblock %}
+                    {{ form_widget(form.login) }}
+                </fieldset>
+                {% block password %}{% endblock %}
+            </div>
+	</div>
+    </fieldset>
+    {{ form_widget(form) }}
+{% endblock %}

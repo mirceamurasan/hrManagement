@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Forecast - Projects' import report</title>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <th colspan="2">Import info</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Import date</td>
+                <td>{{ entity.importDate|date('d F Y') }}</td>
+            </tr>
+            <tr>
+                <td>Source file</td>
+                <td>{{ entity.csvPath }}</td>
+            </tr>
+            <tr>
+                <td>Log file</td>
+                <td>{{ entity.pdfPath }}</td>
+            </tr>
+            <tr>
+                <td>Successful</td>
+                <td>{% if entity.success %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <td>Fail reason</td>
+                <td>{{ entity.failReason }}</td>
+            </tr>
+            <tr>
+                <td>Number of created projects</td>
+                <td>{{ entity.countProjectsCreated }}</td>
+            </tr>
+            <tr>
+                <td>Number of updated projects</td>
+                <td>{{ entity.countProjectsUpdated }}</td>
+            </tr>
+            <tr>
+                <td>Number of errors</td>
+                <td>{{ entity.countErrors }}</td>
+            </tr>
+            <tr>
+                <td>Number of created statuses</td>
+                <td>{{ entity.countStatusesCreated }}</td>
+            </tr>
+            <tr>
+                <td>Number of created clients</td>
+                <td>{{ entity.countClientsCreated }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% if entity.errors|length > 0 %}
+    <h2>Errors</h2>
+    <table>
+        <thead>
+            <th>Line number</th>
+            <th>SAP Id</th>
+            <th>Project Name</th>
+            <th>Project Status</th>
+            <th>Client SAP Id</th>
+            <th>Client Name</th>
+        </thead>
+        <tbody>
+            {% for error in entity.errors %}
+            <tr>
+                <td>{{ error.lineNumber }}</td>
+                <td>{{ error.idSAP }}</td>
+                <td>{{ error.projectName }}</td>
+                <td>{{ error.projectStatus }}</td>
+                <td>{{ error.clientSAPId }}</td>
+                <td>{{ error.clientName }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,40 @@
+table.table tbody tr.colorSubtotal td{
+	background-color: #bdfffb;
+	font-size: 11px;
+}
+
+	table.table tbody tr.colorSubtotal td b{
+		font-size: 13px;
+	}
+
+table.table tbody tr.nojob td{
+	background-color: #ffb3b3;
+}
+
+table.table tbody tr td.colorVacation{
+	background-color: #f90;
+}
+
+table.table tbody tr td.colorHoliday{
+	background-color: #90f;
+}
+
+table.table tbody tr td.colorWeekend{
+	background-color: #e3e3e3;
+}
+
+table.table tbody tr td.colorIndisp{
+	background-color: #999;
+}
+table.table tbody tr td.colorAvailable{
+        background-color: #FFFFFF
+}
+
+.legend-table{
+    margin-left: 0px;
+    width: 50%;
+}
+
+.legend-table td{
+    height: 20px;
+}

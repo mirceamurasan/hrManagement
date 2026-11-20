@@ -1,0 +1,27 @@
+{% extends "FullSixProjectForecastBundle:Groups:new.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Edition d'un groupe</title>
+{% endblock %}
+
+ {% block formTitle %}
+    <h1>Edition du groupe "{{ entity.name }}"</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('groups_update', { 'id': entity.id }) }}"
+{% endblock %}
+
+{% block formAction %}
+    {{ parent() }}
+    <li>
+        <form action="{{ path('groups_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+        <button type="submit">Delete</button>
+        </form>
+    </li>
+{% endblock %}
+
+{% block formMenu %}
+    {% include 'FullSixProjectForecastBundle::_buttonsMenu.html.twig' with { 'entityName': 'groups', 'returnPage': 'edit' }%}
+{% endblock %}

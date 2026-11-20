@@ -1,0 +1,24 @@
+{% block content %}
+    <div class="container-fluid vacations-form popup-content">
+        {% block elementDetails %}
+        <fieldset name="Information Periods">
+            <dt>Identifiant</dt><dd>{{ entity.id }}</dd>
+            <dt>{{ 'common.field.startDate'|trans }}</dt><dd>{{ entity.startdate|date("d-m-Y") }}</dd>
+            <dt>{{ 'common.field.endDate'|trans }}</dt>
+            {% if entity.enddate %}
+                <dd>{{ entity.enddate|date("d-m-Y") }}</dd>
+            {% else %}
+                <dd>{{ 'common.field.infinite'|trans }}</dd>
+            {% endif %}
+            {%  if entity.idcontract.contracttype.contractTypesIsExternal %}
+                <dt>Tax Journalier</dt><dd>{{ entity.tjm }}</dd>
+            {% endif %}
+        </fieldset>
+        {% endblock %}
+    </div>
+{% endblock %}
+<script>
+    function closePopup() {
+        $.colorbox.close();
+    }
+</script>

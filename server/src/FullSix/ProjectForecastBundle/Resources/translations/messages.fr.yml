@@ -1,0 +1,280 @@
+admin:
+  groups:
+    title: Groupes
+  agency:
+    label: Agence
+    title: Agences
+    show: Détails agence
+    edit: Edition de l'agence
+    new: Création d'une agence
+    error:
+      cannot_find: Impossible de trouver l'agence
+      cannotDeactivate:
+        activeCustomers: Cette agence a des clients actifs.
+        activeEmployers: Cette agence a employeurs actifs.
+  employer:
+    label: Employeur
+    cannotActivate:
+      inactiveAgency: L'agence actuelle de l'employeur est inactif
+    cannotDeactivate:
+        noContracts: No current of future contracts
+    title: Employeurs
+    show: Détails employeur
+    edit: Edition de l'employeur
+    new: Création d'un employeur
+    agency: Agence
+    internal: Les personnes contractées par cet employeur <br/> sont considérées comme des membres de l'équipe interne, <br/> car il est lié à une agence Publicis
+    external: Les personnes contractées par cet employeur <br/> sont considérées comme des prestataires de services, <br/> car il n'est pas lié à une agence Publicis
+  job:
+    label: Métier
+    title: Métiers
+    show: Détails métier
+    edit: Edition du métier
+    new: Création d'un métier
+    error:
+      cannotDeactivate:
+        futurePeriods: This job still have periods in the future
+        activeTaskloads: Il ya encore des charges de travail actifs associés à ce métier.
+  location:
+    label: Emplacement
+    title: Emplacements
+    show: Détails emplacement
+    edit: Edition de l'emplacement
+    new: Création d'un emplacement
+    address: Addrese
+    error:
+      duplication: Il existe déjà un autre emplacement avec le même nom
+      cannotDeactivate:
+        activeTeams: Il ya encore des équipes actives associées à cette emplacement.
+  typeCon:
+    label: Type de contrat
+    title: Types de contrat
+    show: Détails type de contrat
+    edit: Edition du type de contrat
+    new: Création d'un type de contrat
+    internal: Contract Intern
+    external: Contract Prestataires
+  status:
+    title: Statuts du projet
+    show: Détails statut du projet
+    edit: Edition du statut du projet
+    new: Création d'un statut du projet
+    finished: Final
+    error:
+      cannotDeactivate:
+        activeProjects: Il ya encore des projets en cours liés à cet status.
+  pbHol:
+    title: Jours fériés
+    show: Détails jour férié
+    edit: Edition du jour férié
+    new: Création d'un jour férié
+    error:
+      duplication: Il existe déjà un autre jour férié pour la même date
+  role:
+    title: Roles
+provider:
+  title: Prestataires
+  show: Détails du prestataire
+  edit: Edition du prestataire
+  new: Création d'un prestataire
+keydates:
+    details: Details
+client:
+  title: Clients
+  merge: Fusionner
+  currentClient: Client sélectionné
+  anotherClient: Client à fusioneer avec
+  cannotActivate:
+    alreadyMearged: Le client actuel est fusionné dans un autre client
+    inactiveAgency: L'agence actuelle du client est inactif
+  selectWorker: Sélectionnez une personne
+  workers: Personnes attachées
+  addWorkerTitle: Attacher une personne
+  projects: Projets rattachés
+  sapIDs: Identifiants SAP
+  info:
+    alreadyMearged: Le client actuel est fusionné avec le client
+project:
+  title: Projets
+  clientName: Nom du client
+  merge: Fusionner
+  currentProject: Projet sélectionné
+  anotherProject: Projet à fusioneer avec
+  cannotActivate:
+    alreadyMearged: Le project actuel est fusionné avec un atre projet
+    inactiveCustomer: Le client du project est inactif
+  info:
+    alreadyMearged: Le project a été fusionné avec le project
+  task:
+    cannotActivate:
+      inactiveProject: Le project est inactif
+  taskload:
+      cannotActivate:
+        inactiveTask: La tâche est inactive
+        inactiveJob: Le metier n'est plus active
+  infoTech: Informations techniques
+  infoGlobal: Informations générales
+  keyDates: Dates clés
+worker:
+  label: Ressource Humaine
+  yearbook: Annuaire
+  workers: Ressources Humaines
+  worker_info: Information ressource humaine
+  contract:
+    label: Contrats
+    cannotActivate:
+      inactiveEmployer: L'employeur du contrat est inactif
+      inactiveContractType: Le type de contrat est inactif
+    period:
+      title: Périodes contractuelles
+      cannotCreate:
+        inactiveContract: Le contrat est inactif, donc la période ne peut être sauvegardé
+        invalidRange: La date de fin ne peut pas est après la date de début
+        overlapingPeriod: La période chevauche une autre période de la person
+        outVacation: La période contient vacances qui ne sont pas incluses par l'intervalle de temps choisi.
+      cannotActivate:
+        inactiveContract: L'employeur du contrat est inactif
+        inactiveJob: Le type de contrat est inactif
+    title: Contracts
+    show: Détails du contrat
+    edit: Edition du contrat
+    new: Création d'un contrat
+  vacation:
+    label: Congés
+    cannotCreate:
+      invalidRange: La date de fin ne peut pas est après la date de début
+      noPeriod: La personne n'a pas de période de contrat portant sur l'intervalle de temps choisi
+      inactivePeriod: La période de contrat portant sur l'intervalle de temps choisi est inactive
+      alreadyVacation: La personne à déjà déposé un congé portant sur l'intervalle de temps choisi
+    cannotActivate:
+      inactivePeriod: La période contractuelle contenant la période des vacances est inactive
+    morning: Matinée 
+    afternoon: Après-midi
+  title: Ressources Humaines
+  show: Détails resource humaine
+  edit: Edition resource humaine
+  new: Création d'une resource humaine
+user:
+  label: Utilisateur
+  merge: Fusionner
+  currentUser: Utilisateur sélectionné
+  anotherUser: Utilisateur à fusioneer avec
+  hire: Embaucher
+  user_info: Information utilisateur
+  user_social_info: Information sociale
+  user_login_info: Informations de connexion
+  no_login: L'utilisateur ne peut pas se connecter à l'application.
+  notLoginYet: L'utilisateur ne peut encore se connecter à l'application: les informations de connexion ne sont pas définis
+  mergeWith: Utilisateur fusioné avec
+  mergeError:
+    user: Sélectionnez un utilisteur
+    source: Sélectionnez une valeur parmi "source" et "destination"
+    workers: Il n'est pas possible de fusionner deux ressource humaines
+  firstName: Prénom
+  lastName: Nom
+  changePassword:
+    label: Changer le mot de passe
+  title: Utilisateurs
+  show: Détails de l'utilisateur
+  edit: Edition de l'utilisateur
+  new: Création d'un utilisateur
+  ADLinked: Active Directory
+  warning:
+    is_dirty: Un utilisateur avec le meme  nom d'utilisateur a été importé du serveur LDAP  <br/> Vous pouvez modifier le nom d'utilisateur ou fusionner les 2 utilisateurs
+    existsDirty: Lorsque l'utilisateur courant a été importé, il y avait déjà un utilisateur cote application avec le même nom d'utilisateur <br/> Vous pouvez modifier les informations de connexion de l'utilisateur côté application, ou fusionner les 2 utilisateurs
+    adLinked: L'utilisateur a été importé de LDAP, dont certains champs ne sont pas modifiables, ainsi que le mot de passe
+    myAccountIsAdLinked: Votre utilisateur a été importé de LDAP, dont certains champs ne sont pas modifiables.  <br/>  Vous êtes également pas autorisé à changer votre mot de passe <br/> S'il vous plaît contactez l'administrateur de votre serveur LDAP
+  account:
+    changePassword: Changer mon mot de passe
+login:
+  label:
+    username: Nom d'utilisateur
+    password: Mot de passe
+    samePassword: Les deux mots de passe ne sont pas identiques
+    confirmPass: Confirmation du mot de passe
+    endAccountDate: Date du fin de compte
+team:
+  label: Équipes
+  show: Détails de l'équipe
+  edit: Edition de l'équipe
+  new: Création d'une équipe
+  cannotActivate:
+    inactiveLocation: L'emplacement de l'équipe est inactive
+common:
+  filters: Filtres
+  field:
+    label: Libellé
+    date: Date
+    trashed: Archivé
+    name: Nom
+    createdAt: Créé en
+    updatedAt: Mise à jour en
+    activeF: Active
+    activeM: Actif
+    currentlyActive: Actuellement actif
+    startDate: Date de début
+    endDate: Date de fin
+    mergedWith: Fusionné avec
+    infinite: Infini
+  action:
+    actions: Actions
+    create: Ajout d'un élément
+    save: Sauvegarder
+    cancel: Annuler
+    show: Afficher
+    edit: Editer
+    trash: Archiver
+    activate: Activer
+    search: Rechercher
+    reinit: Réinitialiser
+    back: Retour à la liste
+    cannotPerform: Cannot perform action
+  yes: Oui
+  no: Non
+reporting:
+  title: Reporting
+  weekly:
+    vacations:
+      title: Congés
+      startDate: Date de début
+      endDate: Date de fin
+      status: Status
+      morning: Matinée
+      evening: Soirée
+      fullday: Journée
+      none: Il n'y a pas des congés dans cette période de temps pour la personne choisi.
+    projects:
+      title: Les tâches de la semaine
+      none: Il n'y a pas des tâches dans cette période de temps choisi.
+    options:
+      any: Toutes les tâches de la semaine
+      unassigned: Tâches non affectées de la semaine
+    buttons:
+      filter: Filtre
+      prevWeek: "<< Semaine Précédente"
+      nextWeek: "Semaine Prochaine >>"
+    view: Revue hebdo
+  absences:
+    title: Absences
+    legend: LÉGENDE
+    weekend: Weekend
+    vacation: Congé
+    publicHoliday: Jour fériés
+    available: Disponible
+    unavailable: En dehors des périodes de contrat
+  importReports:
+    projects: Project Import Reports
+    users: Users Import Reports
+    csvPath: Chemin CSV
+    pdfPath: Chemin PDF
+    failReason: Raison de l'échec
+    countProjectsCreated: N° de projets créés
+    countProjectsUpdated: N° de projets mis à jour
+    countErrors: N° d'erreurs
+    countStatusesCreated: N° de status créés
+    countClientsCreated: N° de clients créés
+    countUsersCreated: N° d'utilisateurs créés
+    countUsersUpdated: N° d'utilisateurs mis à jour
+    countUsersMarkedDirty: N° d'utilisateurs marqués 'dirty'
+homepage:
+    welcomeTitle: Welcome to this wonderful place. I can be translated.

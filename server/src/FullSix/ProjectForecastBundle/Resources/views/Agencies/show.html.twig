@@ -1,0 +1,19 @@
+{% extends "FullSixProjectForecastBundle::show.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Agence "{{ entity.agenciesname }}"</title>
+{% endblock %}
+
+{% block elementTitle %}
+    {{ 'admin.agency.edit'|trans }} "{{ entity.agenciesname }}"
+{% endblock %}
+
+{% block formMenu %}
+    {% include 'FullSixProjectForecastBundle::_buttonsMenu.html.twig' with { 'entityName': 'agencies', 'returnPage': 'show' } %}
+{% endblock %}
+
+{% block elementDetails %}
+    <dt>{{ 'common.field.name'|trans }}</dt><dd>{{ entity.agenciesname }}</dd>
+    <dt>{{ 'common.field.createdAt'|trans }}</dt><dd>{{ entity.agenciescreated|date('Y-m-d H:i:s') }}</dd>
+    <dt>{{ 'common.field.updatedAt'|trans }}</dt><dd>{{ entity.agenciesupdated|date('Y-m-d H:i:s') }}</dd>
+{% endblock %}

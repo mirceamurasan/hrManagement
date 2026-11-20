@@ -1,0 +1,32 @@
+{% extends "FullSixProjectForecastBundle::show.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Tâche</title>
+{% endblock %}
+
+{% block elementTitle %}
+    Tâche "{{ entity.tasksname }}"
+{% endblock %}
+
+{% block backLink %}
+    {{ path('tasks') }}
+{% endblock %}
+
+{% block editLink %}
+    {{ path('tasks_edit', { 'id': entity.id }) }}
+{% endblock %}
+
+{% block deleteLink %}
+    {{ path('tasks_delete', { 'id': entity.id }) }}
+{% endblock %}
+
+{% block elementDetails %}
+    <dt>Id</dt><dd>{{ entity.id }}</dd>
+    <dt>Tasksname</dt><dd>{{ entity.tasksname }}</dd>
+    <dt>Tasksbeginat</dt><dd>{{ entity.tasksbeginat|date('Y-m-d H:i:s') }}</dd>
+    <dt>Tasksendat</dt><dd>{{ entity.tasksendat|date('Y-m-d H:i:s') }}</dd>
+    <dt>Tasksorder</dt><dd>{{ entity.tasksorder }}</dd>
+    <dt>Tasksistrashed</dt><dd>{{ entity.isTrashed }}</dd>
+    <dt>Taskscreated</dt><dd>{{ entity.taskscreated|date('Y-m-d H:i:s') }}</dd>
+    <dt>Tasksupdated</dt><dd>{{ entity.tasksupdated|date('Y-m-d H:i:s') }}</dd>
+{% endblock %}

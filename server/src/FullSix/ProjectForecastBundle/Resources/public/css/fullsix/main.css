@@ -1,0 +1,986 @@
+body {
+	font-family: 'Arial';
+}
+
+/* ==========================================================================
+   Custom styles
+   ========================================================================== */
+
+.btn.btn-inverse.dropdown-toggle{width:100%}
+ /* ==========================================================================
+   GENERIC
+   ========================================================================== */
+.fcast-txt-align-left{text-align:left}
+.fcast-txt-align-right{text-align:right}
+.fcast-txt-align-center{text-align:center}
+.fcast-txt-float-left{float:left}
+.fcast-txt-float-right{float:right}
+.fcast-txt-font-italic{font-style:italic}
+.fcast-txt-font-bold{font-weight:bold}
+.fcast-txt-font-normal{font-weight:normal}
+
+.fcast-color1{color:#be2c2c}
+.fcast-color2{color:#be804d}
+.fcast-color3{color:#47a6b1}
+.fcast-color4{color:#699c55}
+.fcast-color5{color:#8d9191}
+
+
+.fcast-bckgcolor1{background-color:#c46b72}
+.fcast-bckgcolor2{background-color:#be804d}
+.fcast-bckgcolor3{background-color:#47a6b1}
+.fcast-bckgcolor4{background-color:#699c55}
+.fcast-bckgcolor5{background-color:#8d9191}
+
+h1{font-size:26px;padding:10px;text-align:center}
+h2{padding:5px}
+
+.fcast-view-widget h2, h1 {
+	background: #F07F23;
+	background: -moz-linear-gradient(top,  #356aa0 0%, #356aa0 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#356aa0), color-stop(100%,#356aa0));
+	background: -webkit-linear-gradient(top,  #356aa0 0%,#356aa0 100%);
+	background: -o-linear-gradient(top,  #356aa0 0%,#356aa0 100%);
+	background: -ms-linear-gradient(top,  #356aa0 0%,#356aa0 100%);
+	background: linear-gradient(to bottom,  #356aa0 0%,#356aa0 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#356aa0', endColorstr='#356aa0',GradientType=0 );
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	color: #fff;
+	}
+
+/* ==========================================================================
+   STRUCTURE
+   ========================================================================== */
+
+
+footer p{margin:0 0 0 10px}
+
+.page-header.fcast-fcast-projectDetail {
+    margin: 20px 0 30px -30px;
+}
+
+
+/* ==========================================================================
+   BOOLSTRAP  OVERRIDES
+   ========================================================================== */
+
+h1, h2, h3 {
+    line-height: 1;
+}
+
+.btn-group {
+    width: 100%;
+}
+
+.btn-group form {
+    display: inline;
+}
+
+.dropdown-menu li{
+	line-height: 20px!important;
+	min-height: 20px!important;
+}
+
+.btn-group .btn-primary {
+	color: #fff;
+}
+
+
+.btn-primary .caret-down, .btn-warning .caret-down, .btn-danger .caret-down, .btn-info .caret-down, .btn-success .caret-down, .btn-inverse .caret-down {
+    border-top-color: #fff;
+}
+
+
+/* ==========================================================================
+   BOOLSTRAP RESPONSIVE OVERRIDES
+   ========================================================================== */
+
+
+
+/* ==========================================================================
+   BOOLSTRAP TARGETED OVERRIDES FROM CONTAINER
+   ========================================================================== */
+
+.fcast-view-widget .btn {
+	margin-left: 5px;
+}
+
+.fcast-absence .row{
+	margin:0px;
+}
+
+.fcast-absence .span3{
+	width:245px;
+}
+
+
+/* ==========================================================================
+   BOOLSTRAP INSPIRED CLASSES
+   ========================================================================== */
+
+.caret-down {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #fff;
+    content: "";
+    display: inline-block;
+    height: 0;
+    vertical-align: top;
+    width: 0;
+}
+
+.btn .caret-down {
+    margin-left: 0;
+    margin-top: 7px;
+}
+
+
+/* ==========================================================================
+   DASHBOARD
+   ========================================================================== */
+
+.hero-unit.fcast-hero-unit{background:none;padding:5px;text-align:center;}
+.hero-unit.fcast-hero-unit h1{color:#ffffff;font-size:26px;}
+.hero-unit.fcast-hero-unit .fcast-currentdate{font-size:16px;font-weight:bold;}
+
+
+/* =========================
+   WIDGETS
+   =======================*/
+.fcast-view-widget{margin-bottom:40px;position:relative}
+.fcast-view-widget h2{
+    color: #fff;
+    font-size: 16px;
+    line-height:32px;
+    text-align: center;
+    -webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	position:relative
+}
+
+.fcast-view-widget h2 .fcast-widget-info-picto{
+	position:absolute;
+	right:10px;
+	top:24%;
+	max-width:90%;
+}
+
+.fcast-view-widget .fcast-widget-info{
+	background:#fff;
+	border:1px solid #ccc;
+	display:none;
+	height:auto;
+	padding:5px;
+	position:absolute;
+	right:0;
+	top:50px;
+	width:75%;
+	z-index:1;
+}
+
+.fcast-view-widget .fcast-widget-info.selected{
+	visibility:visible;
+	display: block;
+}
+
+
+.fcast-view-widget .fcast-widget-info span{
+	border-bottom: 4px solid #FFFFFF;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+	border-top-color: #fff;
+    content: "";
+    display: inline-block;
+    height: 0;
+    margin-left: 0;
+    margin-top: 7px;
+    position:absolute;
+    top:-11px;
+    right:16px ;
+    vertical-align: top;
+    width: 0;
+
+}
+
+.fcast-view-widget p{font-style:italic}
+.fcast-view-widget ul{margin:0}
+.fcast-view-widget > ul {border:1px solid #dddddd; padding:0; border-top:none;}
+.fcast-view-widget ul > li{min-height:18px;margin:0}
+
+.fcast-view-widget ul > li span {}
+.fcast-view-widget li{
+	display:inline-block;
+	font-size:12px;
+	padding:0%;
+	text-align:left;
+}
+.fcast-view-widget li a{color:#000}
+.fcast-view-title{/*background:#ccc;-webkit-border-top-left-radius: 4px;
+-webkit-border-top-right-radius: 4px;
+-moz-border-radius-topleft: 4px;
+-moz-border-radius-topright: 4px;
+border-top-left-radius: 4px;
+border-top-right-radius: 4px;
+background-color: #363636;
+background-image: -moz-linear-gradient(top, #444444, #222222);
+background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#444444), to(#222222));
+background-image: -webkit-linear-gradient(top, #444444, #222222);
+background-image: -o-linear-gradient(top, #444444, #222222);
+background-image: linear-gradient(to bottom, #444444, #222222);
+background-repeat: repeat-x;
+border-color: #222222 #222222 #000000;
+border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff444444', endColorstr='#ff222222', GradientType=0);
+filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);*/
+color:#fff;	
+	
+}
+
+.fcast-view-title > li {
+	text-align: center;
+}
+
+.fcast-view-item > li {
+	text-align: center
+}
+
+.fcast-view-widget .fcast-view-title li a{color:#000;font-weight:bold}
+
+
+.fcast-view-widget ul > li.fcast-view-title-item span.fcast-view-deadline-title-item-customer/*,
+.fcast-view-widget ul > li.fcast-view-title-item span.fcast-view-deadline-title-item-project span*/{
+	display:block
+}
+
+/* =========================
+   WIDGET 1 - DATES BUTOIRS
+   =======================*/
+.fcast-view-deadline-item{background-color:#ffffff}
+ 
+.fcast-view-widget .fcast-view-deadline-item .fcast-view-deadline-field1 {background:url(../img/fcast-arrow-right-black.png) 5px 45% no-repeat;text-align: center}
+
+
+.fcast-view-widget .fcast-view-deadline-title .fcast-view-deadline-title-item1,
+.fcast-view-widget .fcast-view-deadline-item > .fcast-view-deadline-field1{text-align: left}
+
+.fcast-view-widget .fcast-view-deadline-item > .fcast-view-deadline-field1{padding:0 0 0 15px;}
+
+
+.fcast-view-widget .fcast-view-deadline-title .fcast-view-deadline-title-item2,
+.fcast-view-widget .fcast-view-deadline-item > .fcast-view-deadline-field2{font-weight:bold;text-align: center}
+
+.fcast-view-widget .fcast-view-deadline-title .fcast-view-deadline-title-item3,
+.fcast-view-widget .fcast-view-deadline-item > .fcast-view-deadline-field3{text-align: center}
+
+.fcast-view-widget .fcast-view-deadline-title .fcast-view-deadline-title-item4,
+.fcast-view-widget .fcast-view-deadline-item > .fcast-view-deadline-field4{text-align: center}
+
+.fcast-view-widget .fcast-view-deadline-title .fcast-view-deadline-title-item5,
+.fcast-view-widget .fcast-view-deadline-item > .fcast-view-deadline-field5{text-align: center}
+
+.fcast-view-widget .fcast-view-deadline-item > li:first-child span{
+	display:block;
+	padding:0 0 0 5px;
+}
+
+.fcast-view-widget .fcast-view-deadline-item > li:first-child span.fcast-txt-font-italic{
+	font-style:italic;
+}
+
+li.fcast-view-title-item span{
+	font-weight: bold;
+	font-size: 13px;
+}
+li.fcast-view-title-item span.fcast-txt-font-normal{font-weight:normal}
+
+
+
+.fcast-view-widget .fcast-view-deadline-item-ongoing > .fcast-view-deadline-field1 span{
+	/*background:url(../img/glyphicons-halflings-orange.png) no-repeat 0 -120px;*/
+}
+
+.fcast-view-widget .fcast-view-deadline-item-inprobatecourt > .fcast-view-deadline-field1 span{
+	/*background:url(../img/glyphicons-halflings-blue.png) no-repeat 0 -120px;*/
+}
+
+.fcast-view-deadline-item-level2{background-color:#f9f9f9; display:none; margin:0;padding:0 0 0 12px;}
+.fcast-view-deadline-item-level2 li{text-align:center }
+.fcast-view-widget .fcast-view-deadline-item-level2 > li{padding:0;width:30%; line-height: 30px;}
+
+
+/*colors fields */
+
+.fcast-view-widget .fcast-view-deadline-item-overruns li.fcast-view-deadline-field2 a{color:#f00}
+.fcast-view-widget .fcast-view-deadline-item-ongoing li.fcast-view-deadline-field2 a{color:#be804d}
+.fcast-view-widget .fcast-view-deadline-item-inprobatecourt li.fcast-view-deadline-field2 a{color:#47a6b1}
+
+.fcast-view-deadline-field4 .btn {
+	float:left;
+	margin: 2px 0 0;
+}
+
+/* =========================
+   WIDGET 2 - NOUVEAUX PROJETS
+   =======================*/
+.fcast-view-newprojects-item{background-color:#fff}
+.fcast-view-widget .fcast-view-newprojects-item li.fcast-view-newprojects-field2 a,
+.fcast-view-widget .fcast-view-newprojects-item li.fcast-view-newprojects-field3 a,
+.fcast-view-widget .fcast-view-newprojects-item li.fcast-view-newprojects-field4 a
+ {
+    color: #47A6B1;
+}
+
+.fcast-view-widget .fcast-view-newprojects-title .fcast-view-newprojects-title-item1,
+.fcast-view-widget .fcast-view-newprojects-item > .fcast-view-newprojects-field1{text-align:left;}
+
+.fcast-view-widget .fcast-view-newprojects-title .fcast-view-newprojects-title-item2,
+.fcast-view-widget .fcast-view-newprojects-item > .fcast-view-newprojects-field2{text-align: center;}
+
+.fcast-view-widget .fcast-view-newprojects-title .fcast-view-newprojects-title-item3,
+.fcast-view-widget .fcast-view-newprojects-item > .fcast-view-newprojects-field3{text-align: center;}
+
+.fcast-view-widget .fcast-view-newprojects-title .fcast-view-newprojects-title-item4,
+.fcast-view-widget .fcast-view-newprojects-item > .fcast-view-newprojects-field4{text-align: center;}
+
+.fcast-view-widget .fcast-view-newprojects-field2{font-weight:bold}
+.fcast-view-widget .fcast-view-newprojects-field1 span{
+	/*background:url(../img/glyphicons-halflings-blue.png) no-repeat 0 -120px;*/
+	display:inline-block;
+	padding:0 0 0 5px;
+}
+
+.fcast-view-widget .fcast-view-newprojects-item > li:first-child span {
+    display: block;
+    padding: 0 0 0 5px;
+}
+
+ /* =========================
+   WIDGET 3 - ABSENCES
+   =======================*/
+
+.fcast-view-absence-item{background-color:#fff}
+.fcast-view-widget .fcast-view-absence-item .fcast-view-absence-field2,
+.fcast-view-widget .fcast-view-absence-item .fcast-view-absence-field3
+{font-weight:bold}
+
+.fcast-view-widget .fcast-view-absence-item-today .fcast-view-absence-field2 a{color:#f00;}
+.fcast-view-widget .fcast-view-absence-item-prevision .fcast-view-absence-field2 a{color:#be804d}
+.fcast-view-widget .fcast-view-absence-item-today .fcast-view-absence-field3 a{color:#f00;}
+.fcast-view-widget .fcast-view-absence-item-prevision .fcast-view-absence-field3 a{color:#f00}
+
+.fcast-view-widget .fcast-view-absence-title .fcast-view-absence-title-item1,
+.fcast-view-widget .fcast-view-absence-item > .fcast-view-absence-field1{text-align: left;}
+
+.fcast-view-widget .fcast-view-absence-title .fcast-view-absence-title-item2,
+.fcast-view-widget .fcast-view-absence-item > .fcast-view-absence-field2{text-align: center;}
+
+.fcast-view-widget .fcast-view-absence-title .fcast-view-absence-title-item3,
+.fcast-view-widget .fcast-view-absence-item > .fcast-view-absence-field3{text-align: center;}
+
+/*colors fields */
+
+.fcast-view-widget .fcast-view-absence-item .fcast-view-absence-field1 span{
+	display:inline-block;
+	height:13px;
+	padding:0 0 0 5px;
+}
+
+.fcast-view-widget .fcast-view-absence-item-today .fcast-view-absence-field1 span{
+	/*background:url(../img/glyphicons-halflings-red.png) no-repeat -169px 0;*/
+}
+
+.fcast-view-widget .fcast-view-absence-item-prevision .fcast-view-absence-field1 span{
+	/*background:url(../img/glyphicons-halflings-orange.png) no-repeat -169px 0;*/
+}
+
+ /* =========================
+   WIDGET 4 - CHARGES
+   =======================*/
+.fcast-view-workload-item{background-color:#fff }
+
+
+.fcast-view-widget .fcast-view-workload-title .fcast-view-workload-title-item1,
+.fcast-view-widget .fcast-view-workload-item > .fcast-view-workload-field1{text-align:left;}
+
+.fcast-view-widget .fcast-view-workload-title .fcast-view-workload-title-item2,
+.fcast-view-widget .fcast-view-workload-item > .fcast-view-workload-field2{}
+
+.fcast-view-widget .fcast-view-workload-title .fcast-view-workload-title-item3,
+.fcast-view-widget .fcast-view-workload-item > .fcast-view-workload-field3{}
+
+.fcast-view-widget .fcast-view-workload-title .fcast-view-workload-title-item4,
+.fcast-view-widget .fcast-view-workload-item > .fcast-view-workload-field4{}
+
+.fcast-view-widget .fcast-view-workload-title .fcast-view-workload-title-item5,
+.fcast-view-widget .fcast-view-workload-item > .fcast-view-workload-field5{}
+
+
+.fcast-view-widget .fcast-view-workload-item > .fcast-view-workload-field1 span{
+	/*background:url(../img/glyphicons-halflings.png) no-repeat -384px -145px;*/
+	display:inline-block;
+	padding:0 0 0 5px;
+}
+
+.fcast-view-widget .fcast-view-workload-item > li:first-child span {
+    display: block;
+    padding: 0 0 0 5px;
+}
+
+ /* =========================
+   WIDGET 5 - PROJETS A METTRE A JOUR  
+   =======================*/
+
+.fcast-view-toupdate-item{background-color:#f0f0f0 }
+
+.fcast-view-widget .fcast-view-toupdate-title .fcast-view-toupdate-title-item1,
+.fcast-view-widget .fcast-view-toupdate-item > .fcast-view-toupdate-field1{text-align:left}
+
+.fcast-view-widget .fcast-view-toupdate-title .fcast-view-toupdate-title-item2,
+.fcast-view-widget .fcast-view-toupdate-item > .fcast-view-toupdate-field2{}
+
+.fcast-view-widget .fcast-view-toupdate-title .fcast-view-toupdate-title-item3,
+.fcast-view-widget .fcast-view-toupdate-item > .fcast-view-toupdate-field3{}
+
+
+.fcast-view-widget .dropdown-menu{min-width: 90px}
+.fcast-view-widget .dropdown-menu li{display:block;padding:0}
+
+.fcast-view-widget .fcast-view-toupdate-field1 span{
+	/*background:url(../img/glyphicons-halflings-blue.png) no-repeat -23px -145px;*/
+	display:inline-block;
+	height:13px;
+	padding:0 5px 0 5px;
+}
+
+.fcast-view-widget .fcast-view-toupdate-field2 span{
+	/*background:url(../img/glyphicons-halflings-blue.png) no-repeat 0 -49px;*/
+	display:inline-block;
+	height:13px;
+	margin:0 0 0 5px;
+}
+
+.fcast-view-projects-toupdate .fcast-view-toupdate-item {
+	height: 40px;
+}
+
+.fcast-view-item li{
+	min-height: 40px!important;
+}
+
+/* ==========================================================================
+   TEMPLATES
+   ========================================================================== */
+
+
+/* ==========================================================================
+MANSORY
+========================================================================== */
+
+.mansory-fluid-box {
+    float: left;
+}
+
+
+/* ==========================================================================
+PAGE - ABSENCES
+========================================================================== */
+
+.fcast-head-color {
+    color:#fff;
+}
+
+.fcast-absences-head {
+    border-top:1px solid grey;
+    padding:5px 0 0 0;
+
+}
+.fcast-head-icon-cont {
+    margin:15px;
+}
+.fcast-head-icon-cont > img {
+    border: 0;
+    height: 30px;
+    width: 30px;
+}
+.fcast-head-icon-cont > span {
+    color:#000;
+    margin-left:10px;
+}
+ .fcast-head-previsions {
+ 	margin-top: 20px;
+ }
+
+ .fcast-head-encours span, .fcast-head-previsions span {
+ 	color:#fff;
+ 	font-size: 18px;
+	font-weight: bold;
+ }
+
+.fcast-row-user {
+    background-color:#f9f9f9;
+    border-top:1px solid grey;
+    /*padding:15px 0 15px 0;*/
+}
+.fcast-user-encart-jours {
+background: #356aa0;
+background: -moz-linear-gradient(top,  #356aa0 0%, #356aa0 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#356aa0), color-stop(100%,#356aa0));
+background: -webkit-linear-gradient(top,  #356aa0 0%,#356aa0 100%);
+background: -o-linear-gradient(top,  #356aa0 0%,#356aa0 100%);
+background: -ms-linear-gradient(top,  #356aa0 0%,#356aa0 100%);
+background: linear-gradient(to bottom,  #356aa0 0%,#356aa0 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#356aa0', endColorstr='#356aa0',GradientType=0 );
+
+    margin:5px;
+    padding:0 0 0 10px;
+    color: #fff;
+    -webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+/* ==========================================================================
+   PAGE - details project
+   ========================================================================== */
+
+.page-header.fcast-projectDetail {
+	margin: 0px;
+}
+
+
+.fcast-project {
+	background-repeat: repeat-x;
+	padding: 15px 0;
+}
+
+
+.page-header h1 span {
+	/*float: right;*/
+}
+
+.fcast-project .title {
+	margin-left: 0px!important;
+	text-align:left;
+		
+}
+
+.fcast-project .title .btn-inverse{
+	width:115px;
+}
+
+
+.fcast-project .title .clear {
+	display: block;
+	margin-top: 5px;
+	margin-left: 10px;
+}
+
+.infoNext span.labelDesc{
+	font-weight: bold;
+}
+
+.infoNext {
+	color:#000;
+}
+
+.infoNext .btn-inverse {
+	margin-left: 0px;
+	margin-bottom: 10px;
+}
+
+.infoNext ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.infoNext a {
+	color: #000;
+	font-weight: bold;
+}
+
+
+.subTitle {
+	 padding:5px 0 0 0px; 
+	 border-top:1px solid grey;
+	background-repeat: repeat-x;
+}
+
+.subTitle span {
+	padding-left: 20px;
+	color: #fff;
+}
+
+.infoPrject p{
+	background-color:#fff; padding:10px;
+}
+
+.backupProject button{
+	margin: 0;
+	margin-bottom:10px; 
+}
+
+.backupProject ul{
+	list-style-type: none;
+	margin: 0;
+}
+
+
+.backupProject a{
+	color: #000;
+}
+
+
+.subTitleNew {
+	background-color:#ebebeb; padding:5px 0 0 0; border-top:1px solid grey;
+}
+
+.newInformation  {
+
+	background-color:#adadad; padding:5px 0 0 0;  border-top:1px solid grey;
+}
+
+.newInformation.v2 {
+	background-color: #fff;
+	border:none;
+}
+
+.newInformation.v2 .btn,
+.fcast-descProject.v2 .btn{
+	margin-left: 0px;
+	margin-bottom:10px;
+	vertical-align: top;
+}
+
+.newInformation.v2 textarea {
+	display: block;
+	width: 90%;
+}
+
+.span6.descProject{
+	margin-left: 0px;
+}
+
+.row-fluid.arrondi {
+	background-color: #fff;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	margin-bottom: 0;
+	padding: 0;
+}
+
+.descProject{
+	margin:10px 0 0 0;
+	padding:5px;
+
+
+}
+
+.fcast-projectDetail .fcast-view-title.fcast-view-listtasks-title.row-fluid,
+.fcast-projectDetail .fcast-view-item.fcast-view-listtasks-item.row-fluid,
+.fcast-projectDetail .fcast-view-title.fcast-view-listprojects-title.row-fluid,
+.fcast-projectDetail .fcast-view-item.fcast-view-listprojects-item.row-fluid
+{
+	margin:0;
+}
+
+.fcast-projectDetail .fcast-view-item.fcast-view-listprojects-item.row-fluid{
+	border-top:1px solid #ccc;
+}
+
+.fcast-project .fcast-view-listtasks-item{
+	border-bottom:1px solid #ccc;
+}
+
+.fcast-view-newprojects-item{background-color:#fff}
+.fcast-view-widget .fcast-view-listtasks-item li.fcast-view-listtasks-field2 a,
+.fcast-view-widget .fcast-view-listtasks-item li.fcast-view-listtasks-field3 a,
+.fcast-view-widget .fcast-view-listtasks-item li.fcast-view-listtasks-field4 a
+ {
+    color: #47A6B1;
+}
+
+.fcast-view-widget .fcast-view-listtasks-title .fcast-view-listtasks-title-item1,
+.fcast-view-widget .fcast-view-listtasks-item > .fcast-view-listtasks-field1{text-align:left;}
+
+.fcast-view-widget .fcast-view-listtasks-title .fcast-view-listtasks-title-item2,
+.fcast-view-widget .fcast-view-listtasks-item > .fcast-view-listtasks-field2{text-align: center;}
+
+.fcast-view-widget .fcast-view-listtasks-title .fcast-view-listtasks-title-item3,
+.fcast-view-widget .fcast-view-listtasks-item > .fcast-view-listtasks-field3{text-align: center;}
+
+.fcast-view-widget .fcast-view-listtasks-title .fcast-view-listtasks-title-item4,
+.fcast-view-widget .fcast-view-listtasks-item > .fcast-view-listtasks-field4{text-align: center;}
+
+.fcast-view-widget .fcast-view-listtasks-field2{font-weight:bold}
+.fcast-view-widget .fcast-view-listtasks-field1 span{
+	/*background:url(../img/glyphicons-halflings-blue.png) no-repeat 0 -120px;*/
+	display:inline-block;
+	padding:0 0 0 5px;
+}
+
+.fcast-view-widget .fcast-view-listtasks-item > li:first-child span {
+    display: block;
+    padding: 0 0 0 5px;
+}
+
+.fcast-projectDetail .infoFirst, .fcast-projectDetail .infoNext{
+	border:1px solid #356AA0 ;
+	padding:5px;
+}
+
+.fcast-projectdetail-tasklist .row-fluid .offset1:first-child {
+    margin-left:1%;
+}
+
+.fcast-projectDetail .fcast-view-title-item.fcast-view-listprojects-title-item1.span6{
+	
+	text-align:left;
+}
+
+.fcast-projectDetail .fcast-view-title-item.fcast-view-listprojects-title-item1.span6 .btn-group{
+	left:5%;
+	top:5%;
+}
+
+.fcast-view-item.fcast-view-listtasks-item.row-fluid{
+	background:#ccc;
+	border-bottom:1px solid #000;
+}
+
+.fcast-projectDetail .fcast-view-title.fcast-view-listprojects-title.row-fluid,
+.fcast-projectDetail .fcast-view-item.fcast-view-listprojects-item.row-fluid
+{
+	display:none;
+}
+
+.fcast-projectDetail .fcast-view-title.fcast-view-listprojects-title.row-fluid.selected,
+.fcast-projectDetail .fcast-view-item.fcast-view-listprojects-item.row-fluid.selected{
+	display:block;
+}
+
+.fcast-titleaddtask, .fcast-fieldsaddtask,
+.fcast-titleaddfee, .fcast-fieldsaddfee{
+	/*display:none;*/
+}
+
+.fcast-titleaddtask.selected, .fcast-fieldsaddtask.selected,
+.fcast-titleaddfee.selected, .fcast-fieldsaddfee.selected{
+	/*display:block;*/
+}
+
+ /* ==========================================================================
+   PAGE - taches
+   ========================================================================== */
+
+.row-fluid.list {
+	 color:#000; padding:10px 0 10px 0;
+}
+
+.row-fluid.list button {
+	margin-bottom:10px;
+	margin-left: 0px;
+	
+}
+
+.row-fluid.list .btn-success {
+	font-size: 18px;
+	padding: 15px!important;
+}
+
+.row-fluid.list .btn-danger {
+	font-size: 18px;
+	padding: 15px!important;
+}
+
+
+.row-fluid.list #_atssh {
+		visibility: hidden; height: 1px; width: 1px; position: absolute; z-index: 100000;
+}
+
+.row-fluid.areaTache {
+	margin-left: 0px;
+	margin-bottom:10px;
+	padding: 10px 0px;
+	background-color: #ededed;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.row-fluid.areaTache p {
+	padding: 0 10px;
+}
+
+.row-fluid.areaTache .btn-inverse {
+	margin-bottom: 10px;
+}
+
+
+.row-fluid.areaTache .btn-danger.alert {
+	color: #fff;
+	display: none;
+}
+
+.row-fluid.areaAdd textarea {
+	width:90%;
+}
+
+.row-fluid.list div{
+	margin-left: 0px;
+}
+
+.btn.before{
+	margin-left: 0px;
+	text-align: center;
+	width: 100%;
+}
+
+.btn.marginLeft {
+	margin-left: 40px!important;
+}
+
+ /* ==========================================================================
+   PAGE - liste des projets
+   ========================================================================== */
+
+.fcast-project-list ul{margin:0}
+.fcast-project-list ul.fcast-view-item{border-bottom:1px solid #ccc;}
+
+.fcast-view-newprojects-item{background-color:#fff}
+.fcast-view-widget .fcast-view-listprojects-item li.fcast-view-listprojects-field2 a,
+.fcast-view-widget .fcast-view-listprojects-item li.fcast-view-listprojects-field3 a,
+.fcast-view-widget .fcast-view-listprojects-item li.fcast-view-listprojects-field4 a
+ {
+    color: #47A6B1;
+}
+
+.fcast-view-widget .fcast-view-listprojects-title .fcast-view-listprojects-title-item1,
+.fcast-view-widget .fcast-view-listprojects-item > .fcast-view-listprojects-field1{text-align:left;}
+
+.fcast-view-widget .fcast-view-listprojects-title .fcast-view-listprojects-title-item2,
+.fcast-view-widget .fcast-view-listprojects-item > .fcast-view-listprojects-field2{text-align: center;}
+
+.fcast-view-widget .fcast-view-listprojects-title .fcast-view-listprojects-title-item3,
+.fcast-view-widget .fcast-view-listprojects-item > .fcast-view-listprojects-field3{text-align: center;}
+
+.fcast-view-widget .fcast-view-listprojects-title .fcast-view-listprojects-title-item4,
+.fcast-view-widget .fcast-view-listprojects-item > .fcast-view-listprojects-field4{text-align: center;}
+
+.fcast-view-widget .fcast-view-listprojects-field2{font-weight:bold}
+.fcast-view-widget .fcast-view-listprojects-field1 span{
+	/*background:url(../img/glyphicons-halflings-blue.png) no-repeat 0 -120px;*/
+	display:inline-block;
+	padding:0 0 0 5px;
+}
+
+.fcast-view-widget .fcast-view-listprojects-item > li:first-child span {
+    display: block;
+    padding: 0 0 0 5px;
+}
+
+
+/* ==========================================================================
+   RESPONSIVE FORECAST DEVICES 
+   ========================================================================== */
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+	.mansory-fluid-box {
+	    clear: both;
+	    float: none;
+	    width:100%;
+	}
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (min-width: 569px) and (max-width: 767px) {
+
+	footer p{margin:40px 0 0 10px}
+
+	/* ----------TBB--------------*/
+	.fcast-view-widget .fcast-view-item {
+		background: #dedede;
+		border-bottom:3px solid #fff;
+	}
+
+	.fcast-view-item > li{
+		text-align:center!important;
+		border-bottom:1px solid #ccc;
+	} 
+
+
+	.fcast-view-deadline-field4 .btn {
+	    float: none;
+	    margin: 2px 0 0;
+	}
+
+	/* ----------ABSENCES--------------*/
+
+ }
+
+/* Mobile paysage (480x320) */
+
+@media (min-width:481px) and (max-width:568px) {
+
+	.mansory-fluid-box {
+	    clear: both;
+	    float: none;
+	    width:100%;
+	}
+
+	/* ----------TBB--------------*/
+	.fcast-view-item > li{
+		text-align:center!important;
+		border-bottom:1px solid #ccc;
+	} 
+
+
+	.fcast-view-widget .fcast-view-item {
+		background:#dedede;
+		border-bottom:3px solid #fff;
+	}
+
+	/* ----------ABSENCES--------------*/
+	.fcast-user-encart-jours {
+    	margin: 0;
+	}
+ }
+ 
+/* Mobile portrait (320x480) */ 
+@media (min-width:322px) and (max-width:480px) {
+
+
+	/* ----------TBB--------------*/
+	footer p{margin:40px 0 0 10px}
+
+	.fcast-view-widget .fcast-view-item {
+		background:#dedede;
+		border-bottom:3px solid #fff;
+	}
+
+	.fcast-view-item > li{
+		text-align:center!important;
+		border-bottom:1px solid #ccc;
+	} 
+
+
+	.fcast-view-deadline-field4 .btn {
+	    float: none;
+	    margin: 2px 0 0;
+	}
+
+	.fcast-view-widget .fcast-view-deadline-item-level2 > li {
+    	float: left
+	}
+
+
+	/* ----------ABSENCES--------------*/
+	.fcast-user-encart-jours {
+    	margin: 0;
+	}
+ }

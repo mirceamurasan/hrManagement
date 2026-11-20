@@ -1,0 +1,38 @@
+{% extends "FullSixProjectForecastBundle::layout.html.twig" %}
+
+{% block bodyClass %}dashboard-container{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('bundles/fullsixprojectforecast/css/reporting.css') }}" type="text/css">
+{% endblock %}
+
+{% block content %}
+    <h1>DASHBOARD</h1>
+    <p class="fcast-currentdate">{{ 'now' | date('l j M Y - H:i') }}</p>
+    <h3>{{ 'homepage.welcomeTitle'|trans }}</h3>
+
+    {% if app.user is not null and (is_granted('ROLE_ADMIN') or app.user.user.worker is not null) %}
+    <div class="row-fluid" id="mansory-container">
+        <div class="span6">
+            {% render url('widget_projects_update') %}
+
+            {# render url('home_widget_deadlines_projects') #}
+            {# render url('home_widget_new_projects') #}
+            {# render url('home_widget_projects_load') #}
+            {# render url('home_widget_absence') #}
+        </div>
+
+        <div class="span6 fcast-view-widget fcast-view-projects-toupdate mansory-fluid-box">
+            <h2>Your tasks for the current week</h2>
+
+            {% if isWorker %}
+                {% include 'FullSixProjectForecastBundle:Reporting:_weekly_tasks.html.twig' %}
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "FullSixProjectForecastBundle:Providers:new.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Edition d'un prestataire</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>{{ 'provider.edit'|trans }} "{{ entity.providersname }}"</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('providers_update', { 'id': entity.id }) }}"
+{% endblock %}
+
+{% block formAction %}
+    {{ parent() }}
+    <li>
+        <form action="{{ path('providers_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+{% endblock %}
+
+{% block formMenu %}
+    {% include 'FullSixProjectForecastBundle::_buttonsMenu.html.twig' with { 'entityName': 'providers', 'returnPage': 'edit' }%}
+{% endblock %}

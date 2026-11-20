@@ -1,0 +1,64 @@
+{% extends "FullSixProjectForecastBundle:Users:new.html.twig" %}
+
+{% block title%}
+    <title>Edit user</title>
+{% endblock %}
+
+{% block elementTitle %}
+{% endblock %}
+
+{% block formTitle %}
+    <h1>{{ 'user.edit'|trans }} : {{ entity.checkedName }}</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('users_update', { 'id': entity.id }) }}"
+{% endblock %}
+
+{% block formAction %}
+    {{ parent() }}
+{% endblock %}
+
+{% block password %}
+    {% if entity.login and not entity.adLinked %}
+        <a href="{{ path('users_change_password_popup', { 'id': entity.login.id }) }}" class="btn password-popup" title="{{ 'user.changePassword.label'|trans }}">
+            {{ 'user.changePassword.label'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+ {% block no_login_message %}
+     {% if entity.login is null %}
+         <h4>{{ 'user.notLoginYet'|trans }}</h4>
+     {% endif %}
+ {% endblock %}
+
+{% block formMenu %}
+    <div class="btn-toolbar">
+        <div class="btn-group">
+            <div class="btn-group">
+            <a href="{{ path('users') }}" class="btn" title="{{ 'common.action.back'|trans }}">
+                <i class="icon-arrow-left"></i>
+            </a>
+            <i class="icon-white"></i>
+            {% if entity.mergedWith == null %}
+                <a href="{{ path('users_merge_popup', {'id': entity.id }) }}" class="btn merge-popup" title="Users merge">
+                    {{ 'user.merge'|trans }}
+                </a>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function(){
+	     setTimeout(function() {
+      		$(".merge-popup, .password-popup").colorbox();
+            }, 500);
+        });
+    </script>
+{% endblock %}

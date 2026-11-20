@@ -1,0 +1,38 @@
+{% extends "FullSixProjectForecastBundle::layout.html.twig" %}
+
+{% block title%}
+{% endblock %}
+
+{% block content %}
+    {% block formTitle %}
+    {% endblock %}
+
+    {% block formMenu %}
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <a href="{% block backLink %}{% endblock %}" class="btn" title="Retour à la liste">
+                    <i class="icon-arrow-left"></i>
+                </a>
+                <i class="icon-white"></i>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block form %}
+    <form
+            {% block formParam %}
+            {% endblock %}
+        method="post" {{ form_enctype(form) }} class="form-horizontal edit-form">
+            {% block formFields %}
+                {{ form_widget(form) }}
+            {% endblock %}
+            {{ formActions() }}
+    </form>
+    {% endblock %}
+{% endblock %}
+
+{% block curstomErrorsForm %}
+<div style="display:none">
+    {{ include("FullSixProjectForecastBundle::_errors.html.twig") }}
+</div>
+{% endblock %}

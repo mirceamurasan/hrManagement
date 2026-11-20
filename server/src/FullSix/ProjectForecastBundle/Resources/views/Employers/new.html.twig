@@ -1,0 +1,17 @@
+{% extends "FullSixProjectForecastBundle::form.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Employers</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>{{ 'admin.employer.new' |trans }}</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('employers_create') }}"
+{% endblock %}
+
+{% block backLink %}
+    {{ path('employers') }}
+{% endblock %}

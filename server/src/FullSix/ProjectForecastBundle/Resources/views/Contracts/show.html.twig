@@ -1,0 +1,63 @@
+{% extends "FullSixProjectForecastBundle::show.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : User</title>
+{% endblock %}
+
+{% block elementTitle %}
+    {{ 'worker.contract.show'|trans }}
+{% endblock %}
+
+{% block formMenu %}
+    <div class="btn-toolbar">
+        <div class="btn-group">
+            <a href="{{ path('workers_edit', {'id': entity.idworker.id} ) }}" class="btn" title="Retour à la liste">
+                <i class="icon-arrow-left"></i>
+            </a>
+            <i class="icon-white"></i>
+            <a href="{{ path('contracts_edit', { 'id': entity.id }) }}" class="btn" title="Edit">
+                <i class="icon-edit"></i>
+            </a>
+            {% if entity.isTrashed == false %}
+                <a href="{{ path('contracts_activation', { 'id': entity.id, 'page': 'show' }) }}" class="btn"><i class="icon-pause" title="{{ 'common.action.trash'|trans }}"></i></a>
+            {% else %}
+                <a href="{{ path('contracts_activation', { 'id': entity.id, 'page': 'show' }) }}" class="btn"><i class="icon-play" title="{{ 'common.action.activate'|trans }}"></i></a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block elementDetails %}
+<fieldset name="Information worker">
+    <h2>{{  'worker.worker_info'|trans }}</h2>
+    <dt>{{ 'user.firstName'|trans }}</dt><dd>{{ entity.idworker.user.usersfirstname }}</dd>
+    <dt>{{ 'user.lastName'|trans }}</dt><dd>{{ entity.idworker.user.userslastname }}</dd>
+</fieldset>
+<fieldset name="Information contrat">
+    <h2>Information contrat</h2>
+    {%  if entity.contracttype.contractTypesIsExternal %}
+    <dt>Bon de commande</dt><dd>{{ entity.bdc }}</dd>
+    {% endif %}
+    <dt>{{ 'admin.typeCon.label'|trans }}</dt><dd>{{ entity.contracttype.contracttypesname }}</dd>
+    <dt>{{ 'admin.employer.label'|trans }}</dt><dd>{{ entity.employer.employersname }}</dd>
+    <dt>{{ 'admin.job.label'|trans }}</dt><dd>{{ entity.idjob.jobslabel }}</dd>
+    <dt> Périodes</dt>
+    <dd>
+        {% for period in entity.periods %}
+            <li>
+                <dt>Identifiant</dt><dd>{{ period.id }}</dd>
+                <dt>Début de la période</dt><dd>{{ period.startdate|date("d-m-Y") }}</dd>
+                <dt>Fin de la période</dt>
+                {% if period.enddate %}
+                    <dd>{{ period.enddate|date("d-m-Y") }}</dd>
+                {% else %}
+                    <dd>{{ 'common.field.infinite'|trans }}</dd>
+                {% endif %}
+                {%  if entity.contracttype.contractTypesIsExternal %}
+                    <dt>Tax Journalier</dt><dd>{{ period.tjm }}</dd>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </dd>
+</fieldset>
+{% endblock %}

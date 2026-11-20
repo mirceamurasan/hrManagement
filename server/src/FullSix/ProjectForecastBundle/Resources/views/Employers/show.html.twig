@@ -1,0 +1,28 @@
+{% extends "FullSixProjectForecastBundle::show.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Employers</title>
+{% endblock %}
+
+{% block elementTitle %}
+    {{ 'admin.employer.edit' |trans }} "{{ entity.employersname }}"
+{% endblock %}
+
+{% block formMenu %}
+    {% include 'FullSixProjectForecastBundle::_buttonsMenu.html.twig' with { 'entityName': 'employers', 'returnPage': 'show' } %}
+{% endblock %}
+
+{% block elementDetails %}
+    {% if entity.agenciesidagencies != null %}
+        <h5 style="color:#d44413" > {{ 'admin.employer.internal'|trans|raw }}</h5>
+    {% else %}
+        <h5 style="color:#d44413" > {{ 'admin.employer.external'|trans|raw }}</h5>
+    {% endif %}
+
+    <dt>{{ 'common.field.name'|trans }}</dt><dd>{{ entity.employersname }}</dd>
+    {% if entity.agenciesidagencies != null %}
+        <dt>{{ 'admin.employer.agency'|trans }}</dt><dd>{{ entity.agenciesidagencies }}</dd>
+    {% endif %}
+    <dt>{{ 'common.field.createdAt'|trans }}</dt><dd>{{ entity.employerscreated|date('Y-m-d H:i:s') }}</dd>
+    <dt>{{ 'common.field.updatedAt'|trans }}</dt><dd>{{ entity.employersupdated|date('Y-m-d H:i:s') }}</dd>
+{% endblock %}

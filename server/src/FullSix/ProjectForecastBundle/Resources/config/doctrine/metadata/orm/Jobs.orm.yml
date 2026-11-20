@@ -1,0 +1,31 @@
+Jobs:
+    type: entity
+    table: Jobs
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: Id
+            generator:
+                strategy: IDENTITY
+        jobslabel:
+            type: string
+            length: 45
+            fixed: false
+            nullable: true
+            column: JobsLabel
+        jobsistrashed:
+            type: boolean
+            nullable: false
+            column: JobsIsTrashed
+        jobscreated:
+            type: datetime
+            nullable: false
+            column: JobsCreated
+        jobsupdated:
+            type: datetime
+            nullable: true
+            column: JobsUpdated
+    lifecycleCallbacks: {  }

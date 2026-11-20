@@ -1,0 +1,99 @@
+{% extends "FullSixProjectForecastBundle::show.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Client {{ entity.customersname }}</title>
+{% endblock %}
+
+{% block elementTitle %}
+    Client "{{ entity.customersname }}"
+{% endblock %}
+
+{% block formMenu %}
+    <form class="activation" action="{{ path('customers_activation', { 'id': entity.id }) }}" method="post">
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <a href="{{ path('customers') }}" class="btn" title="{{ 'common.action.back'|trans }}">
+                    <i class="icon-arrow-left"></i>
+                </a>
+                {% if app.user is not null and is_granted('ROLE_ADMIN') %}
+                    {% if entity.mergedWith == null %}
+                        <i class="icon-white"></i>
+                        <a href="{{ path('customers_edit', { 'id': entity.id }) }}" class="btn" title="{{ 'common.action.edit'|trans }}">
+                            <i class="icon-edit"></i>
+                         </a>
+                        {% if entity.isTrashed == false %}
+                            <button type="submit" class="btn"><i id="activate" class="icon-pause" title="{{ 'common.action.trash'|trans }}"></i></button>
+                        {% else %}
+                            <button type="submit" class="btn"><i id="activate" class="icon-play" title="{{ 'common.action.activate'|trans }}"></i></button>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+
+                {% if app.user is not null and is_granted('ROLE_PM') %}
+                    <i class="icon-white"></i>
+                    <a href="{{ path('workers_popup', {'id': entity.id }) }}" class="btn workers-popup" title="{{ 'client.addWorkerTitle'|trans }}">
+                        <i class="icon-user"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block elementDetails %}
+    {% if entity.mergedWith != null %}
+        <h3 style="color:#d44413" > {{ 'client.info.alreadyMearged'|trans }} "{{ entity.mergedWith }}"</h3>
+    {% endif %}
+
+    <dt>{{ 'common.field.name'|trans }}</dt><dd>{{ entity.customersname }}</dd>
+    <dt>{{ 'client.sapIDs'|trans }}</dt>
+    <dd><ul style="list-style-type: circle;">
+        {% for sapID in entity.sapids %}
+            <li> {{ sapID.sapid }}</li>
+        {% endfor %}
+    </ul></dd>
+    <dt>{{ 'common.field.createdAt'|trans }}</dt><dd>{{ entity.customerscreated|date('Y-m-d H:i:s') }}</dd>
+    <dt>{{ 'common.field.updatedAt'|trans }}</dt><dd>{{ entity.customersupdated|date('Y-m-d H:i:s') }}</dd>
+    <br/>
+
+    {% if entity.mergedWith == null %}
+    <div class="clear">
+        <div class="fos_user_group_list">
+            <dt>{{ 'client.workers'|trans }}</dt>
+            <dd><ul style="list-style-type: circle;">
+                {% for resourceProfile in entity.resourceprofiles %}
+                    <li>
+                        <a target="_blank" href="{{ path('workers_show', { 'id': resourceProfile.workerid.id }) }}">{{ resourceProfile.workerid.user }}</a>
+                           : {% for key in resourceProfile.roles|keys %}
+                                {{ resourceProfile.roles[key] }} &nbsp;
+                            {% endfor %}
+                    </li>
+                {% endfor %}
+            </ul></dd>
+        </div>
+
+        <div class="fos_user_group_list">
+            <dt>{{ 'client.projects'|trans }}</dt>
+            <dd><ul style="list-style-type: circle;">
+                {% for project in entity.projects %}
+                    <li>
+                        <a target="_blank" href="{{ path('projects_details', { 'id': project.id }) }}">{{ project.projectsname }}</a>
+                    </li>
+                {% endfor %}
+            </ul></dd>
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function(){
+            $(".workers-popup").colorbox();
+        });
+    </script>
+{% endblock %}

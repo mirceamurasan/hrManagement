@@ -1,0 +1,39 @@
+{% block field_row %}
+{% spaceless %}
+{% set class_name = '' %}
+{% if form.vars.widget is defined and form.vars.widget == 'single_text'  %}{% set class_name = 'has_datepicker' %}{% endif %}
+    <div class="control-group">
+        {{ form_label(form) }}
+        <div class="controls">
+            {{ form_widget(form, { attr: {'class': class_name }} ) }}
+            <span class="help-inline">{{ form_errors(form) }}</span>
+        </div>
+    </div>
+{% endspaceless %}
+{% endblock field_row %}
+
+{% block form_widget_compound %}
+{% spaceless %}
+        {% if form.parent is empty %}
+            {{ form_errors(form) }}
+        {% endif %}
+        {{ block('form_rows') }}
+        {{ form_rest(form) }}
+{% endspaceless %}
+{% endblock form_widget_compound %}
+
+{% block form_label %}
+{% spaceless %}
+    {% if not compound %}
+        {% set label_attr = label_attr|merge({'for': id}) %}
+    {% endif %}
+    {% if required %}
+        {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+    {% endif %}
+    {% if label is empty %}
+        {% set label = name|humanize %}
+    {% endif %}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' control-label')|trim}) %}
+    <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+{% endspaceless %}
+{% endblock form_label %}

@@ -1,0 +1,17 @@
+{% extends "FullSixProjectForecastBundle::form.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Création d'une jour férié</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>Création d'un jour férié</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('daysoffsglobal_create') }}"
+{% endblock %}
+
+{% block backLink %}
+    {{ path('daysoffsglobal') }}
+{% endblock %}

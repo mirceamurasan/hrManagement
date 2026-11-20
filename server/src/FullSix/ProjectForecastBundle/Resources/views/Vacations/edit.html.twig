@@ -1,0 +1,55 @@
+{% stylesheets filter='cssrewrite' output='css/projects-forecast.css'
+    '@FullSixProjectForecastBundle/Resources/public/css/colorbox.css'
+%}
+{% endstylesheets %}
+{% block content %}
+    <div class="container-fluid popup-content vacations-form">
+        <br />
+        <div id="vacations_form_errors">
+        </div>
+        <form method="POST">
+            {{ form_widget(form) }}
+            {{ form_rest(form) }}
+            <div class="button-container">
+                <button type="submit" id="_submit" class="btn btn-primary">Save</button>
+                <button type="button" onclick="closePopup()" class="btn save-period">Cancel</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% javascripts
+    "@FullSixProjectForecastBundle/Resources/public/js/jquery.min.js"
+    "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js"
+    '@FullSixProjectForecastBundle/Resources/public/js/jquery.colorbox.js'
+%}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<script>
+    $(".has_datepicker" ).datepicker({ dateFormat: 'dd-mm-yy' });
+    function closePopup() {
+        $('#cboxClose').click();
+    }
+    $(document).ready(function() {
+        $('form').on('submit', function(e){
+            var href = this.action;
+
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "{{ path('vacations_update', {'id': entity.id}) }}",
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response['status'] == "OK") {
+                        closePopup();
+                        window.location.reload( true );
+                    } else {
+                        $('#vacations_form_errors').html(response['messages']);
+                    }
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

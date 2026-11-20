@@ -1,0 +1,68 @@
+Projects:
+    type: entity
+    table: Projects
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: Id
+            generator:
+                strategy: IDENTITY
+        projectsname:
+            type: string
+            length: 250
+            fixed: false
+            nullable: true
+            column: ProjectsName
+        projectscomments:
+            type: text
+            nullable: true
+            column: ProjectsComments
+        projectscreated:
+            type: datetime
+            nullable: false
+            column: ProjectsCreated
+        projectsupdated:
+            type: datetime
+            nullable: true
+            column: ProjectsUpdated
+    manyToOne:
+        customersidcustomers:
+            targetEntity: Customers
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                CustomersIdCustomers:
+                    referencedColumnName: Id
+            orphanRemoval: false
+        projectscreatedby:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ProjectsCreatedBy:
+                    referencedColumnName: id
+            orphanRemoval: false
+        projectscotechsupervisor:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ProjectsCotechSupervisor:
+                    referencedColumnName: id
+            orphanRemoval: false
+        projectscotechoperational:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ProjectsCotechOperational:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

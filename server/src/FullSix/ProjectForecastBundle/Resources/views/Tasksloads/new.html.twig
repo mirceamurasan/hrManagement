@@ -1,0 +1,17 @@
+{% extends "FullSixProjectForecastBundle::form.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Création d'une charge</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>Création d'une charge</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('tasksloads_create') }}"
+{% endblock %}
+
+{% block backLink %}
+    href="{{ path('tasksloads') }}"
+{% endblock %}

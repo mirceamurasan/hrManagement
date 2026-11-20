@@ -1,0 +1,20 @@
+{% extends "FullSixProjectForecastBundle::show.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Locations</title>
+{% endblock %}
+
+{% block elementTitle %}
+    {{ 'admin.location.show'|trans }} '{{ entity.Locationsname }}'
+{% endblock %}
+
+{% block elementDetails %}
+    <dt>{{ 'common.field.label'|trans }}</dt><dd>{{ entity.Locationsname }}</dd>
+    <dt>{{ 'admin.location.address'|trans }}</dt><dd>{{ entity.Locationsaddress }}</dd>
+    <dt>{{ 'common.field.createdAt'|trans }}</dt><dd>{{ entity.locationscreated|date('Y-m-d H:i:s') }}</dd>
+    <dt>{{ 'common.field.updatedAt'|trans }}</dt><dd>{{ entity.locationsupdated|date('Y-m-d H:i:s') }}</dd>
+{% endblock %}
+
+{% block formMenu %}
+    {% include 'FullSixProjectForecastBundle::_buttonsMenu.html.twig' with { 'entityName': 'locations', 'returnPage': 'show' } %}
+{% endblock %}

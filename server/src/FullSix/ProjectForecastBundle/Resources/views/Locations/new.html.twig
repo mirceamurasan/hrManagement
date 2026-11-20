@@ -1,0 +1,17 @@
+{% extends "FullSixProjectForecastBundle::form.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : 'Création d'un emplacement'</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>'Création d'un emplacement'</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('locations_create') }}"
+{% endblock %}
+
+{% block backLink %}
+    {{ path('locations') }}
+{% endblock %}

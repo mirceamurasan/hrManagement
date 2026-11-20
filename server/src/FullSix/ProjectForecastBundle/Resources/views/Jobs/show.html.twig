@@ -1,0 +1,19 @@
+{% extends "FullSixProjectForecastBundle::show.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Métier {{ entity.jobslabel }}</title>
+{% endblock %}
+
+{% block elementTitle %}
+    {{ 'admin.job.show'|trans }}  "{{ entity.jobslabel }}"
+{% endblock %}
+
+{% block formMenu %}
+    {% include 'FullSixProjectForecastBundle::_buttonsMenu.html.twig' with { 'entityName': 'jobs', 'returnPage': 'show' } %}
+{% endblock %}
+
+{% block elementDetails %}
+    <dt>{{ 'common.field.label'|trans }}</dt><dd>{{ entity.jobslabel }}</dd>
+    <dt>{{ 'common.field.createdAt'|trans }}</dt><dd>{{ entity.jobscreated|date('Y-m-d H:i:s') }}</dd>
+    <dt>{{ 'common.field.updatedAt'|trans }}</dt><dd>{{ entity.jobsupdated|date('Y-m-d H:i:s') }}</dd>
+{% endblock %}

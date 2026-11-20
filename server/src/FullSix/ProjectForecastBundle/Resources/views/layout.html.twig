@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    {% block title%}
+    <title>Projects Forecast</title>
+    {% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="include_mode" content="async" />
+    <!-- Le styles -->
+    <link rel="stylesheet" href="{{ asset('bundles/fullsixprojectforecast/css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('bundles/fullsixprojectforecast/css/bootstrap-responsive.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('bundles/fullsixprojectforecast/css/themes/united/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('bundles/fullsixprojectforecast/css/themes/jquery-ui.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('bundles/fullsixprojectforecast/css/fullsix/main.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('bundles/fullsixprojectforecast/css/fullsix/fullsix.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('bundles/fullsixprojectforecast/css/colorbox.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('bundles/fullsixprojectforecast/css/custom.css') }}" type="text/css">
+
+    {% block stylesheets %}
+    {% endblock %}
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+  </head>
+
+  <body class="{% block bodyClass %}{% endblock %}">
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    {% block navbar %}
+        {{ render(controller("FullSixProjectForecastBundle:Default:header") , {'standalone': 'js'}) }}
+    {% endblock %}
+{% endif %}
+    {% block container %}
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12">
+          {% block content %}
+          {% endblock %}
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p></p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+    {% endblock %}
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    {% block javascripts %}
+         <script src="{{ asset('bundles/fullsixprojectforecast/js/jquery.min.js') }}"></script>
+        <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+        <script src="{{ asset('bundles/fullsixprojectforecast/js/jquery.form.min.js') }}"></script>
+        <script src="{{ asset('bundles/fullsixprojectforecast/js/hinclude.js') }}"></script>
+        <script src="{{ asset('bundles/fullsixprojectforecast/js/jquery.colorbox.js') }}"></script>
+        <script src="{{ asset('bundles/fullsixprojectforecast/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bundles/fullsixprojectforecast/js/fullsix.js') }}"></script>
+        <script src="{{ asset('bundles/fullsixprojectforecast/js/custom.js') }}"></script>
+
+    {% endblock %}
+
+  </body>
+</html>
+
+{% block curstomErrorsForm %}
+    <div style="display:none">
+        {{ include("FullSixProjectForecastBundle::_errors.html.twig") }}
+    </div>
+{% endblock %}

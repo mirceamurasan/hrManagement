@@ -1,0 +1,75 @@
+Tasksloads:
+    type: entity
+    table: TasksLoads
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: Id
+            generator:
+                strategy: IDENTITY
+        tasksloadsvolume:
+            type: smallint
+            nullable: false
+            column: TasksLoadsVolume
+        isTrashed:
+            type: boolean
+            nullable: false
+            column: TasksLoadsIsTrashed
+        tasksloadscreated:
+            type: datetime
+            nullable: false
+            column: TasksLoadsCreated
+        tasksloadsupdated:
+            type: datetime
+            nullable: true
+            column: TasksLoadsUpdated
+    manyToOne:
+        tasksloadsworkers:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                TasksLoadsWorkers:
+                    referencedColumnName: id
+            orphanRemoval: false
+        tasksidtasks:
+            targetEntity: Tasks
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                TasksIdTasks:
+                    referencedColumnName: Id
+            orphanRemoval: false
+        providersidproviders:
+            targetEntity: Providers
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ProvidersIdProviders:
+                    referencedColumnName: Id
+            orphanRemoval: false
+        tasksloadscreatedby:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                TasksLoadsCreatedBy:
+                    referencedColumnName: id
+            orphanRemoval: false
+        jobsidjobs:
+            targetEntity: Jobs
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                JobsIdJobs:
+                    referencedColumnName: Id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

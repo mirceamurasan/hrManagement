@@ -1,0 +1,11 @@
+<form novalidate id="{{ form.vars.full_name }}_{{ id }}_{{ attribut }}_EIP" action="{{ path('projects_edit_inplace') }}" method="post" class="form-horizontal">
+	<input type="hidden" name="entity" value="{{ entity }}">
+	<input type="hidden" name="attribut" value="{{ attribut }}">
+	<input type="hidden" name="id" value="{{ id }}">
+	<input type="hidden" name="form_name" value="{{ form.vars.name }}">
+	<span class="field-to-change">{{ form_widget(attribute(form, attribut)) }}{{ form_errors(attribute(form, attribut)) }}</span>
+	{{ form_widget(form._token) }}
+
+	<button class="btn btn-primary btn-info page-refresh" type="submit" onClick="window.location.reload( true );"><i class="icon-ok"></i></button>
+	<button class="btn btn-primary btn-info" type="button"><i class="icon-remove"></i></button>
+</form>

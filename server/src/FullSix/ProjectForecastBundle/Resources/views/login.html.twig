@@ -1,0 +1,13 @@
+{% if error %}
+    <div  class="alert alert-error">{{ error|trans({}, 'FOSUserBundle') }}</div>
+{% endif %}
+<form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
+    <h2 class="form-signin-heading">Log in</h2>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    <input type="text" placeholder="User" class="input-block-level" id="username" name="_username" value="{{ last_username }}" required="required" />
+    <input type="password" class="input-block-level" id="password" name="_password" required="required" placeholder="Password"/>
+    <label class="checkbox">
+        <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> Remember me
+    </label>
+    <button type="submit" id="_submit" class="btn btn-primary btn-large">Log in</button>
+</form>    

@@ -1,0 +1,6 @@
+period:
+    invalid-interval: Intervalles de date non valide
+login:
+    username: Indiquez un nom d'utilisateur.
+    password: Choisissez un mot de pass.
+    roles: Choisissez au moins un rôle

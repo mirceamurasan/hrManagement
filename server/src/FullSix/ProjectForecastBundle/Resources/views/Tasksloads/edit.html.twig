@@ -1,0 +1,26 @@
+{% extends "FullSixProjectForecastBundle:Tasksloads:new.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Edition d'une charge</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>Edition d'une charge</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('tasksloads_update', { 'id': entity.id }) }}"
+{% endblock %}
+
+{% block formAction %}
+    {{ parent() }}
+    <li>
+        <a href="{{ path('projects_details', { 'id': entity.tasksidtasks.projectsidprojects.id }) }}">Return to project</a>
+    </li>
+    <li>
+        <form action="{{ path('tasksloads_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+{% endblock %}

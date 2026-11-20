@@ -1,0 +1,31 @@
+{% spaceless %}
+{% block form %}
+    <form novalidate id="{{ form.vars.full_name }}_{{ task_id }}" action="{{ path('tasksloads_create_from_project' ) }}" method="post" class="tasksloadstypeform">
+       <div class="span4"></div>
+       <div class="span1">
+            <button class="btn btn-primary btn-info" type="submit">add</button>
+        </div>
+        <div class="span2 jobsidjobs ">
+            {{ form_widget(form.jobsidjobs) }}
+            {{ form_errors(form.jobsidjobs) }}
+        </div>
+        <div class="span1 tasksloadsvolume">
+            {{ form_widget(form.tasksloadsvolume) }}
+            {{ form_errors(form.tasksloadsvolume) }}
+        </div>
+        <div class="span2 tasksloadsworkers">
+            {{ form_widget(form.tasksloadsworkers) }}
+            {{ form_errors(form.tasksloadsworkers) }}
+        </div>
+        <div class="span2 providersidproviders">
+            {{ form_widget(form.providersidproviders) }}
+            {{ form_errors(form.providersidproviders) }}
+        </div>
+
+    <div class="do-nbot-shiw" style="display:none">
+        {{ form_rest(form) }}
+    </div>
+
+   </form>
+{% endblock %}
+{% endspaceless %}

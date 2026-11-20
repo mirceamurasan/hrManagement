@@ -1,0 +1,23 @@
+{% extends "FullSixProjectForecastBundle::show.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Groupe {{ entity.name }}</title>
+{% endblock %}
+
+{% block elementTitle %}
+    Groupe "{{ entity.name }}"
+{% endblock %}
+
+{% block formMenu %}
+    {% include 'FullSixProjectForecastBundle::_buttonsMenu.html.twig' with { 'entityName': 'groups', 'returnPage': 'show' } %}
+{% endblock %}
+
+{% block elementDetails %}
+    <dt>Nom</dt><dd>{{ entity.name }}</dd>
+    <dt>Utilisateurs</dt>
+    <dd>
+        {% for user in entity.groupUsers %}
+            - {{ user.CheckedName }}<br>
+        {% endfor %}
+    </dd>
+{% endblock %}

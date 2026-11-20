@@ -1,0 +1,36 @@
+<h3>Details</h3>
+{% if project.projectfirsttasktdate is not null %}
+<div id="Projects_projectfirsttasktdate_{{ project.id }}" class="row-fluid">
+    <em class="title">Start date : </em>
+    <time datetime="{{ project.projectfirsttasktdate|date('Y-m-d H:i:s') }}" class="projectfirsttasktdate">{{ project.projectfirsttasktdate|date('d F Y', "Europe/Paris") }}</time>
+</div>
+{% endif %}
+{% if project.projectlasttasktdate is not null %}
+<div id="Projects_projectlasttasktdate_{{ project.id }}" class="row-fluid">
+    <em class="title">End date : </em>
+    <time datetime="{{ project.projectlasttasktdate|date('Y-m-d H:i:s') }}"><span class="projectlasttasktdate">{{ project.projectlasttasktdate|date('d F Y', "Europe/Paris") }}</span></time>
+</div>
+{% endif %}
+{% if interval_date is not null %}
+<div class="row-fluid">
+    <em class="title">Duration : </em><span class="interval_date"> {{ interval_date }}</span> days
+   <progress value="{{ since_begining }}" max="{{ interval_date }}"></progress> {# to_ending #}
+</div>
+{% endif %}
+<div  id="Projects_projectssuccess_{{ project.id }}" class="row-fluid editable-field">
+    <em class="title">Succes : </em>
+    <progress value="{{ project.projectssuccess }}" max="100"></progress>
+    <span class="meta-content">{{ project.projectssuccess }}</span> %
+</div>
+<div id="Projects_projectstatus_{{ project.id }}" class="row-fluid editable-field">
+    <em class="title">Status: </em>
+    <span class="meta-content">{{ project.projectstatus }}</span>
+</div>
+<div id="Projects_infogeneral_{{ project.id }}" class="row-fluid editable-field">
+    <em class="title">{{ 'project.infoGlobal'|trans }}: </em>
+    <span class="meta-content">{{ project.infogeneral }}</span>
+</div>
+<div id="Projects_infotech_{{ project.id }}" class="row-fluid editable-field">
+    <em class="title">{{ 'project.infoTech'|trans }}: </em>
+    <span class="meta-content">{{ project.infotech }}</span>
+</div>

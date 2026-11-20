@@ -1,0 +1,29 @@
+{% extends "FullSixProjectForecastBundle::layout.html.twig" %}
+
+
+{% block content %}
+<div class="row-fluid">
+    {% block tabletitle %}
+    {% endblock %}
+    <table class="table table-striped  table-hover records_list">
+        <thead>
+            <tr>
+                {% block tableheader %}
+                {% endblock %}
+            </tr>
+        </thead>
+        <tbody>
+        {% block tablebody %}
+        {% endblock %}
+        </tbody>
+        <tfoot>
+            <tr>
+                {% block tablefooter %}
+                {% endblock %}
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<div class="modal hide fade" id="ShowPopin" tabindex="-1" role="dialog" aria-labelledby="ShowPopinLabel" aria-hidden="true">
+</div>
+{% endblock %}

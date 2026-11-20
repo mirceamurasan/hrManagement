@@ -1,0 +1,84 @@
+{% extends "FullSixProjectForecastBundle::show.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : User</title>
+{% endblock %}
+
+{% block elementTitle %}
+    {{ 'user.show'|trans }} : {{ entity.checkedName }}
+{% endblock %}
+
+{% block formMenu %}
+    <div class="btn-toolbar">
+        <div class="btn-group">
+            <a href="{{ path('users') }}" class="btn" title="Retour à la liste">
+                <i class="icon-arrow-left"></i>
+            </a>
+            <i class="icon-white"></i>
+            <a href="{{ path('users_edit', { 'id': entity.id }) }}" class="btn" title="Edit">
+                <i class="icon-edit"></i>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block elementDetails %}
+
+    {% block user_info %}
+        <h2>{{ 'user.user_info'|trans }}</h2>
+        {% if message is defined and message is not empty %}
+            <h4 style="color:#d44413" > {{ message|trans|raw }} </h4>
+        {% endif %}
+        <div class="user-info">
+            <div class="left-block">
+                <dt>Firstname</dt><dd>{{ entity.usersfirstname }}</dd>
+                <dt>Lastname</dt><dd>{{ entity.userslastname }}</dd>
+                <dt>E-mail</dt><dd>{{ entity.email }}</dd>
+
+
+                {% block social_info %}
+                <fieldset name="Information sociale" class="social-info">
+                    <h2>{{ 'user.user_social_info'|trans }} <span class="arrow underline" ></span> </h2>
+                    <div class="social-info-content">
+                        <dt>Birthday</dt><dd>{{ entity.birthDate|date('d F Y') }}</dd>
+                        <dt>Telephone</dt><dd>{{ entity.phoneNumber }}</dd>
+                        <dt>Contact MSN</dt><dd>{{ entity.contactMsn }}</dd>
+                        <dt>Contact Facebook</dt><dd>{{ entity.contactFacebook }}</dd>
+                        <dt>Contact Twitter</dt><dd>{{ entity.contactTwitter }}</dd>
+                        <dt>Message</dt><dd>{{ entity.message }}</dd>
+                    </div>
+                </fieldset>
+                {% endblock %}
+
+            </div>
+
+            <div class="right-block">
+                 {% block login_info %}
+                    <h2>{{  'user.user_login_info'|trans }}</h2>
+                    {% if(entity.login) %}
+                        <dt>{{ 'login.label.username'|trans }}</dt><dd>{{ entity.login.username }}</dd>
+                        <dt>Roles</dt>
+                        <dd>
+                            {% for key in entity.login.roles|keys %}
+                                {{ entity.login.roles[key] }} &nbsp;
+                            {% endfor %}
+                        </dd>
+                        <dt>{{ 'login.label.endAccountDate'|trans }}</dt>
+                        {% if entity.login.expiresAt %}
+                           <dd>{{ entity.login.expiresAt|date('d F Y') }}</dd>
+                        {% else %}
+                            <dd>{{ 'common.field.infinite'|trans }}</dd>
+                        {% endif %}
+                    {% else %}
+                        <dt>{{ 'user.no_login'|trans }}</dt>
+                    {% endif %}
+                 {% endblock %}
+             </div>
+
+        </div>
+    {% endblock %}
+
+
+    {% block worker_info %}
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "FullSixProjectForecastBundle::show.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Type de Contrat {{ entity.contracttypesname }}</title>
+{% endblock %}
+
+{% block elementTitle %}
+    {{ 'admin.typeCon.show'|trans }} "{{ entity.contracttypesname }}"
+{% endblock %}
+
+{% block formMenu %}
+    {% include 'FullSixProjectForecastBundle::_buttonsMenu.html.twig' with { 'entityName': 'contracttypes', 'returnPage': 'show' } %}
+{% endblock %}
+
+{% block elementDetails %}
+    <dt>{{ 'common.field.label'|trans }}</dt><dd>{{ entity.contracttypesname }}</dd>
+    <dt>{{ 'admin.typeCon.external'|trans }}</dt>
+    {% if entity.contractTypesIsExternal %}
+        <dd>{{ 'common.yes'|trans }}</dd>
+    {% else %}
+        <dd>{{ 'common.no'|trans }}</dd>
+    {% endif %}
+    <dt>{{ 'common.field.createdAt'|trans }}</dt><dd>{{ entity.contracttypescreated|date('Y-m-d H:i:s') }}</dd>
+    <dt>{{ 'common.field.updatedAt'|trans }}</dt><dd>{{ entity.contracttypesupdated|date('Y-m-d H:i:s') }}</dd>
+{% endblock %}

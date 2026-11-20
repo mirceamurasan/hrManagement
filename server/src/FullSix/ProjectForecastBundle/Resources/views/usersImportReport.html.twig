@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Forecast - Users' import report</title>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <th colspan="2">Import info</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Import date</td>
+                <td>{{ entity.importDate|date('d F Y') }}</td>
+            </tr>
+            <tr>
+                <td>Log file</td>
+                <td>{{ entity.pdf }}</td>
+            </tr>
+            <tr>
+                <td>Successful</td>
+                <td>{% if entity.success %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <td>Fail reason</td>
+                <td>{{ entity.failReason }}</td>
+            </tr>
+            <tr>
+                <td>Number of created users</td>
+                <td>{{ entity.countUsersCreated }}</td>
+            </tr>
+            <tr>
+                <td>Number of users marked dirty</td>
+                <td>{{ entity.countUsersMarkedDirty }}</td>
+            </tr>
+            <tr>
+                <td>Number of updated users</td>
+                <td>{{ entity.countUsersUpdated }}</td>
+            </tr>
+            <tr>
+                <td>Number of errors</td>
+                <td>{{ entity.countErrors }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% if entity.errors|length > 0 %}
+    <h2>Errors</h2>
+    <table>
+        <thead>
+            <th>Login username</th>
+            <th>User's email</th>
+            <th>User's first name</th>
+            <th>User's last name</th>
+            <th>User's initials</th>
+            <th>Status</th>
+        </thead>
+        <tbody>
+            {% for error in entity.errors %}
+            <tr>
+                <td>{{ error.username }}</td>
+                <td>{{ error.email }}</td>
+                <td>{{ error.firstname }}</td>
+                <td>{{ error.lastname }}</td>
+                <td>{{ error.initials }}</td>
+                <td>{{ error.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</body>
+</html>

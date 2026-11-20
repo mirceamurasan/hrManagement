@@ -1,0 +1,63 @@
+<table id="revuehebdo">
+    <thead>
+        <tr>
+            <td>Client</td>
+            <td>Project</td>
+            <td>Success</td>
+            <td>Start Date</td>
+            <td>End Date</td>
+            <td>Last Update</td>
+        </tr>
+    </thead>
+    <tbody>
+    {% for project in projects %}
+        <tr>
+            <td>></td>
+            <td>{{ project.customersidcustomers }}</td>
+            <td><a target="_blank" href="{{ path('projects_details', { 'id': project.id }) }}">{{ project.projectsname }}</a></td>
+            <td>{{ project.projectssuccess }}</td>
+            <td>{{ project.projectfirsttasktdate|date('d/m/Y') }}</td>
+            <td>{{ project.projectlasttasktdate|date('d/m/Y') }}</td>
+            <td>{{ project.projectsupdated|date('d/m/Y H:i:s') }}</td>
+        </tr>
+        {% if tasks[project.id] is defined %}
+            <tr style="height: 40px;">
+                <td></td>
+                <td></td>
+                <th style="border: solid black 1px;">Tâche</th>
+                <th style="border: solid black 1px;">Début</th>
+                <th style="border: solid black 1px;">Fin</th>
+                <th style="border: solid black 1px;">Charges</th>
+                <th style="border: solid black 1px;">Charges Out</th>
+            </tr>
+            {% for task in tasks[project.id] %}
+            <tr style="height: 40px;">
+                <td></td>
+                <td></td>
+                <td>{{ task.name }}</td>
+                <td>{{ task.datedeb|date('d/m/Y') }}</td>
+                <td>{{ task.datefin|date('d/m/Y') }}</td>
+                <td>
+                    <ul>
+                        {% if tasksloads[task.id] is defined %}
+                            {% for tasksload in tasksloads[task.id] %}
+                                <li>{{ tasksload.jobslabel }} : {{ tasksload.volume }}</li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        {% if out_tasksloads[task.id] is defined %}
+                            {% for out_tasksload in out_tasksloads[task.id] %}
+                                <li>{{ out_tasksload.jobslabel }} : {{ out_tasksload.volume }}</li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>

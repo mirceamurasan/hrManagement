@@ -1,0 +1,24 @@
+{% block form %}
+    <div class="container-fluid popup-content edit-key">
+        <br />
+            <form action="{{ path('keydates_edit', { 'id': entity.id, 'projectId': projectId }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+                {% block formFields %}
+                    {{ form_widget(form) }}
+                {% endblock %}
+                <div class="button-container">
+                    <button type="submit" id="_submit" class="btn btn-primary">Save</button>
+                    <button type="button" onclick="closePopup()" class="btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $( ".has_datepicker" ).datepicker({ dateFormat: 'dd-mm-yy' });
+        function closePopup() {
+            $('#cboxClose').click();
+        }
+    </script>
+{% endblock %}

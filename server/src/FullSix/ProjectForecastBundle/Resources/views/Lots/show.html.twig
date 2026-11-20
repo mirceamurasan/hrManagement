@@ -1,0 +1,29 @@
+{% extends "FullSixProjectForecastBundle::show.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Lot</title>
+{% endblock %}
+
+{% block elementTitle %}
+    Lot "{{ entity.lotsname }}"
+{% endblock %}
+
+{% block backLink %}
+    {{ path('lots') }}
+{% endblock %}
+
+{% block editLink %}
+    {{ path('lots_edit', { 'id': entity.id }) }}
+{% endblock %}
+
+{% block deleteLink %}
+    {{ path('lots_delete', { 'id': entity.id }) }}
+{% endblock %}
+
+{% block elementDetails %}
+    <dt>Id</dt><dd>{{ entity.id }}</dd>
+    <dt>Lotsname</dt><dd>{{ entity.lotsname }}</dd>
+    <dt>Lotsistrashed</dt><dd>{{ entity.lotsistrashed }}</dd>
+    <dt>Lotscreated</dt><dd>{{ entity.lotscreated|date('Y-m-d H:i:s') }}</dd>
+    <dt>Lotsupdated</dt><dd>{{ entity.lotsupdated|date('Y-m-d H:i:s') }}</dd>
+{% endblock %}

@@ -1,0 +1,38 @@
+#sf2 folders to exclude
+/server/web/css/
+/server/web/js/
+/server/web/bundles/
+/server/app/bootstrap.php.cache
+/server/app/cache/*
+/server/app/config/parameters.yml
+/server/app/logs/*
+/server/build/
+/server/vendor/
+/server/bin/
+/server/composer.phar
+/server/users_import_reports/
+/server/project_import/
+
+# Local config
+/server/app/config/config_local.yml
+/server/app/config/parameters_local.yml
+/server/web/app_local.php
+
+# IDE settings
+.buildpath
+.externalToolBuilders/
+.project
+.settings/
+.idea
+/server/.apdisk
+
+# Excluding unwanted files
+.DS_Store
+/nbproject
+
+# Never commit local or production credentials
+.env
+.env.*
+!.env.example
+/server/app/config/parameters_prod.yml
+/server/app/config/parameters.yml.sample

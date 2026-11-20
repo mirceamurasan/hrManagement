@@ -1,0 +1,98 @@
+jms_security_extra:
+    secure_all_services: false
+    expressions: true
+
+security:
+    providers:
+        multiples:
+            chain:
+                providers: [fos_userbundle]
+#        ldap:
+#            id: imag_ldap.security.user.provider
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+#        IMAG\LdapBundle\User\LdapUser: plaintext
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|img|js)/
+            security: false
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+#            imag_ldap:
+#                provider: multiples
+            logout:     true
+            anonymous:  true
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #Security Model: Projects
+        - { path: ^/projects/.*/update, role: ROLE_PM }
+        - { path: ^/projects/edit-in-place, role: ROLE_PM }
+        - { path: ^/projects/merge-popup/, role: ROLE_ADMIN }
+        - { path: ^/projects/merge-popup/, role: ROLE_ADMIN }
+        - { path: ^/projects/.*/activate/, role: ROLE_ADMIN }
+        - { path: ^/tasks/.*/show, role: ROLE_FORECAST_USER }
+        - { path: ^/tasksloads/.*/show, role: ROLE_FORECAST_USER }
+        - { path: ^/tasksloads/, role: ROLE_PM }
+        - { path: ^/tasks/, role: ROLE_PM }
+        - { path: ^/projects/.*/details, role: ROLE_FORECAST_USER }
+        - { path: ^/projects/$, role: ROLE_FORECAST_USER }
+        - { path: ^/projects/.*, role: ROLE_ADMIN }
+        #Security Model: Customers
+        - { path: ^/customers/.*/show, role: ROLE_PM }
+        - { path: ^/customers/workers-popup, role: ROLE_PM }
+        - { path: ^/customers/add-worker, role: ROLE_PM }
+        - { path: ^/customers/$, role: ROLE_PM }
+        - { path: ^/customers/.*, role: ROLE_ADMIN }
+        #Security Model: Providers
+        - { path: ^/providers/.*/show, role: ROLE_PM }
+        - { path: ^/providers/$, role: ROLE_PM }
+        - { path: ^/providers/.*, role: ROLE_ADMIN }
+        #Security Model: Workers
+        - { path: ^/workers/.*/show, role: ROLE_FORECAST_USER }
+        - { path: ^/workers/$, role: ROLE_FORECAST_USER }
+        - { path: ^/workers/.*, role: ROLE_ADMIN }
+
+        - { path: ^/teams/.*/show, role: ROLE_FORECAST_USER }
+        - { path: ^/teams/$, role: ROLE_FORECAST_USER }
+        - { path: ^/teams/.*, role: ROLE_ADMIN }
+
+        - { path: ^/contracts/, role: ROLE_ADMIN }
+        - { path: ^/periods/, role: ROLE_ADMIN }
+        - { path: ^/workers/users/, role: ROLE_ADMIN }
+        #Security Model: Reporting Module
+        - { path: ^/reporting/usersimportreports/, role: ROLE_ADMIN }
+        - { path: ^/reporting/projectimportreports/, role: ROLE_ADMIN }
+        - { path: ^/reporting/, role: ROLE_PM }
+        #Security Model: Administration Module
+        - { path: ^/administration/, role: ROLE_ADMIN }
+        #Security Model: Homepage
+        - { path: ^/, role: ROLE_FORECAST_USER }
+
+    role_hierarchy:
+        #ROLE_USER : automatically added by Symfony thus not persisted in the DB
+        ROLE_FORECAST_USER:        [ ROLE_FORECAST_USER]
+        ROLE_WORKER:        [ ROLE_FORECAST_USER, ROLE_WORKER ]
+        ROLE_PM:            [ ROLE_WORKER, ROLE_PM ]
+        ROLE_UNIT_MANAGER:    [ ROLE_PM, ROLE_UNIT_MANAGER ]
+        ROLE_ADMIN:         [ ROLE_PM, ROLE_ADMIN]
+        ROLE_SUPER_ADMIN:   ROLE_ADMIN
+        #ROLE_SUPER_ADMIN : convention role for user without any access restrictions.
+
+#imag_ldap:
+#    client:
+#        host: %ldap_server.host%
+#        port: %ldap_server.port%
+#        version: %ldap_server.version%
+#        username: %ldap_server.username%
+#        password: %ldap_server.password%
+#        referrals_enabled: %ldap_server.referrals_enabled%

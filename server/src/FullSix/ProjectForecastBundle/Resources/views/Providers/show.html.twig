@@ -1,0 +1,19 @@
+{% extends "FullSixProjectForecastBundle::show.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Prestataire </title>
+{% endblock %}
+
+{% block elementTitle %}
+    {{ 'provider.show'|trans }}  "{{ entity.providersname }}"
+{% endblock %}
+
+{% block formMenu %}
+    {% include 'FullSixProjectForecastBundle::_buttonsMenu.html.twig' with { 'entityName': 'providers', 'returnPage': 'show' } %}
+{% endblock %}
+
+{% block elementDetails %}
+    <dt>{{ 'common.field.name'|trans }}</dt><dd>{{ entity.providersname }}</dd>
+    <dt>{{ 'common.field.createdAt'|trans }}</dt><dd>{{ entity.Providerscreated|date('Y-m-d H:i:s') }}</dd>
+    <dt>{{ 'common.field.updatedAt'|trans }}</dt><dd>{{ entity.providersupdated|date('Y-m-d H:i:s') }}</dd>
+{% endblock %}

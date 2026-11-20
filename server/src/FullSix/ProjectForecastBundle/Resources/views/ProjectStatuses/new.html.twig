@@ -1,0 +1,17 @@
+{% extends "FullSixProjectForecastBundle::form.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Create new project status/title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>Create new project status</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('projectstatuses_create') }}"
+{% endblock %}
+
+{% block backLink %}
+    {{ path('projectstatuses') }}
+{% endblock %}

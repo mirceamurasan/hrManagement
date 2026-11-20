@@ -1,0 +1,42 @@
+{% extends "FullSixProjectForecastBundle::form.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Création d'un groupe</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>Création d'un groupe</h1>
+{% endblock %}
+
+{% block backLink %}
+    {{ path('groups') }}
+{% endblock %}
+
+{% block form %}
+    <span class="help-inline">{{ form_errors(form) }}</span>
+    <form
+        {% block formParam %}
+            action="{{ path('groups_create') }}"
+        {% endblock %}
+        method="post" {{ form_enctype(form) }} class="form-horizontal">
+
+    <form  method="post" {{ form_enctype(form) }} class="form-horizontal">
+        <div class="control-group">
+            {{ form_label(form.name) }}
+            <div class="controls">
+                {{ form_widget(form.name) }}
+            </div>
+        </div>
+        <div class="control-group">
+        {{ form_label(form.groupUsers) }}
+            <div class="controls">
+                {% for child in form.groupUsers %}
+                    {{ form_widget(child) }} - <label for="{{ child.vars.id }}" style="display: inline;">{{ child.vars.label }}</label><br>
+                {% endfor %}
+            </div>
+        </div>
+        {{ form_widget(form) }}
+        {{ formActions() }}
+    </form>
+    </form>
+{% endblock %}

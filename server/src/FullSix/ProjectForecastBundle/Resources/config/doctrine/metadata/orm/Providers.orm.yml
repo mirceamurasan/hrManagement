@@ -1,0 +1,33 @@
+Providers:
+    type: entity
+    table: Providers
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: Id
+            generator:
+                strategy: IDENTITY
+        providersname:
+            type: string
+            length: 50
+            fixed: false
+            nullable: false
+            column: ProvidersName
+        providersistrashed:
+            type: boolean
+            nullable: false
+            column: ProvidersIsTrashed
+        providerscreated:
+            type: datetime
+            nullable: false
+            column: ProvidersCreated
+        providersupdated:
+            type: string
+            length: 45
+            fixed: false
+            nullable: true
+            column: ProvidersUpdated
+    lifecycleCallbacks: {  }

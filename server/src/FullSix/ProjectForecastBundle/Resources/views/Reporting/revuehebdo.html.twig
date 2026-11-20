@@ -1,0 +1,62 @@
+{% extends "FullSixProjectForecastBundle::layout.html.twig" %}
+
+{% block title %}
+    <title>Projects Forecast{% if title is defined %} : {{ title }}{% endif %}</title>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('bundles/fullsixprojectforecast/css/reporting.css') }}" type="text/css">
+{% endblock %}
+
+{% block content %}
+    <div id="userselectform">
+        {{ form_start(form)}}
+        {{ form_widget(form.workers) }}
+        {{ form_widget(form.filter) }}
+        <br/>
+        {{ form_widget(form.prevWeek) }}
+            <div class="report-week-period">{{ weekStartDate|date('D d M Y') }} - {{ weekEndDate|date('D d M Y') }}</div>
+        {{ form_widget(form.nextWeek) }}
+
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
+
+    <br/>
+    <span class="report-title report-margin">{{ 'reporting.weekly.projects.title'|trans }}</span>
+    <br/><br/>
+
+    {% if projects|length %}
+        {% include 'FullSixProjectForecastBundle:Reporting:_weekly_tasks.html.twig' %}
+    {% else %}
+        <span class="report-margin">{{ 'reporting.weekly.projects.none'|trans }}</span>
+    {% endif %}
+    <br/><br/>
+    <span class="report-title report-margin">{{ 'reporting.weekly.vacations.title'|trans }}</span>
+    <br/><br/>
+    {% if vacations|length %}
+    <table id="revuehebdo">
+        <thead>
+            <tr>
+                <td>{{ 'reporting.weekly.vacations.startDate'|trans }}</td>
+                <td>{{ 'reporting.weekly.vacations.endDate'|trans }}</td>
+                <td>{{ 'reporting.weekly.vacations.status'|trans }}</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vacation in vacations %}
+            <tr>
+                <td>{{ vacation.startDate | date('d/m/Y') }}</td>
+                <td>{{ vacation.endDate | date('d/m/Y') }}</td>
+                <td>{{ ('reporting.weekly.vacations.' ~ vacation.status)| trans }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <span class="report-margin">{{ 'reporting.weekly.vacations.none'|trans }}</span>
+    {% endif %}
+
+{% endblock %}

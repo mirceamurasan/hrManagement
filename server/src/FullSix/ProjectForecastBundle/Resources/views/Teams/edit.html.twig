@@ -1,0 +1,57 @@
+{% extends "FullSixProjectForecastBundle:Teams:new.html.twig" %}
+
+{% block formTitle %}
+    <h1>{{ 'team.edit'|trans }} "{{ entity.teamsname }}"</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('teams_edit', { 'id': entity.id }) }}"
+{% endblock %}
+
+{% block formAction %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+    {{ parent() }}
+    <h3>{{ 'worker.workers'|trans }}</h3>
+    <div class="grid">
+        {% if grid.totalCount > 0 or grid.isFiltered or grid.noDataMessage is sameas(false) %}
+            <form id="{{ grid.hash }}" action="{{ grid.routeUrl }}" method="post">
+                <div class="grid_header">
+                {% if grid.massActions|length > 0 %}
+                    {{ grid_actions(grid) }}
+                {% endif %}
+                </div>
+                <div class="grid_body">
+                <table class="table table-striped  table-hover records_list">
+                {% if grid.isTitleSectionVisible %}
+                    {{ grid_titles(grid) }}
+                {% endif %}
+
+                {% if grid.isFilterSectionVisible %}
+                    {{ grid_filters(grid) }}
+                {% endif %}
+
+                {{ grid_rows(grid) }}
+                </table>
+                </div>
+                <div class="grid_footer">
+                {% if grid.isPagerSectionVisible %}
+                    {{ grid_pager(grid) }}
+                {% endif %}
+                {% if grid.exports|length > 0 %}
+                    {{ grid_exports(grid) }}
+                {% endif %}
+                </div>
+                {% if withjs is defined %}
+                    {{ grid_scripts(grid) }}
+                {% endif %}
+            </form>
+        {% else %}
+            {{ grid_no_data(grid) }}
+        {% endif %}
+    </div>
+{% endblock %}
+{% block formMenu %}
+    {% include 'FullSixProjectForecastBundle::_buttonsMenu.html.twig' with { 'entityName': 'teams', 'returnPage': 'edit' }%}
+{% endblock %}

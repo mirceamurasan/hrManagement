@@ -1,0 +1,48 @@
+{% extends "FullSixProjectForecastBundle::form.html.twig" %}
+{% block title%}
+    <title>Projects Forecast : Création d'un Contrat</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>{{ 'worker.contract.new'|trans }}</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('contracts_new', {'id': entity.idworker.id}) }}"
+{% endblock %}
+
+{% block backLink %}
+    {{ path('workers_edit', {'id': entity.idworker.id} ) }}
+{% endblock %}
+
+{% block formAction %}
+{% endblock %}
+{% block formFields %}
+    <fieldset name="Information worker" class="contract-info">
+        <h2>{{ 'worker.worker_info'|trans }}</h2>
+        {{ form_row(form.workerfirstname) }}
+        {{ form_row(form.workerlastname) }}
+    </fieldset>
+    <fieldset name="Information contrat" class="contract-info">
+        <h2>Information contrat</h2>
+        {{ form_row(form.contracttype) }}
+        {{ form_row(form.employer) }}
+        {{ form_row(form.idjob) }}
+        {{ form_row(form.bdc) }}
+        {{ form_row(form.comment) }}
+    </fieldset>
+    <fieldset name="Information period" class="new-period">
+        <h2>{{ 'worker.contract.period.title'|trans }}</h2>
+        <ul class="periods" data-prototype="{{ form_widget(form.periods.vars.prototype)|e }}">
+            {% for period in form.periods %}
+                <li>{{ form_widget(form) }}</li>
+                    {{ form_rest(form) }}
+            {% endfor %}
+        </ul>
+    </fieldset>
+    {{ form_widget(form._token) }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/fullsixprojectforecast/js/contracts.js') }}"></script>
+{% endblock %}

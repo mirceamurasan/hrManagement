@@ -1,0 +1,17 @@
+{% extends "FullSixProjectForecastBundle::form.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Création d'un prestataire</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>Création d'un prestataire</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('providers_create') }}"
+{% endblock %}
+
+{% block backLink %}
+    {{ path('providers') }}
+{% endblock %}

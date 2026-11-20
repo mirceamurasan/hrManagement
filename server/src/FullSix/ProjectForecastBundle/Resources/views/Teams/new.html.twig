@@ -1,0 +1,19 @@
+{% extends "FullSixProjectForecastBundle::form.html.twig" %}
+{% block title%}
+    <title>Projects Forecast : {{ 'team.label'|trans }}</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>{{ 'team.new'|trans }}</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('teams_new') }}"
+{% endblock %}
+
+{% block backLink %}
+    {{ path('teams') }}
+{% endblock %}
+
+{% block formAction %}
+{% endblock %}

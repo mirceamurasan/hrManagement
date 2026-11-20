@@ -1,0 +1,6 @@
+period:
+    invalid-interval: The date intervals are not valid.
+login:
+    username: Enter a username
+    password: Choose a password
+    roles: Choose at least one role

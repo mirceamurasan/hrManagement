@@ -1,0 +1,37 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: localhost
+    database_port: null
+    database_name:	s_forecas
+    database_user:	s_forecas
+    database_password: 
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: fr
+    secret: 
+
+    ldap_server.host: 10.196.203.3    # domain name or IP
+    ldap_server.port: 389
+    ldap_server.version: 3
+    ldap_server.referrals_enabled: 0
+    ldap_server.username: ldap-auth-user
+    ldap_server.password: 
+    ldap_server.user.filter: (objectcategory=person)
+    ldap_server.user.base_dn: DC=equesto,DC=fr
+    ldap_server.user.name_attribute: samaccountname
+    ldap_server.role.base_dn: DC=equesto,DC=fr
+    ldap_server.role.name_attribute: cn
+    ldap_server.role.user_attribute: member
+    ldap_server.role.user_id: username
+
+    knp_snappy.path_wkhtmltopdf: "vendor/bin/wkhtmltopdf-amd64"
+    knp_snappy.path_reports.import_users: "users_import_reports"
+
+    csv_source_server: "project_import/reports_pdfs"
+    csv_source_ftp: "project_import/reports_pdfs"
+    csv_target: "project_import/reports_pdfs"
+    pdf_target_path: "project_import/original_csv"
+    ftp_stream: ""
+    pdf_name: "project_import_log"

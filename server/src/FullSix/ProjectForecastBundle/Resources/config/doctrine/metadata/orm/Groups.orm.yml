@@ -1,0 +1,28 @@
+Groups:
+    type: entity
+    table: Groups
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            generator:
+                strategy: IDENTITY
+        name:
+            type: string
+            length: 255
+            fixed: false
+            nullable: false
+        roles:
+            type: array
+            nullable: false
+    manyToMany:
+        usersid:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: groupsid
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks: {  }

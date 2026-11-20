@@ -1,0 +1,27 @@
+{% extends "FullSixProjectForecastBundle:Jobs:new.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Métiers</title>
+{% endblock %}
+
+ {% block formTitle %}
+    <h1>  {{ 'admin.location.edit'|trans }}"{{ entity.jobslabel }}"</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('jobs_update', { 'id': entity.id }) }}"
+{% endblock %}
+
+{% block formAction %}
+    {{ parent() }}
+    <li>
+        <form action="{{ path('jobs_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+{% endblock %}
+
+{% block formMenu %}
+    {% include 'FullSixProjectForecastBundle::_buttonsMenu.html.twig' with { 'entityName': 'jobs', 'returnPage': 'edit' }%}
+{% endblock %}

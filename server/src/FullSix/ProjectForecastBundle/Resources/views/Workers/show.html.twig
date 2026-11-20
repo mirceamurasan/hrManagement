@@ -1,0 +1,65 @@
+{% extends "FullSixProjectForecastBundle:Users:show.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Worker</title>
+{% endblock %}
+
+{% block elementTitle %}
+    {{ 'worker.show'|trans }} : {{ entity.checkedName }}
+{% endblock %}
+
+{% block formMenu %}
+    <div class="btn-toolbar">
+        <div class="btn-group">
+            <a href="{{ path('users') }}" class="btn" title="Retour à la liste">
+                <i class="icon-arrow-left"></i>
+            </a>
+            {% if app.user is not null and is_granted('ROLE_ADMIN') %}
+                <i class="icon-white"></i>
+                <a href="{{ path('workers_edit', { 'id': worker.id }) }}" class="btn" title="Edit">
+                    <i class="icon-edit"></i>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+ {% block worker_info %}
+     <h2>{{  'worker.worker_info'|trans }}</h2>
+     <dt>{{ 'admin.location.label'|trans }}</dt>
+     {% if worker.location %}
+         <dd>{{ worker.location.locationsname }}</dd>
+     {% endif %}
+     <dt>Équipe</dt>
+     {% if worker.team %}
+         <dd>{{ worker.team.teamsname }}</dd>
+     {% endif %}
+     <dt> {{  'common.field.currentlyActive'|trans }}</dt>
+            {% if worker.getActive()  %}
+                <dd>  Oui </dd>
+            {% else %}
+                <dd>  Non </dd>
+            {% endif %}
+     <dt>{{  'admin.job.label'|trans }}</dt>
+        {% if worker.job %}
+            <dd>{{ worker.job.jobslabel }}</dd>
+        {% endif %}
+     <dt>{{  'admin.employer.label'|trans }}</dt>
+        {% if worker.employer %}
+            <dd>{{ worker.employer.employersname }}</dd>
+        {% endif %}
+     <dt>{{  'admin.typeCon.label'|trans }}</dt>
+        {% if worker.contracttype %}
+            <dd>{{ worker.contracttype.contracttypesname }}</dd>
+        {% endif %}
+     <dt>{{  'common.field.startDate'|trans }}</dt>
+     {% if worker.startworkingdate %}
+         <dd>{{ worker.startworkingdate|date('D d M Y') }}</dd>
+     {% endif %}
+     <dt>{{  'common.field.endDate'|trans }}</dt>
+     {% if worker.endworkingdate %}
+         <dd>{{ worker.endworkingdate|date('D d M Y') }}</dd>
+     {% endif %}
+
+
+ {% endblock %}

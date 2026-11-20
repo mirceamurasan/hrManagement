@@ -1,0 +1,19 @@
+{% extends "FullSixProjectForecastBundle::show.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Project status "{{ entity.projectstatuseslabel }}"</title>
+{% endblock %}
+
+{% block elementTitle %}
+    Project status "{{ entity.projectstatuseslabel }}"
+{% endblock %}
+
+{% block formMenu %}
+    {% include 'FullSixProjectForecastBundle::_buttonsMenu.html.twig' with { 'entityName': 'projectstatuses', 'returnPage': 'show' } %}
+{% endblock %}
+
+{% block elementDetails %}
+    <dt>{{ 'common.field.label'|trans }}</dt><dd>{{ entity.projectstatuseslabel }}</dd>
+    <dt>{{ 'common.field.createdAt'|trans }}</dt><dd>{{ entity.projectstatusescreated|date('Y-m-d H:i:s') }}</dd>
+    <dt>{{ 'common.field.updatedAt'|trans }}</dt><dd>{{ entity.projectstatusesupdated|date('Y-m-d H:i:s') }}</dd>
+{% endblock %}

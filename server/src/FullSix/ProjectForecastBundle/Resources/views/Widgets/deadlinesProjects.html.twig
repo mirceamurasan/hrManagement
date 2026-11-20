@@ -1,0 +1,78 @@
+<div class="span6 fcast-view-widget view-deadline mansory-fluid-box">
+    <h2>
+        Dates butoirs
+        <a class="fcast-widget-info-picto-action" title="Informations sur le widget" href="#"><img class="fcast-widget-info-picto" src="../../static/img/fcast-info-white.png" alt="info" /></a>
+    </h2>
+    <p class="fcast-widget-info">Vue rapide des projets et de leurs dates butoirs (par défaut le widget est trié par date d'échéance)<span></span></p><!-- titres des données de cette vue -->
+    <ul class="fcast-view-title fcast-view-deadline-title row-fluid">
+        <li class="fcast-view-title-item fcast-view-deadline-title-item1 span4">
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-inverse dropdown-toggle">
+                    <span class="fcast-view-deadline-title-item-project" >Projet - Lot - Client</span>
+                    <span class="caret-down"></span>
+                </button>
+            </div>
+        </li>
+        <li class="fcast-view-title-item fcast-view-deadline-title-item2 span2">
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-inverse dropdown-toggle">
+                    <span class="fcast-view-deadline-title-item-project" >Livraison</span>
+                    <span class="caret"></span>
+                </button>
+            </div>
+        </li>
+        <li class="fcast-view-title-item fcast-view-deadline-title-item3 span2">
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-inverse dropdown-toggle">
+                    <span class="fcast-view-deadline-title-item-project" >Statut</span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Prod</a></li>
+                    <li><a href="#">RI</a></li>
+                    <li><a href="#">RE</a></li>
+                    <li><a href="#">Livraison</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="fcast-view-title-item fcast-view-deadline-title-item4 span2">
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-inverse dropdown-toggle">
+                    <span class="fcast-view-deadline-title-item-project" >Échéance</span>
+                    <span class="caret"></span>
+                </button>
+            </div>
+        </li>
+        <li class="fcast-view-title-item fcast-view-deadline-title-item5 span2">
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-inverse dropdown-toggle">
+                    <span class="fcast-view-deadline-title-item-project" >RAF</span>
+                    <span class="caret"></span>
+                </button>
+            </div>
+        </li>
+    </ul>
+    {% for project in output %}
+    <ul class="fcast-view-item fcast-view-deadline-item fcast-view-deadline-item-overruns row-fluid">
+        <li class="fcast-view-deadline-field1 span4">
+            <a href="#"><span class="warning">{{ project.name }}</span></a>
+            <span class="fcast-txt-font-italic warning">{{ project.customer.name }}</span>
+        </li>
+        <li class="fcast-view-deadline-field2 span2">
+            <span class="">{{ project.lastTaskLoad|date('d/m/Y') }}</span>
+        </li>
+        <li class="fcast-view-deadline-field3 span2">
+            <span></span>
+        </li>
+        <li class="fcast-view-deadline-field4 span2">
+            {% set echeance = (("NOW"|date('U') - project.lastTaskLoad|date('U'))/60/60/24)|number_format(0) %}
+            <button type="button" class="btn {% if echeance > 0 %}btn-danger{% else %}{% if echeance < -5 %}btn-success{% else %}btn-warning{% endif %}{% endif %}">!</button>
+            <span >J {% if echeance > 0 %}+{% endif %}{{ echeance }}</span>
+        </li>
+        <li class="fcast-view-deadline-field5 span2">
+            <span ></span>
+        </li>
+    </ul>
+    {% endfor %}
+
+</div>

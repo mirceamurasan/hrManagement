@@ -1,0 +1,42 @@
+{% extends "FullSixProjectForecastBundle::layout.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Modification des jours en absence</title>
+{% endblock %}
+{% block bodyClass %}users daysoff{% endblock %}
+{% block content %}
+    <h1>Gestion des abscences : {{ user_edit }}</h1>
+    <form action="{{ path('users_daysoffs_update', { 'id': userid, 'year': year }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+        <div class="sub-menu">{% spaceless %}
+        {% for year_item in year_menu %}
+            <span>
+                {% if(year != year_item) %}<a href="{{ path('users_daysoffs', { 'id': userid, 'year': year_item }) }}">{% endif %}
+                    {{ year_item }}
+                {% if(year != year_item) %}</a>{% endif %}
+                 |</span>
+        {% endfor %}{% endspaceless %}
+        </div>
+    {{ formActions() }}
+    {% for mkey, month in dates %}
+        <div>
+        <table>
+            <legend>{{ mkey }} / {{ year }} <a href="#" class="unselect-days">Désélectionner les jours</a></legend>            
+            <tr><th>Jours</th>{% for dkey, day in month %}<td class="{{ cycle(['odd', 'even'] ,[day|slice(0,4), '-', day|slice(4,2), '-', day|slice(6,2)]|join|date('W')%2 ) }}">{{ dkey }}</td>{% endfor %}</tr>
+            <tr><th>AM</th>{% for dkey, day in month %}<td class="{{ cycle(['odd', 'even'] ,[day|slice(0,4), '-', day|slice(4,2), '-', day|slice(6,2)]|join|date('W')%2 ) }}">{{ form_widget(attribute(form, ['m', day]|join), { 'attr': {'class': 'day am-day'} }) }}</td>{% endfor %}</tr>
+            <tr><th>PM</th>{% for dkey, day in month %}<td class="{{ cycle(['odd', 'even'] ,[day|slice(0,4), '-', day|slice(4,2), '-', day|slice(6,2)]|join|date('W')%2 ) }}">{{ form_widget(attribute(form, ['a', day]|join), { 'attr': {'class': 'day pm-day'} }) }}</td>{% endfor %}</tr>
+        </table>
+        </div>
+    {% endfor %}
+    {{ formActions() }}
+    </form>
+{% endblock %}
+
+
+{% block ligne_prem %}
+
+{% endblock %}
+
+
+
+
+

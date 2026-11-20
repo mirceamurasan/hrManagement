@@ -1,0 +1,104 @@
+{% extends "FullSixProjectForecastBundle::form.html.twig" %}
+{% block title%}
+    <title>Création worker</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>Création worker</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('workers_new') }}"
+{% endblock %}
+
+{% block backLink %}
+    {{ path('workers') }}
+{% endblock %}
+
+{% block formAction %}
+{% endblock %}
+
+{% block formFields %}
+    {{ form_errors(form) }}
+    <fieldset name="User information">
+        <h2>{{ 'user.user_info'|trans }}</h2>
+        {% if message is defined and message is not empty %}
+            <h4 style="color:#d44413" > {{ message|trans|raw }} </h4>
+        {% endif %}
+        {% if entity is defined and entity.user is not null and entity.user.adLinked  %}
+            <h5 style="font-style: italic" > {{ 'user.warning.adLinked'|trans|raw }} </h5>
+        {% endif %}
+	<div class="user-info">
+            <div class="left-block">
+                {{ form_row(form.user.usersfirstname) }}
+                {{ form_row(form.user.userslastname) }}
+                {{ form_row(form.user.usersinitials) }}
+                {{ form_row(form.user.email) }}
+                <fieldset name="Information sociale" class="social-info">
+                    <h2>{{ 'user.user_social_info'|trans }} <span class="arrow underline"></span> </h2>
+                     <div class="social-info-content">
+                        {{ form_row(form.user.birthDate, { 'attr': {'class': 'has_datepicker'} }) }}
+                        {{ form_row(form.user.phoneNumber) }}
+                        {{ form_row(form.user.contactMsn) }}
+                        {{ form_row(form.user.contactFacebook) }}
+                        {{ form_row(form.user.contactTwitter) }}
+                        {{ form_row(form.user.message) }}
+                     </div>
+                </fieldset>
+            </div>
+            <div class="right-block">
+                <fieldset name="Login application">
+                    <h2>{{  'user.user_login_info'|trans }}</h2>
+                    {% block no_login_message %}{% endblock %}
+                    {{ form_widget(form.user.login) }}
+                </fieldset>
+                {% block password %}{% endblock %}
+            </div>
+        </div>
+
+    </fieldset>
+    <fieldset name="Information worker">
+        <h2>{{  'worker.worker_info'|trans }}</h2>
+        {{ form_rest(form) }}
+    </fieldset>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+
+        function getTeamLocation()
+        {
+            if ($('#fullsix_projectforecastbundle_workerstype_team').val()) {
+                var id = $('#fullsix_projectforecastbundle_workerstype_team option:selected').attr('value');
+                $.ajax({
+                    dataType: "json",
+                    url: "{{ path('get_team_location') }}",
+                    data: {'id': id},
+                    success: function(response) {
+                        if (response['status'] == "OK") {
+                            {#$('#fullsix_projectforecastbundle_workerstype_location option:selected').attr('disabled', false);#}
+                            $('#fullsix_projectforecastbundle_workerstype_location option:selected').removeAttr('selected');
+                            $('#fullsix_projectforecastbundle_workerstype_location option[value='+response['id']+']').prop('selected', true);
+                            $('#fullsix_projectforecastbundle_workerstype_location').attr('disabled', true);
+                        }
+                    }
+                });
+            } else {
+                $('#fullsix_projectforecastbundle_workerstype_location').attr('disabled', false);
+            }
+        }
+
+        $(document).ready(function() {
+            $(".vacation-popup").colorbox();
+            $(".password-popup").colorbox();
+            getTeamLocation();
+
+        });
+
+        $(document).on('change', '#fullsix_projectforecastbundle_workerstype_team', function() {
+            getTeamLocation();
+        });
+    </script>
+    <script src="{{ asset('bundles/fullsixprojectforecast/js/workers.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "FullSixProjectForecastBundle::layout.html.twig" %}
+
+{% block title%}
+    <title>Mon compte</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Mon compte</h1>
+    {% block form %}
+
+    {% if not entity.isAdLinked %}
+        <a href="{{ path('users_change_password_account') }}"> {{ 'user.account.changePassword'|trans }}</a>
+    {% else %}
+        <h5 style="font-style: italic" > {{ 'user.warning.myAccountIsAdLinked'|trans|raw }} </h5>
+    {% endif %}
+
+    <form action="{{ path('users_account') }}" method="post" {{ form_enctype(form) }} class="form-horizontal edit-form">
+        {{ form_errors(form) }}
+        <fieldset name="User information">
+            <div class="user-info user-account">
+                <h2>{{ 'user.user_info'|trans }}</h2>
+                {{ form_row(form.usersfirstname) }}
+                {{ form_row(form.userslastname) }}
+                {{ form_row(form.usersinitials) }}
+                {{ form_row(form.email) }}
+                <fieldset name="information sociale" class="social-info">
+                    <h2>{{ 'user.user_social_info'|trans }} <span class="arrow underline"></span> </h2>
+                    <div class="social-info-content">
+                        {{ form_row(form.birthDate) }}
+                        {{ form_row(form.phoneNumber) }}
+                        {{ form_row(form.contactMsn) }}
+                        {{ form_row(form.contactFacebook) }}
+                        {{ form_row(form.contactTwitter) }}
+                        {{ form_row(form.message) }}
+                    </div>
+                </fieldset>
+            </div>
+        </fieldset>
+        {{ form_widget(form) }}
+        {{ formActions() }}
+    </form>
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,50 @@
+Customers:
+    type: entity
+    table: Customers
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: Id
+            generator:
+                strategy: IDENTITY
+        customersname:
+            type: string
+            length: 50
+            fixed: false
+            nullable: true
+            column: CustomersName
+        customersistrashed:
+            type: boolean
+            nullable: false
+            column: CustomersIsTrashed
+        customerscreated:
+            type: datetime
+            nullable: false
+            column: CustomersCreated
+        customersupdated:
+            type: datetime
+            nullable: true
+            column: CustomersUpdated
+    manyToOne:
+        agenciesidagencies:
+            targetEntity: Agencies
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                AgenciesIdAgencies:
+                    referencedColumnName: Id
+            orphanRemoval: false
+        customerscreatedby:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                CustomersCreatedBy:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

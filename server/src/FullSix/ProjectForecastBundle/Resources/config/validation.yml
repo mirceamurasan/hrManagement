@@ -1,0 +1,25 @@
+FullSix\ProjectForecastBundle\Entity\Login:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields:  [username, dirty]
+            errorPath: ""
+            message: "Un utilisateur avec le même nom d'utilisateur existe  déjà soit côté application soit côté Active Directory"
+    parameters:
+        username:
+            - NotBlank: ~
+        expiresAt:
+            - DateTime: ~
+
+FullSix\ProjectForecastBundle\Entity\Users:
+    parameters:
+        email:
+            - NotBlank: ~
+            - Email: { message: "L'email '{{ value }}' n'est pas une adresse email valide." }
+
+FullSix\ProjectForecastBundle\Entity\Periods:
+    constraints:
+        - FullSix\ProjectForecastBundle\Validator\Constraints\PeriodDate: { message: "period.invalid-interval" }
+
+FullSix\ProjectForecastBundle\Entity\Vacations:
+    constraints:
+        - FullSix\ProjectForecastBundle\Validator\Constraints\Vacations: { message: "period.invalid-interval" }

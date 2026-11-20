@@ -1,0 +1,200 @@
+{% extends "FullSixProjectForecastBundle::grid.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('bundles/fullsixprojectforecast/css/reporting.css') }}" type="text/css">
+{% endblock %}
+
+{% block content %}
+    {% if title is defined %}
+        {% block formTitle %}
+            <h1>{{ title }}</h1>
+        {% endblock %}
+    {% endif %}
+   {# <div class="btn-toolbar">
+        <div class="btn-group">
+            <select name="intext" id="intext" class="btn btn-small">
+                <option value="all"{% if param.intext == 'all' %} selected="selected"{% endif %}>Toutes les charges</option>
+                <option value="internal"{% if param.intext == 'internal' %} selected="selected"{% endif %}>Charges Equipe</option>
+                <option value="external"{% if param.intext == 'external' %} selected="selected"{% endif %}>Charges prestataire</option>
+            </select>
+            <button id="filter" class="btn btn-small marginLeft">Filtrer</button>
+        </div>
+    </div> #}
+    {{ form_start(param.form)}}
+
+    {{ form_widget(param.form.prevWeek) }}
+    <div class="report-week-period">
+        {{ param.weekStartDate|date('D d M Y') }} - {{ param.weekEndDate|date('D d M Y') }}
+    </div>
+    {{ form_widget(param.form.nextWeek) }}
+
+    {{ form_rest(param.form) }}
+    {{ form_end(param.form) }}
+    {{ grid(grid, _self, '', param) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            $("#filter").click(function() {
+                window.location = "{{ path('workload', { 'jobid': param.jobid }) }}/"+$("#intext").val();
+            });
+        });
+</script>
+{% endblock %}
+
+{% block grid %}
+<div class="grid">
+{% if grid.totalCount > 0 or grid.isFiltered or grid.noDataMessage is sameas(false) %}
+    <form id="{{ grid.hash }}" action="{{ grid.routeUrl }}" method="post">
+        <div class="grid_header">
+        {% if grid.massActions|length > 0 %}
+            {{ grid_actions(grid) }}
+        {% endif %}
+        </div>
+        <div class="grid_body">
+        <table class="table table-striped  table-hover records_list">
+        {% if grid.isTitleSectionVisible %}
+            {{ grid_titles(grid) }}
+        {% endif %}
+
+        {% if grid.isFilterSectionVisible %}
+            {{ grid_filters(grid) }}
+        {% endif %}
+
+        {{ grid_rows(grid) }}
+        </table>
+        </div>
+        <div class="grid_footer">
+        {% if grid.isPagerSectionVisible %}
+            {{ grid_pager(grid) }}
+        {% endif %}
+        {% if grid.exports|length > 0 %}
+            {{ grid_exports(grid) }}
+        {% endif %}
+        </div>
+        {% if withjs %}
+            {{ grid_scripts(grid) }}
+        {% endif %}
+    </form>
+{% else %}
+    {{ grid_no_data(grid) }}
+{% endif %}
+</div>
+{% endblock grid %}
+
+{% block grid_titles %}
+    <tr id="row_total">
+        <td colspan="1" style="text-align: right;">Charge totale</td>
+        {% for week in total %}
+            <td style="text-align: right;">{{ week }} <em>jours</em></td>
+        {% endfor %}
+    </tr>
+    {% if internalDispo is defined %}
+        <tr id="row_dispo">
+            <td colspan="1" style="text-align: right;">Capacité équipe</td>
+            {% for week in internalDispo %}
+                {% spaceless %}
+                <td style="text-align: right;">{{ week.DaysDispo }} <em>jours</em>
+                    <ul class="nav">
+                        <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="">Détails<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu report-details">
+                                <li><em>semaine N° </em>{{ week.week }}</li>
+                                <li><em>période </em>{{ week.beginDate|date('d/m') }} au {{ week.endDate|date('d/m') }}</li>
+                                <li><em>capacité : </em>{{ week.employes }} pers.</li>
+                                <li><em>tps de travail : </em>{{ week.daysOpen }} jours</li>
+                                <li><em>abs. pers. : </em>{{ week.NbDaysOff }} jours</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </td>
+            {% endspaceless %}
+            {% endfor %}
+        </tr>
+    {% endif %}
+    {% if externalDispo is defined %}
+        <tr id="row_dispo">
+            <td colspan="1" style="text-align: right;">Capacité prestataire</td>
+            {% for week in externalDispo %}
+                {% spaceless %}
+                <td style="text-align: right;">{{ week.DaysDispo }} <em>jours</em>
+                    <ul class="nav">
+                        <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="">Détails<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu report-details">
+                                <li><em>semaine N° </em>{{ week.week }}</li>
+                                <li><em>période </em>{{ week.beginDate|date('d/m') }} au {{ week.endDate|date('d/m') }}</li>
+                                <li><em>capacité : </em>{{ week.prestataires }} pers.</li>
+                                <li><em>tps de travail : </em>{{ week.daysOpen }} jours</li>
+                                {# service providers don't have vacations #}
+                                {#<li><em>abs. pers. : </em>{{ week.NbDaysOff }} jours</li>#}
+                            </ul>
+                        </li>
+                    </ul>
+                </td>
+            {% endspaceless %}
+            {% endfor %}
+        </tr>
+    {% endif %}
+    {#
+    <tr id="row_percent">
+        <td colspan="1" style="text-align: right;">Dispo / Charge</td>
+        {% for week in percent %}
+            <td style="text-align: right;">{% if week > 0 %} {{ week }} % {% else %} - {% endif %}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+    {% for column in grid.columns %}
+        {% if column.visible(grid.isReadyForExport) %}
+            <th>
+            {% if column.type == 'massaction' %}
+                <input type="checkbox" class="grid-mass-selector" onclick="{{ grid.hash }}_markVisible(this.checked);"/>
+            {% else %}
+                {% set columnTitle = grid.prefixTitle ~ column.title ~ '__abbr' %}
+                {% if columnTitle|trans == columnTitle %}
+                    {% set columnTitle = grid.prefixTitle ~ column.title %}
+                {% endif %}
+                {% if (column.sortable) %}
+                    <a class="order" href="{{ grid_url('order', grid, column) }}" title="{{ 'Order by'|trans }} {{ columnTitle|trans }}">{{ columnTitle|trans }}</a>
+                    {% if column.order == 'asc' %}
+                        <i class="icon-chevron-up"></i>
+                    {% elseif column.order == 'desc' %}
+                        <i class="icon-chevron-down"></i>
+                    {% endif %}
+                {% else %}
+                    {{ columnTitle|trans }}
+                {% endif %}
+            {% endif %}
+            </th>
+        {% endif %}
+    {% endfor %}
+    </tr>#}
+{% endblock grid_titles %}
+
+{% block grid_rows %}
+   {# {% for row in grid.rows %}
+    {% set last_row = loop.last %}
+    {% spaceless %}
+        <tr{% if row.color != '' %} style="background-color:{{ row.color }};"{% endif %} class="grid-row-cells {{ cycle(['odd', 'even'], loop.index) }}">
+        {% for column in grid.columns %}
+            {% if column.id == 'ProjectsId' %}
+                {% set ProjectsId = grid_cell(column, row, grid)|trim %}
+            {% endif %}
+            {% if column.visible(grid.isReadyForExport) %}
+                {% if column.id == 'ProjectsName' %}
+                <td tt="{{ ProjectsId }}" class="grid-column-{{ column.id }}{% if column.align != 'left'%} align-{{ column.align }}{% endif %}{% if loop.last %} last-column{% endif %}{% if last_row %} last-row{% endif %}"><a target="_blank" href="{{ path('projects_details', { 'id': ProjectsId }) }}">{{ grid_cell(column, row, grid)|raw }}</a></td>
+                {% else %}
+                    <td class="grid-column-{{ column.id }}{% if column.align != 'left'%} align-{{ column.align }}{% endif %}{% if loop.last %} last-column{% endif %}{% if last_row %} last-row{% endif %}">{{ grid_cell(column, row, grid)|raw }}</td>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endspaceless %}
+    </tr>
+    {% else %}
+        {{ grid_no_result(grid) }}
+    {% endfor %} #}
+{% endblock grid_rows %}

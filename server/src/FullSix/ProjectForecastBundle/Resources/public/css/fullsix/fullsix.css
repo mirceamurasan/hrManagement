@@ -1,0 +1,219 @@
+@charset "utf-8";
+
+/* Sections
+    (CSS flags marked with [=])
+    
+    APY GRID
+    DETAIL PROJET
+*/
+
+body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+h2 {
+    margin: 25px 0 15px 0;
+    font-size: 18px;
+    border-bottom: 1px solid #333;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+h4 {
+    font-size: 14px;
+}
+
+.navbar {
+    margin: 0 20px;
+}
+
+
+body {
+    padding-top: 0px;
+}
+
+/* =APY GRID */
+.form-signin {
+    max-width: 300px;
+    padding: 19px 29px 29px;
+    margin: 0 auto 20px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+.form-signin input[type="text"],
+.form-signin input[type="password"] {
+    font-size: 16px;
+    height: auto;
+    margin-bottom: 15px;
+    padding: 7px 9px;
+}
+
+.grid {
+    margin-top: 15px;
+}
+
+.sidebar-nav {
+    padding: 9px 0;
+}
+
+/* =DETAIL PROJET */
+
+.table-head {
+    border-bottom: 1px solid #333;
+}
+
+.table-head span {
+    font: 700 14px Arial;
+    display: inline-block;
+    padding: 7px 0 0 5px;
+    color: #333;
+}
+
+.tasksloadstypeform {
+    background: #E86537
+}
+
+.fcast-fieldsaddtask {
+    margin-top: 15px;
+    background: #fff;
+}
+.taskstypeform .submit {
+    margin-top: 25px;
+}
+
+.table-cell {
+    padding: 5px;
+}
+
+.tasklist-line {
+    margin-top: 10px;
+    background: #999;
+    border: 1px solid #999;
+    border-bottom: 2px solid #999;
+}
+
+.tasklist-line .table-cell {
+   font-weight: 700;
+    
+}
+
+.tasksloads-entete .table-head {
+    
+}
+
+.tasksidtasks-line.odd .table-cell {
+    background: #ddd;
+}
+
+.tasksidtasks-line.even .table-cell {
+    background: #eee;
+}
+
+.hidden-form {
+    display: none;
+}
+
+legend a {
+    font-size: 12px;
+}
+
+.daysoff legend {
+    border-top: 2px #333 solid;
+    margin-top: 15px;
+    padding: 0;
+}
+
+.daysoff table:first-child legend {
+    border-top: 0;
+}
+
+.daysoff table th {
+    width: 80px;
+}
+
+.daysoff table td {
+    width: 39px;
+    text-align: center;
+}
+
+.daysoff .sub-menu {
+    margin-top: 35px;
+    font-weight: 700;
+    font-size: 18px;
+}
+.daysoff .sub-menu a{
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.daysoff table .odd {
+    background-color: #dadada;
+}
+
+.project-detail select,
+.project-detail input {
+    width: 90%;
+    max-width: 205px;
+    margin-left: 10px;
+}
+
+.project-detail label {
+ margin-left: 10px;   
+}
+.project-detail .fcast-projectdetail-tasklist {
+    
+}
+
+.project-detail .areaAdd {
+    padding: 5px 0;
+    height: auto;
+}
+
+.project-detail .tasklist-line {
+    margin-top: 0;
+}
+
+.btn-add-taskload,
+.tasksloadsvolume {
+    text-align: right;
+}
+
+.task-wrap {
+    border: 1px solid #333;
+    margin-top: 15px;
+}
+.tasklist-line {
+    border-bottom: 1px solid #333;
+}
+
+.tasklist-line .table-head {
+    border: 0;
+}
+
+.tasklist-line .table-head span {
+    padding: 0;
+}
+
+.page-header {
+    background-color: none;
+}
+.fcast-view-widget h2, h1 {
+    
+    background: linear-gradient(to bottom, #666 0px, #999 100%) repeat scroll 0 0 transparent;
+}

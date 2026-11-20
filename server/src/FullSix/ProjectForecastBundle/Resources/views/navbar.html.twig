@@ -1,0 +1,22 @@
+<div class="navbar navbar-info">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <span class="navbar-text pull-right">
+                    <a href="{{ path('users_account') }}" class="navbar-link">{{ app.user }}</a>&nbsp;&nbsp;<a href="{{ path('fos_user_security_logout') }}" class="navbar-link"><i class="icon-off icon-white"></i></a>
+                </span>
+                {% endif %}
+            <a class="brand" href="{{ path('home') }}">Forecast</a>
+            <div class="nav-collapse collapse">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                {{ knp_menu_render('FullSixProjectForecastBundle:Builder:mainMenu', {'currentClass' : 'active', 'depth': 2, 'template':'FullSixProjectForecastBundle::navbarMenu.html.twig'}) }}
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="span6 fcast-view-widget view-absence mansory-fluid-box">
+<h2>Absences</h2>
+<p class="">Vue rapide des absences du jour et pour les 15 prochains jours</p>
+
+<ul class="row-fluid">
+    <li class="span6"><span class="" >Nom (fonction)</span></li>
+    <li class="span2"><span class="" >Absent</span></li>
+    <li class="span2"><span class="" >Jours</span></li>
+    <li class="span2"><span class="" >Congés</span></li>
+</ul>
+    {% for absence in output %}
+<ul class="fcast-view-item fcast-view-absence-item fcast-view-absence-item-today row-fluid">
+
+    <li class="span6">
+        <span>{{ absence['person'] }} <span class="fcast-txt-font-italic">({{ absence['function'] }})</span></span>
+    </li>
+    <li class="span2">
+        {% if absence['start'] is not null %}
+            {% if today >= absence['start'] and today <= absence['back'] %}
+            <button type="button" class="btn btn-danger">Oui</button>
+            {% else %}
+            <button type="button" class="btn btn-success">Non</button>
+            {% endif %}
+        {% else %}
+            <button type="button" class="btn btn-success">Non</button>
+        {% endif %}
+    </li>
+    <li class="span1">
+        <span>{{ absence['days'] }}</span>
+    </li>
+    <li class="span2">
+        <span>du {{ absence['start']|date('d/m/Y') }} au {{ absence['back']|date('d/m/Y') }}</span>
+    </li>
+
+</ul>
+    {% endfor %}
+</div>

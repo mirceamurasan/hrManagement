@@ -1,0 +1,46 @@
+{% block content %}
+    <div class="container-fluid popup-content merge-popup">
+        <form class="form-horizontal" method="post" action="{{ path('merge', { 'id': entity.id }) }}">
+            <div class="form-block">
+                <div class="left">
+                    <h3>{{ 'client.currentClient'|trans }}:</h3>
+                    <div class="form-row">
+                        <dt>{{ 'project.clientName'|trans }}</dt><dd>{{ entity.customersname }}</dd>
+                    </div>
+                    <div class="form-row">
+                        <dt>{{ 'common.field.trashed'|trans }}</dt><dd>{{ entity.istrashed }}</dd>
+                    </div>
+                    <div class="form-row">
+                        <dt>{{ 'common.field.createdAt'|trans }}</dt><dd>{{ entity.customerscreated|date('Y-m-d H:i:s') }}</dd>
+                    </div>
+                    <div class="form-row">
+                        <dt>{{ 'common.field.updatedAt'|trans }}</dt><dd>{{ entity.customersupdated|date('Y-m-d H:i:s') }}</dd>
+                    </div>
+                </div>
+                <div class="right">
+                    <h3>{{ 'client.anotherClient'|trans }}</h3>
+                    <div class="form-row select-container">
+                        <select name="customer">
+                            <option value=""></option>
+                            {% for customer in customers %}
+                                <option value="{{ customer.id }}">{{ customer.customersname }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <input type="radio" checked="" value="source" name="merge"><label class="check-label">Source</label>
+                        <input type="radio" value="destination" name="merge"><label class="check-label">Destination</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button type="submit"  class="btn btn-primary">{{ 'client.merge'|trans }}</button>
+                <button type="button" onclick="$('#cboxClose').click();" class="btn">Cancel</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/fullsixprojectforecast/css/popup.css') }}" type="text/css">
+{% endblock %}

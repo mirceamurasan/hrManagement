@@ -1,0 +1,14 @@
+{% extends "FullSixProjectForecastBundle::layout.html.twig" %}
+{% block container %}
+    <div class="container">
+        {% for type, messages in app.session.flashBag.all %}
+            {% for message in messages %}
+                <div class="alert alert-error {{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+{% endblock %}

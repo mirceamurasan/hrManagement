@@ -1,0 +1,61 @@
+<div class="fcast-view-widget fcast-view-projects-toupdate mansory-fluid-box">
+    <h2>
+        Projects to be updated
+
+    </h2>
+    <p class="">List of projects that have not been updated for the last 15 days.<span></span></p><!-- titres des données de cette vue -->
+
+    <ul class="fcast-view-title fcast-view-toupdate-title row-fluid">
+        <li class="fcast-view-title-item fcast-view-toupdate-title-item1 span3">
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-inverse dropdown-toggle">
+                    <span class="fcast-view-deadline-title-item-project" >Customer</span>
+                </button>
+            </div>
+        </li>
+        <li class="fcast-view-title-item fcast-view-toupdate-title-item2 span4">
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-inverse dropdown-toggle">
+                    <span class="fcast-view-deadline-title-item-project" >Project</span>
+                </button>
+            </div>
+        </li>
+        <li class="fcast-view-title-item fcast-view-toupdate-title-item3 span2">
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-inverse dropdown-toggle">
+                    <span class="fcast-view-deadline-title-item-project" >Update</span>
+                </button>
+            </div>
+        </li>
+        <li class="fcast-view-title-item fcast-view-toupdate-title-item4 span3">
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-inverse dropdown-toggle">
+                    <span class="fcast-view-deadline-title-item-project" >Action</span>
+                    <span class="caret"></span>
+                </button>
+            </div>
+        </li>
+    </ul>
+    {% for project in output %}
+    <ul class="fcast-view-item fcast-view-toupdate-item row-fluid">
+        <li class="fcast-view-toupdate-field1 span3">
+            <span>{{ project.customer.name }}</span>
+        </li>
+        <li class="fcast-view-toupdate-field2 span4">
+            <span>{{ project.name }}</span>
+        </li>
+        <li class="fcast-view-toupdate-field3 span2">
+            <span>{{ project.updatedAt|date('d/m/Y') }}</span>
+        </li>
+        <li class="fcast-view-toupdate-field4 span3">
+            <div class="btn-group">
+                <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> Action</a>
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path('projects_details', {'id': project.id}) }}" target="_blank">Search</a></li>
+                </ul>
+        </li>
+    </ul>
+    {% endfor %}
+
+</div>

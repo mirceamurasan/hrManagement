@@ -1,0 +1,30 @@
+{% block form %}
+{% spaceless %}
+<div class="row-fluid fcast-titleaddtask">
+    <div class="span12">
+<form data-load="{{ path('projects_block_details', {'project_id': entity.getProjectsidprojects.id }) }}" novalidate id="{{ form.vars.full_name }}" action="{{ path('tasks_create_create_from_project', { 'projectId': entity.getProjectsidprojects.id }) }}" method="post" class="taskstypeform">
+	{### {{ form_errors(form) }} ###}
+        <div class="span6 tasksname">
+            {{ form_label(form.tasksname) }}
+            {{ form_widget(form.tasksname) }}
+            {{ form_errors(form.tasksname) }}
+        </div>
+        <div class="span2 tasksbeginat">
+            {{ form_label(form.tasksbeginat) }}
+            {{ form_widget(form.tasksbeginat, { 'attr': {'class': 'has_datepicker'} }) }}
+            {{ form_errors(form.tasksbeginat) }}
+        </div>
+        <div class="span2 tasksendat">
+            {{ form_label(form.tasksendat) }}
+            {{ form_widget(form.tasksendat, { 'attr': {'class': 'has_datepicker'} }) }}
+            {{ form_errors(form.tasksendat) }}
+        </div>
+        <div class="span2">
+            <button class="btn btn-primary btn-info submit" type="submit">Add new task</button>
+        </div>
+        {{ form_rest(form) }}
+    </form>
+</div>
+</div>
+{% endspaceless %}
+{% endblock %}

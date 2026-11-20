@@ -1,0 +1,17 @@
+{% extends "FullSixProjectForecastBundle::form.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Création d'une agence</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>Création d'une agence</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('agencies_create') }}"
+{% endblock %}
+
+{% block backLink %}
+    {{ path('agencies') }}
+{% endblock %}

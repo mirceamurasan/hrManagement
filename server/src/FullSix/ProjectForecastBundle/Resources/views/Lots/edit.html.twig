@@ -1,0 +1,23 @@
+{% extends "FullSixProjectForecastBundle:Lots:new.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Edition d'un lot</title>
+{% endblock %}
+
+ {% block formTitle %}
+    <h1>Edition du lot "{{ entity.lotsname }}"</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('lots_update', { 'id': entity.id }) }}"
+{% endblock %}
+
+{% block formAction %}
+    {{ parent() }}
+    <li>
+        <form action="{{ path('lots_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+{% endblock %}

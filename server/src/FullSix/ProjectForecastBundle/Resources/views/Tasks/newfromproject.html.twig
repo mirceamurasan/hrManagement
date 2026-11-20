@@ -1,0 +1,17 @@
+{% extends "FullSixProjectForecastBundle::formpartial.html.twig" %}
+
+{% block formTitle %}
+    Add task
+{% endblock %}
+
+{% block form %}
+<tr>
+    <form action="{{ path('tasks_create') }}" accept-charset="" method="post" {{ form_enctype(form) }} class="form-horizontal">
+        <td>{{ form_label(form.tasksname) }} {{ form_widget(form.tasksname) }} {{ form_errors(form.tasksname) }}</td>
+        <td>{{ form_label(form.tasksbeginat) }} {{ form_widget(form.tasksbeginat) }} {{ form_errors(form.tasksbeginat) }}</td>
+        <td>{{ form_label(form.tasksendat) }} {{ form_widget(form.tasksendat) }} {{ form_errors(form.tasksendat) }}</td>
+        <td style="padding-top: 25px"><button type="submit" class="btn btn-primary">Add</button></td>
+    {{ form_widget(form) }}
+    </form>
+</tr>
+{% endblock %}

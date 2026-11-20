@@ -1,0 +1,41 @@
+Agencies:
+    type: entity
+    table: Agencies
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: Id
+            generator:
+                strategy: IDENTITY
+        agenciesname:
+            type: string
+            length: 45
+            fixed: false
+            nullable: false
+            column: AgenciesName
+        agenciesistrashed:
+            type: boolean
+            nullable: false
+            column: AgenciesIsTrashed
+        agenciescreated:
+            type: datetime
+            nullable: false
+            column: AgenciesCreated
+        agenciesupdated:
+            type: datetime
+            nullable: true
+            column: AgenciesUpdated
+    manyToOne:
+        agenciescreatedby:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                AgenciesCreatedBy:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

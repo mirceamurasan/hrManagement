@@ -1,0 +1,58 @@
+
+<div data-action="{{ path('projects_edit_inplace') }}" class="row-fluid tasklist-line {{ cycle }}">
+
+    <div class="span1" style="width:5px">
+        {% if app.user is not null and is_granted('ROLE_PM') %}
+            <form class="tasks-activation" method="POST" action="{{ path('tasks_activation', {'id': task.id}) }}">
+                {% if task.isTrashed == false %}
+                    <button type="submit" class="btn btn-small"><i id="tasks-activate" class="icon-pause" title="{{ 'common.action.trash'|trans }}"></i></button>
+                {% else %}
+                    <button type="submit" class="btn btn-small"><i id="tasks-activate" class="icon-play" title="{{ 'common.action.activate'|trans }}"></i></button>
+                {% endif %}
+            </form>
+        {% endif %}
+    </div>
+    <div id="Tasks_tasksname_{{ task.id }}" class="span2 table-cell editable-field">
+        <span>{{ task.tasksname }}</span>
+    </div>
+    <div id="Tasks_tasksbeginat_{{ task.id }}" class="span1 table-cell editable-field">
+        <span>{{ task.tasksbeginat|date('d-m-Y') }}</span>
+    </div>
+    <div id="Tasks_tasksendat_{{ task.id }}" class="span1 table-cell editable-field">
+        <span>{{ task.tasksendat|date('d-m-Y') }}</span>
+    </div>
+    <div class="span1 btn-add-taskload" >
+        {% if app.user is not null and is_granted('ROLE_PM') %}
+            {% if task.taskstasksloads is defined and task.taskstasksloads|length > 0 %}
+                <button class="btn btn-primitive submit show-form" type="button">+</button>
+            {% endif %}
+        {% endif %}
+
+    </div>
+    <div class="span1" style="width:10px"> </div>
+    <div class="span1 table-head">
+        <span class="">Job</span>
+    </div>
+    <div class="span1 table-head">
+        <span class="" >Volume</span>
+    </div>
+    <div class="span2 table-head">
+        <span class="" >Assignment</span>
+    </div>
+    <div class="span2 table-head">
+        <span class="" >Providers</span>
+    </div>
+</div>
+
+<div class="row-fluid arrondi fcast-projectdetail-tasklist" id="tasklist_{{ task.id }}">
+
+    {% block asksloadsListHeader %}{% endblock %}
+
+    {% if app.user is not null and is_granted('ROLE_PM') %}
+        <div class="row-fluid areaAdd fcast-fieldsaddfee {% if task.taskstasksloads is defined and task.taskstasksloads|length > 0 %}hidden-form{% endif %}">
+            {% render(controller('FullSixProjectForecastBundle:Tasksloads:newfromproject_responsive', {'task_id': task.id })) %}
+        </div>
+    {% endif %}
+
+    {% block tasksloadsList %}{% endblock %}
+</div>

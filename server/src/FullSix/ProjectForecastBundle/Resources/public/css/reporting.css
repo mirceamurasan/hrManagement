@@ -1,0 +1,60 @@
+#userselectform {
+    margin: 20px 0 10px 50px;
+}
+
+#revuehebdo {
+    margin-left: 50px;
+}
+
+#revuehebdo tr {
+    height: 40px;
+}
+
+#revuehebdo td {
+    border: solid 1px black;
+    padding: 5px;
+}
+
+#revuehebdo thead td {
+    text-align: center;
+    font-weight: bold;
+}
+.report-details {
+    min-width: 220px;
+    text-align: left;
+}
+
+
+.report-details li {
+    padding: 0 3px 0 10px;
+}
+.report-details li em {
+    display: inline-block;
+    width: 100px;
+}
+
+.report-week-period {
+    border-color: #cccccc #cccccc #b3b3b3;
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+    line-height: 20px;
+    margin-bottom: 0;
+    padding: 4px 14px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.report-title {
+    font-size: 120%;
+    font-weight: bold;
+}
+
+.report-margin {
+    margin-left: 50px;
+}
+
+.report-filter {
+    margin-top: -10px;
+}

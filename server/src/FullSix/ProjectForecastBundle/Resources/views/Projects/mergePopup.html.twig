@@ -1,0 +1,38 @@
+{% block content %}
+    <div class="container-fluid popup-content merge-popup">
+        <form class="form-horizontal" method="post" action="{{ path('projects_merge', { 'id': entity.id }) }}">
+            <div class="form-block">
+                <div class="left">
+                    <h3>{{ 'project.currentProject'|trans }}</h3>
+                    <div class="form-row">
+                        <dt>{{ 'common.field.name'|trans }}</dt><dd>{{ entity.projectsname }}</dd>
+                    </div>
+                    <div class="form-row">
+                        <dt>{{ 'project.clientName'|trans }}</dt><dd>{{ entity.customersidcustomers}}</dd>
+                    </div>
+                </div>
+                <div class="right">
+                    <h3>{{ 'project.anotherProject'|trans }}</h3>
+                    <div class="form-row select-container">
+                        <select name="project">
+                            {% for project in projects %}
+                                <option value="{{ project.id }}">{{ project.customersidcustomers }} : {{ project.projectsname }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <input type="radio" checked="" value="source" name="merge"><label class="check-label">Source</label>
+                        <input type="radio" value="destination" name="merge"><label class="check-label">Destination</label>
+                    </div>
+                </div>
+            </div>
+            <div class="button-container">
+                <button type="submit"  class="btn btn-primary">{{ 'project.merge'|trans }}</button>
+                <button type="button" onclick="$('#cboxClose').click();" class="btn">Cancel</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/fullsixprojectforecast/css/popup.css') }}" type="text/css">
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "FullSixProjectForecastBundle:Employers:new.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Employers</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1> {{ 'admin.employer.edit'|trans }} "{{ entity.employersname }}"</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('employers_update', { 'id': entity.id }) }}"
+{% endblock %}
+
+{% block formAction %}
+    {{ parent() }}
+    <li>
+        <form action="{{ path('employers_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+{% endblock %}
+
+{% block formMenu %}
+    {% include 'FullSixProjectForecastBundle::_buttonsMenu.html.twig' with { 'entityName': 'employers', 'returnPage': 'edit' }%}
+
+    {% if entity.agenciesidagencies != null %}
+        <h5 style="color:#d44413" > {{ 'admin.employer.internal'|trans|raw }}</h5>
+    {% else %}
+        <h5 style="color:#d44413" > {{ 'admin.employer.external'|trans|raw }}</h5>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "FullSixProjectForecastBundle::layout.html.twig" %}
+
+{% block content %}
+            <div class="hero-unit">
+              <h1>Administration Général</h1>
+              <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+            </div>
+            <div class="row-fluid">
+              <div class="span4">
+                <h2>Etat des taches</h2>
+                <p>Configuration des états possibles pour une tache.</p>
+                <p><a class="btn" href="{{ path('states') }}">View details &raquo;</a></p>
+              </div><!--/span-->
+              <div class="span4">
+                <h2>Métiers</h2>
+                <p>Configuration des métiers (dev back, dev front, consultant, ...)</p>
+                <p><a class="btn" href="{{ path('jobs') }}">View details &raquo;</a></p>
+              </div><!--/span-->
+            </div><!--/row-->
+            <div class="row-fluid">
+              <div class="span4">
+                <h2>Users</h2>
+                <p>Users administration.</p>
+                <p><a class="btn" href="{{ path('users') }}">Liste &raquo;</a>&nbsp;&nbsp;&nbsp;<a class="btn" href="{{ path('users_new') }}">Ajout &raquo;</a></p>
+              </div><!--/span-->
+            </div><!--/row-->
+{% endblock %}

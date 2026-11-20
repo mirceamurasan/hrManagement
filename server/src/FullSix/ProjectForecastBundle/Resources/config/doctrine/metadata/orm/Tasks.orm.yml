@@ -1,0 +1,71 @@
+Tasks:
+    type: entity
+    table: Tasks
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: Id
+            generator:
+                strategy: IDENTITY
+        tasksname:
+            type: string
+            length: 45
+            fixed: false
+            nullable: false
+            column: TasksName
+        tasksbeginat:
+            type: date
+            nullable: false
+            column: TasksBeginAt
+        tasksendat:
+            type: date
+            nullable: false
+            column: TasksEndAt
+        tasksorder:
+            type: smallint
+            nullable: false
+            column: TasksOrder
+        tasksistrashed:
+            type: boolean
+            nullable: false
+            column: TasksIsTrashed
+        taskscreated:
+            type: datetime
+            nullable: false
+            column: TasksCreated
+        tasksupdated:
+            type: datetime
+            nullable: true
+            column: TasksUpdated
+    manyToOne:
+        lotsidlots:
+            targetEntity: Lots
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                LotsIdLots:
+                    referencedColumnName: Id
+            orphanRemoval: false
+        projectsidprojects:
+            targetEntity: Projects
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ProjectsIdProjects:
+                    referencedColumnName: Id
+            orphanRemoval: false
+        taskscreatedby:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                TasksCreatedBy:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

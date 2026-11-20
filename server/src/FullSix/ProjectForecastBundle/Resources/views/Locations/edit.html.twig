@@ -1,0 +1,31 @@
+{% extends "FullSixProjectForecastBundle::form.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Locations </title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>  {{ 'admin.location.edit'|trans }} '{{ entity.Locationsname }}'</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('locations_update', { 'id': entity.id }) }}"
+{% endblock %}
+
+{% block backLink %}
+    {{ path('locations') }}
+{% endblock %}
+
+{% block formAction %}
+    {{ parent() }}
+    <li>
+        <form action="{{ path('locations_activation', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+{% endblock %}
+
+{% block formMenu %}
+    {% include 'FullSixProjectForecastBundle::_buttonsMenu.html.twig' with { 'entityName': 'locations', 'returnPage': 'edit' }%}
+{% endblock %}

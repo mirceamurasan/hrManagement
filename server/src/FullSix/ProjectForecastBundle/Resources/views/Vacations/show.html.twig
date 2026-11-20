@@ -1,0 +1,26 @@
+{% block content %}
+    <div class="container-fluid vacations-form popup-content">
+        <br /><br />
+        {% block elementDetails %}
+        <fieldset name="Information Vacations">
+            <h3>Information vacations</h3>
+            <dt>{{ 'common.field.startDate'|trans }}</dt><dd>{{ entity.startdate|date("d-m-Y") }}</dd>
+            <dt>{{ 'common.field.endDate'|trans }}</dt><dd>{{ entity.enddate|date("d-m-Y") }}</dd>
+            <dt>{{ 'worker.vacation.morning'|trans }}</dt><dd>{% if entity.morning == 1 %} Oui {% else %} Non {% endif %}</dd>
+            <dt>{{ 'worker.vacation.afternoon'|trans }}</dt><dd>{% if entity.afternoon == 1 %} Oui {% else %} Non {% endif %}</dd>
+        </fieldset>
+        {% endblock %}
+    </div>
+{% endblock %}
+{% javascripts
+    "@FullSixProjectForecastBundle/Resources/public/js/jquery.min.js"
+    "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js"
+    '@FullSixProjectForecastBundle/Resources/public/js/jquery.colorbox.js'
+%}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<script>
+    function closePopup() {
+        $.colorbox.close();
+    }
+</script>

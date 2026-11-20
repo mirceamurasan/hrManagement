@@ -1,0 +1,25 @@
+{% extends "FullSixProjectForecastBundle::form.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Création d'une tâche</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>Création d'une tâche</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('tasks_create') }}"
+{% endblock %}
+
+{% block backLink %}
+    href="{{ path('tasks') }}"
+{% endblock %}
+
+{% block formAction %}
+    {% if entity.projectsidprojects %}
+    <li>
+        <a href="{{ path('projects_details', { 'id': entity.projectsidprojects.id }) }}">Return to project</a>
+    </li>
+    {% endif %}
+{% endblock %}

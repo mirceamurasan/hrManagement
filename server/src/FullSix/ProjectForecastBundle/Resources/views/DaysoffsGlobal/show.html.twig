@@ -1,0 +1,32 @@
+{% extends "FullSixProjectForecastBundle::show.html.twig" %}
+
+
+{% block title%}
+    <title>Projects Forecast : Holidays</title>
+{% endblock %}
+
+{% block elementTitle %}
+    Détails jour férié '{{ entity.DaysoffsGlobalName }}'
+{% endblock %}
+
+{% block formMenu %}
+    <form action="{{ path('daysoffsglobal_delete', { 'id': entity.id}) }}" method="post">
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <a href="{{ path('daysoffsglobal') }}" class="btn" title="Retour à la liste">
+                    <i class="icon-arrow-left"></i>
+                </a>
+                <i class="icon-white"></i>
+                <a href="{{ path('daysoffsglobal_edit', { 'id': entity.id }) }}" class="btn" title="Edit">
+                    <i class="icon-edit"></i>
+                </a>
+                <button type="submit" class="btn"><i class="icon-trash" title="Activate"></i></button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block elementDetails %}
+    <dt>Date</dt><dd>{{ entity.DaysoffsGlobalDate.date|date('m-d-Y') }}</dd>
+    <dt>Libellé</dt><dd>{{ entity.DaysoffsGlobalName }}</dd>
+{% endblock %}

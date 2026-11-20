@@ -1,0 +1,52 @@
+services:
+    fullsix_projectforecast.navbar_renderer:
+        class: FullSix\ProjectForecastBundle\Menu\Renderer\navbarRenderer
+        arguments: [%kernel.charset%]
+        tags:
+            - { name: knp_menu.renderer, alias: navbar }
+    fullsix.twig.fullsix_extension:
+        class: FullSix\ProjectForecastBundle\Twig\FullSixExtension
+        arguments: [@request_stack]
+        tags:
+            - { name: twig.extension }
+    grid.column.action:
+        class: FullSix\ProjectForecastBundle\Grid\Column\ActionColumn
+        public: false
+        tags:
+            - { name: grid.column.extension }
+    fullsix_projectforecast.resource_profile_helper:
+        class: FullSix\ProjectForecastBundle\Helper\ResourceProfileHelper
+        arguments: [ @doctrine.orm.entity_manager ]
+    fullsix_projectforecast.csv_import:
+        class: FullSix\ProjectForecastBundle\Service\CsvImportService
+        arguments:
+            - @doctrine
+            - @service_container
+            - %csv_source_server%
+            - %csv_source_ftp%
+            - %csv_target%
+            - %pdf_target_path%
+            - %ftp_stream%
+            - %pdf_name%
+    fullsix_projectforecast.translation_utils:
+        class: FullSix\ProjectForecastBundle\Service\TranslationUtilsService
+        arguments:
+            - @translator
+    fullsix_projectforecast.file_download:
+        class: FullSix\ProjectForecastBundle\Service\FileDownloadService
+        arguments:
+            - @doctrine
+            - @service_container
+    fullsix_projectforecast.availability_computation:
+        class: FullSix\ProjectForecastBundle\Service\AvailabilityComputationService
+        arguments:
+            - @doctrine
+    fullsix_projectforecast.users_helper:
+        class: FullSix\ProjectForecastBundle\Helper\UsersHelper
+        arguments: [ @doctrine.orm.entity_manager ]
+    fullsix_projectforecast.project_helper:
+        class: FullSix\ProjectForecastBundle\Helper\ProjectHelper
+        arguments: [ @doctrine.orm.entity_manager ]
+    fullsix_projectforecast.denormalisation_helper:
+        class: FullSix\ProjectForecastBundle\Helper\DenormalisationHelper
+        arguments: [ @doctrine.orm.entity_manager ]

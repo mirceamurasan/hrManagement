@@ -1,0 +1,161 @@
+{% extends "FullSixProjectForecastBundle:Customers:new.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Edit customer</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>Edit customer "{{ entity.customersname }}"</h1>
+{% endblock %}
+
+{% block formParam %}
+    action="{{ path('customers_update', { 'id': entity.id }) }}"
+{% endblock %}
+
+{% block formAction %}
+    {{ parent() }}
+    <li>
+        <form action="{{ path('customers_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+{% endblock %}
+
+{% block formMenu %}
+    <form action="{{ path('customers_activation', { 'id': entity.id }) }}" class="activation" method="post">
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <a href="{{ path('customers') }}" class="btn" title="{{ 'common.action.back'|trans }}">
+                    <i class="icon-arrow-left"></i>
+                </a>
+                <i class="icon-white"></i>
+                {% if entity.mergedWith == null %}
+                    {% if entity.isTrashed == false %}
+                        <button type="submit" class="btn"><i id="activate" class="icon-pause"></i></button>
+                    {% else %}
+                        <button type="submit" class="btn"><i id="activate" class="icon-play"></i></button>
+                    {% endif %}
+                {% endif %}
+                <i class="icon-white"></i>
+                <a href="{{ path('workers_popup', {'id': entity.id }) }}" class="btn workers-popup" title="{{ 'client.addWorkerTitle'|trans }}">
+                    <i class="icon-user"></i>
+                </a>
+                <i class="icon-white"></i>
+
+                {% if entity.mergedWith == null %}
+                    <a href="{{ path('merge_popup', {'id': entity.id }) }}" class="btn merge-popup" title="">
+                        {{ 'client.merge'|trans }}
+                    </a>
+                {% endif %}
+
+                <i class="icon-white"></i>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+    <h3>{{ 'client.workers'|trans }}</h3>
+    <table class="table table-striped  table-hover records_list">
+        <tbody>
+            <tr>
+                <th>
+                    <a class="order" href="" title="">Nom</a>
+                </th>
+                <th>
+                    <a class="order" href="" title="">Role</a>
+                </th>
+                <th>
+                    <a class="order" href="" title="">Action</a>
+                </th>
+            </tr>
+            {% for resourceProfile in entity.resourceprofiles %}
+                <tr class="grid-row-cells even">
+                    <td class="">
+                        <a target="_blank" href="{{ path('workers_show', { 'id': resourceProfile.workerid.id }) }}">{{ resourceProfile.workerid.user }}</a>
+                    </td>
+                    <td class="">
+                        {% for key in resourceProfile.roles|keys %}
+                            {{ resourceProfile.roles[key] }} &nbsp;
+                        {% endfor %}
+                    </td>
+                    <td class="">
+                        <a href="{{ path('remove_worker', { 'workerId': resourceProfile.workerid.id, 'customerId': entity.id }) }}" target="_self" onclick="return confirm('Do you want to remove this worker?')" title="Supprimer" class="grid_delete_action">
+                            <i class="icon-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+    <h3>{{ 'client.projects'|trans }}</h3>
+    <table class="table table-striped  table-hover records_list">
+        <tbody>
+            <tr>
+                <th>
+                    <a class="order" href="" title="">Name</a>
+                </th>
+                <th>
+                    <a class="order" href="" title="">Start date</a>
+                </th>
+                <th>
+                    <a class="order" href="" title="">End date</a>
+                </th>
+                <th>
+                    <a class="order" href="" title="">Trash</a>
+                </th>
+                <th>
+                    <a class="order" href="" title="">Actions</a>
+                </th>
+            </tr>
+            {% for project in projects %}
+                <tr class="grid-row-cells even">
+                    <td class="">
+                        <a target="_blank" href="{{ path('projects_details', { 'id': project.id }) }}">{{ project.projectsname }}</a>
+                    </td>
+                    <td class="">{{ project.projectfirsttasktdate|date("d/m/Y") }}</td>
+                    <td class="">{{ project.projectlasttasktdate|date("d/m/Y") }}</td>
+                    <td class="">
+                        {% if project.isTrashed %}
+                            <i class="icon-ok"></i>
+                        {% else %}
+                            <i class="icon-remove"></i>
+                        {% endif %}
+                    </td>
+                    <td class="grid-column-__actions last-column">
+                        <a href="{{ path("projects_details", { 'id': project.id }) }}" target="_self" title="Show">
+                            <i class="icon-book"></i>
+                        </a>&nbsp;&nbsp;
+                        {% if project.mergedWith == null %}
+                            <a href="{{ path('projects_activation', { 'id': project.id, 'page': 'customer', 'customerId': entity.id }) }}" target="_self" title="Pause">
+                                {% if project.istrashed %}
+                                    <i class="icon-play"></i>
+                                {% else %}
+                                    <i class="icon-pause"></i>
+                                {% endif %}
+                            </a>&nbsp;&nbsp;
+                        {% endif %}
+                    </td>
+
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function(){
+	     setTimeout(function() {
+      		$(".merge-popup, .workers-popup").colorbox();
+            }, 500);
+        });
+    </script>
+{% endblock %}

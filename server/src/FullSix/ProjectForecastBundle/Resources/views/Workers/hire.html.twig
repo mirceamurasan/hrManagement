@@ -1,0 +1,18 @@
+{% extends "FullSixProjectForecastBundle:Workers:new.html.twig" %}
+{% block title%}
+    <title>Création worker</title>
+{% endblock %}
+
+{% block formTitle %}
+    <h1>Création worker</h1>
+{% endblock %}
+{% block formParam %}
+    action="{{ path('hire_worker', {'id': entity.user.id }) }}"
+{% endblock %}
+
+{% block backLink %}
+    {{ path('users') }}
+{% endblock %}
+
+{% block formAction %}
+{% endblock %}

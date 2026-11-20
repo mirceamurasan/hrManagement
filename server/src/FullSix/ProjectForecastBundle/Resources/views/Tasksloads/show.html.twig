@@ -1,0 +1,29 @@
+{% extends "FullSixProjectForecastBundle::show.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : Charge</title>
+{% endblock %}
+
+{% block elementTitle %}
+    Charge
+{% endblock %}
+
+{% block backLink %}
+    {{ path('tasksloads') }}
+{% endblock %}
+
+{% block editLink %}
+    {{ path('tasksloads_edit', { 'id': entity.id }) }}
+{% endblock %}
+
+{% block deleteLink %}
+    {{ path('tasksloads_delete', { 'id': entity.id }) }}
+{% endblock %}
+
+{% block elementDetails %}
+    <dt>Id</dt><dd>{{ entity.id }}</dd>
+    <dt>Tasksloadsvolume</dt><dd>{{ entity.tasksloadsvolume }}</dd>
+    <dt>TasksloadsisTrashed</dt><dd>{{ entity.isTrashed }}</dd>
+    <dt>Tasksloadscreated</dt><dd>{{ entity.tasksloadscreated|date('Y-m-d H:i:s') }}</dd>
+    <dt>Tasksloadsupdated</dt><dd>{{ entity.tasksloadsupdated|date('Y-m-d H:i:s') }}</dd>
+{% endblock %}

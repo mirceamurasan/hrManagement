@@ -1,0 +1,16 @@
+{% block content %}
+    {% block formTitle %}
+    {% endblock %}
+
+    {% block form %}
+    <form 
+            {% block formParam %}
+            {% endblock %}
+        method="post" {{ form_enctype(form) }} class="form-horizontal">
+            {{ form_widget(form) }}
+            {{ formActions() }}
+    </form>
+
+    
+    {% endblock %}
+{% endblock %}

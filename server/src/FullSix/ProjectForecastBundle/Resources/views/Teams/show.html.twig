@@ -1,0 +1,24 @@
+{% extends "FullSixProjectForecastBundle::show.html.twig" %}
+
+{% block title%}
+    <title>Projects Forecast : {{ 'team.label'|trans }}</title>
+{% endblock %}
+
+{% block elementTitle %}
+    Team
+{% endblock %}
+
+{% block formMenu %}
+    {% include 'FullSixProjectForecastBundle::_buttonsMenu.html.twig' with { 'entityName': 'teams', 'returnPage': 'show' } %}
+{% endblock %}
+
+{% block elementDetails %}
+    <dt>{{ 'common.field.name'|trans }}</dt><dd>{{ entity.teamsname }}</dd>
+    <dt>{{ 'admin.location.label'|trans }}</dt><dd>{{ entity.teamslocation.locationsname }}</dd>
+    <dt>{{ 'worker.workers'|trans }}</dt>
+    <dd>
+        {% for worker in entity.teamsworkers %}
+            - {{ worker.user.CheckedName }}<br>
+        {% endfor %}
+    </dd>
+{% endblock %}
