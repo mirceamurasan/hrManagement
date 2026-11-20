@@ -24,6 +24,14 @@ php -S 127.0.0.1:8000 -t public public/index.php
 
 The account command asks for a password without displaying it and creates an administrator account using Symfony's configured password hasher.
 
+To inspect or import a legacy SAP project CSV, use:
+
+```sh
+php bin/console app:import:projects /path/to/projects.csv --dry-run
+```
+
+Remove `--dry-run` to write the changes to SQLite. Each completed import is recorded in the administrator's Import history page.
+
 Open `http://127.0.0.1:8000/health` to check that the application responds. The local SQLite file is created under `server/var/` when the database is first used. Put any real local secrets in `.env.local` or the process environment; do not commit them.
 
 ## Migration approach

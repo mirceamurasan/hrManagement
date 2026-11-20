@@ -24,4 +24,9 @@ final class CustomerRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findBySapId(string $sapId): ?Customer
+    {
+        return $this->findOneBy(['sapId' => trim($sapId)]);
+    }
 }

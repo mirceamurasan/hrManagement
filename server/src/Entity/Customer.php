@@ -41,6 +41,9 @@ class Customer extends SoftDeletableEntity
     #[ORM\Column(name: 'mergedWith', type: 'integer', nullable: true)]
     private ?int $mergedWithId = null;
 
+    #[ORM\Column(name: 'CustomersSapId', type: 'string', length: 50, nullable: true, unique: true)]
+    private ?string $sapId = null;
+
     public function __construct(?string $name, int $createdById)
     {
         $this->name = $name === null ? null : trim($name);
@@ -100,6 +103,18 @@ class Customer extends SoftDeletableEntity
     public function setMergedWithId(?int $mergedWithId): self
     {
         $this->mergedWithId = $mergedWithId;
+
+        return $this;
+    }
+
+    public function getSapId(): ?string
+    {
+        return $this->sapId;
+    }
+
+    public function setSapId(?string $sapId): self
+    {
+        $this->sapId = $sapId === null || trim($sapId) === '' ? null : trim($sapId);
 
         return $this;
     }

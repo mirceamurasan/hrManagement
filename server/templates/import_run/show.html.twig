@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block title %}Import details{% endblock %}
+{% block body %}
+    <main>
+        <h1>{{ run.kind|title }} import</h1>
+        <dl><dt>Source</dt><dd>{{ run.source }}</dd><dt>Imported</dt><dd>{{ run.importedAt|date('Y-m-d H:i:s') }}</dd><dt>Result</dt><dd>{{ run.success ? 'Success' : 'Needs review' }}</dd><dt>Created</dt><dd>{{ run.createdCount }}</dd><dt>Updated</dt><dd>{{ run.updatedCount }}</dd><dt>Errors</dt><dd>{{ run.errorCount }}</dd>{% if run.message %}<dt>Message</dt><dd>{{ run.message }}</dd>{% endif %}</dl>
+        <h2>Issues{% if run.errorCount > run.errors|length %} (showing first {{ run.errors|length }} of {{ run.errorCount }}){% endif %}</h2>
+        <ul>{% for error in run.errors %}<li>Line {{ error.line }}: {{ error.message }}</li>{% else %}<li>No issues.</li>{% endfor %}</ul>
+        <p><a href="{{ path('admin_import_run_index') }}">Back to history</a></p>
+    </main>
+{% endblock %}

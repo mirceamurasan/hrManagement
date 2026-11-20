@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title %}Import history{% endblock %}
+{% block body %}
+    <main>
+        <h1>Import history</h1>
+        <table><thead><tr><th>When</th><th>Type</th><th>Source</th><th>Result</th><th>Created</th><th>Updated</th><th>Errors</th></tr></thead><tbody>
+        {% for run in runs %}<tr><td>{{ run.importedAt|date('Y-m-d H:i') }}</td><td>{{ run.kind }}</td><td>{{ run.source }}</td><td>{{ run.success ? 'Success' : 'Needs review' }}</td><td>{{ run.createdCount }}</td><td>{{ run.updatedCount }}</td><td><a href="{{ path('admin_import_run_show', {id: run.id}) }}">{{ run.errorCount }}</a></td></tr>{% else %}<tr><td colspan="7">No imports have been recorded.</td></tr>{% endfor %}
+        </tbody></table>
+    </main>
+{% endblock %}
