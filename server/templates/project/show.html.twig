@@ -31,7 +31,7 @@
                                 <ul>
                                 {% for allocation in task.allocations %}
                                     {% if not allocation.trashed %}
-                                        <li>{{ allocation.job.label ?? 'Unnamed job' }}: {{ allocation.volume }}{% if allocation.provider %} ({{ allocation.provider.name }}){% endif %}
+                                        <li>{{ allocation.job.label ?? 'Unnamed job' }}: {{ allocation.volume }}{% if allocation.worker %} — {{ allocation.worker.name }}{% endif %}{% if allocation.provider %} ({{ allocation.provider.name }}){% endif %}
                                             {% if is_granted('ROLE_PM') %}
                                                 <form action="{{ path('task_allocation_archive', {projectId: project.id, taskId: task.id, allocationId: allocation.id}) }}" method="post" style="display:inline">
                                                     <input type="hidden" name="_token" value="{{ csrf_token('archive-allocation-' ~ allocation.id) }}">

@@ -7,8 +7,10 @@ namespace App\Form;
 use App\Entity\TaskAllocation;
 use App\Entity\Job;
 use App\Entity\ServiceProvider;
+use App\Entity\Worker;
 use App\Repository\JobRepository;
 use App\Repository\ServiceProviderRepository;
+use App\Repository\WorkerRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -32,6 +34,13 @@ final class TaskAllocationType extends AbstractType
                 'required' => false,
                 'placeholder' => 'No provider',
                 'query_builder' => static fn (ServiceProviderRepository $providers) => $providers->createQueryBuilder('provider')->andWhere('provider.isTrashed = false')->orderBy('provider.name'),
+            ])
+            ->add('worker', EntityType::class, [
+                'class' => Worker::class,
+                'choice_label' => 'name',
+                'required' => false,
+                'placeholder' => 'Unassigned',
+                'query_builder' => static fn (WorkerRepository $workers) => $workers->createQueryBuilder('worker')->andWhere('worker.isTrashed = false')->orderBy('worker.name'),
             ])
             ->add('volume', IntegerType::class, [
                 'label' => 'Volume',

@@ -31,8 +31,9 @@ class TaskAllocation extends SoftDeletableEntity
     #[ORM\JoinColumn(name: 'ProvidersIdProviders', referencedColumnName: 'Id', nullable: true)]
     private ?ServiceProvider $provider = null;
 
-    #[ORM\Column(name: 'TasksLoadsWorkers', type: 'integer', nullable: true)]
-    private ?int $workerId = null;
+    #[ORM\ManyToOne(targetEntity: Worker::class)]
+    #[ORM\JoinColumn(name: 'TasksLoadsWorkers', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
+    private ?Worker $worker = null;
 
     #[ORM\Column(name: 'TasksLoadsVolume', type: 'smallint')]
     #[Assert\Positive]
@@ -63,8 +64,8 @@ class TaskAllocation extends SoftDeletableEntity
     public function setJob(Job $job): self { $this->job = $job; return $this; }
     public function getProvider(): ?ServiceProvider { return $this->provider; }
     public function setProvider(?ServiceProvider $provider): self { $this->provider = $provider; return $this; }
-    public function getWorkerId(): ?int { return $this->workerId; }
-    public function setWorkerId(?int $workerId): self { $this->workerId = $workerId; return $this; }
+    public function getWorker(): ?Worker { return $this->worker; }
+    public function setWorker(?Worker $worker): self { $this->worker = $worker; return $this; }
     public function getVolume(): int { return $this->volume; }
     public function setVolume(int $volume): self { $this->volume = $volume; return $this; }
     public function getCreatedById(): int { return $this->createdById; }
