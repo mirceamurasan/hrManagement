@@ -6,7 +6,7 @@ The new runtime targets PHP 8.6 and Symfony 7.4 LTS. The legacy application depe
 
 ## Current structure
 
-- `server/` is the new Symfony application. It has no ORM, database URL, or database server requirement yet.
+- `server/` is the new Symfony application. It uses Doctrine ORM for the migrated persistence layer and a local SQLite file by default, so no database server needs to be installed or configured.
 - `legacy/server/` preserves the original application for reference while features are migrated.
 - Local secrets belong in ignored `.env.local` files or process environment variables. `.env.example` contains placeholders only.
 
@@ -15,7 +15,7 @@ The new runtime targets PHP 8.6 and Symfony 7.4 LTS. The legacy application depe
 1. Establish the modern runtime and safe configuration defaults.
 2. Port domain behavior in small groups, keeping each commit focused. Migrated slices include the database-independent weekly availability calculator in `server/src/Availability/` and a streaming parser for the legacy project CSV export in `server/src/Import/`.
 3. Replace legacy authentication, controller, template, import, and reporting flows with supported Symfony components.
-4. Add persistence only when the user chooses how the application should store data; this modernization does not require setting up a database server.
+4. Port persistence and workflows while keeping SQLite as the no-server default. A production database server can be chosen later without changing domain behavior.
 
 ## Weekly availability calculation
 
