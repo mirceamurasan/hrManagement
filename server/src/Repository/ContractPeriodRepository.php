@@ -17,4 +17,20 @@ final class ContractPeriodRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('period')->andWhere('period.contract = :contract')->andWhere('period.isTrashed = false')->setParameter('contract', $contract)->orderBy('period.startDate', 'DESC')->getQuery()->getResult();
     }
+
+    /** @return list<ContractPeriod> */
+    public function findActive(): array
+    {
+        return $this->createQueryBuilder('period')
+            ->addSelect('contract', 'worker')
+            ->join('period.contract', 'contract')
+            ->join('contract.worker', 'worker')
+            ->andWhere('period.isTrashed = false')
+            ->andWhere('contract.isTrashed = false')
+            ->andWhere('worker.isTrashed = false')
+            ->orderBy('worker.name', 'ASC')
+            ->addOrderBy('period.startDate', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

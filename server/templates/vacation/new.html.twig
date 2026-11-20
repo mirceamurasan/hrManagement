@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title %}Record vacation{% endblock %}
+{% block body %}
+    <main>
+        <h1>Record vacation for {{ period.contract.worker.name }}</h1>
+        <p>Contract period starts {{ period.startDate|date('Y-m-d') }}</p>
+        {{ form_start(form) }}{{ form_widget(form) }}<button type="submit">Save vacation</button>{{ form_end(form) }}
+        <p><a href="{{ path('admin_vacation_index') }}">Back to vacations</a></p>
+    </main>
+{% endblock %}

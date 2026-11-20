@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block title %}Vacations{% endblock %}
+{% block body %}
+    <main>
+        <h1>Vacations</h1>
+        <h2>Record vacation</h2>
+        <ul>{% for period in periods %}<li>{{ period.contract.worker.name }} — {{ period.startDate|date('Y-m-d') }}: <a href="{{ path('admin_vacation_new', {periodId: period.id}) }}">Add vacation</a></li>{% else %}<li>Create a contract period first.</li>{% endfor %}</ul>
+        <h2>Recorded vacations</h2>
+        <table><thead><tr><th>Worker</th><th>Contract period</th><th>Dates</th><th>Part of day</th><th>Coefficient</th></tr></thead><tbody>
+        {% for vacation in vacations %}<tr><td>{{ vacation.worker.name }}</td><td>{{ vacation.period.startDate|date('Y-m-d') }}</td><td>{{ vacation.startDate|date('Y-m-d') }} – {{ vacation.endDate|date('Y-m-d') }}</td><td>{{ vacation.morning ? 'Morning' : '' }}{% if vacation.morning and vacation.afternoon %} / {% endif %}{{ vacation.afternoon ? 'Afternoon' : '' }}</td><td>{{ vacation.coefficient }}</td></tr>{% else %}<tr><td colspan="5">No recorded vacations.</td></tr>{% endfor %}
+        </tbody></table>
+    </main>
+{% endblock %}
