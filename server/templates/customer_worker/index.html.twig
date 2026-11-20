@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %}Workers for {{ customer.name }}{% endblock %}
+{% block body %}
+    <main>
+        <h1>Workers for {{ customer.name }}</h1>
+        {% for message in app.flashes('success') %}<p role="status">{{ message }}</p>{% endfor %}
+        {% for message in app.flashes('warning') %}<p role="status">{{ message }}</p>{% endfor %}
+        <h2>Assigned workers</h2>
+        <ul>{% for assignment in assignments %}<li>{{ assignment.worker.name }}{% if assignment.worker.account %} ({{ assignment.worker.account.email }}){% elseif assignment.worker.externalEmail %} ({{ assignment.worker.externalEmail }}){% endif %}<form action="{{ path('customer_worker_remove', {customerId: customer.id, id: assignment.id}) }}" method="post" style="display:inline"><input type="hidden" name="_token" value="{{ csrf_token('remove-customer-worker-' ~ assignment.id) }}"><button type="submit">Remove</button></form></li>{% else %}<li>No workers assigned.</li>{% endfor %}</ul>
+        <h2>Assign a worker</h2>
+        {{ form_start(form) }}{{ form_widget(form) }}<button type="submit">Assign</button>{{ form_end(form) }}
+        <p><a href="{{ path('customer_index') }}">Back to customers</a></p>
+    </main>
+{% endblock %}

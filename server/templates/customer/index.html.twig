@@ -19,7 +19,7 @@
                     <tr>
                         <td>{{ customer.name }}</td>
                         <td>{{ customer.createdAt|date('Y-m-d') }}</td>
-                        <td>{% if is_granted('ROLE_ADMIN') %}<a href="{{ path('customer_edit', {id: customer.id}) }}">Edit</a>{% endif %}</td>
+                        <td><a href="{{ path('customer_worker_index', {customerId: customer.id}) }}">Workers</a>{% if is_granted('ROLE_ADMIN') %} · <a href="{{ path('customer_edit', {id: customer.id}) }}">Edit</a>{% endif %}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

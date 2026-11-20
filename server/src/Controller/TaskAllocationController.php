@@ -31,7 +31,7 @@ final class TaskAllocationController extends AbstractController
         }
 
         $allocation = new TaskAllocation($task, $this->getDefaultJob($entityManager), 1, $user->getId());
-        $form = $this->createForm(TaskAllocationType::class, $allocation);
+        $form = $this->createForm(TaskAllocationType::class, $allocation, ['project' => $task->getProject()]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($allocation);
