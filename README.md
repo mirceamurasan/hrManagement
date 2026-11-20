@@ -4,7 +4,7 @@ An incremental modernization of the legacy HR management application.
 
 ## Current stack
 
-- PHP 8.5+
+- PHP 8.6+
 - Symfony 7.4 LTS
 - Composer
 - No database is required or configured for the new application baseline.

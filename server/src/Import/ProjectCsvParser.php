@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Import;
 
 use Generator;
+use RuntimeException;
 
 /** Reads the semicolon-delimited project export used by the legacy importer. */
 final class ProjectCsvParser
@@ -22,28 +23,34 @@ final class ProjectCsvParser
      */
     public function parseFile(string $path): Generator
     {
-        $file = new \SplFileObject($path, 'r');
-        $file->setCsvControl(';', '"', '');
+        $file = fopen($path, 'rb');
+        if ($file === false) {
+            throw new RuntimeException(sprintf('Unable to open CSV file "%s".', $path));
+        }
 
-        while (!$file->eof()) {
-            $columns = $file->fgetcsv();
-            if ($columns === false || $columns === [null]) {
-                continue;
+        try {
+            $lineNumber = 0;
+            while (($columns = fgetcsv($file, null, ';', '"', '')) !== false) {
+                ++$lineNumber;
+                if ($columns === [null]) {
+                    continue;
+                }
+
+                if ($lineNumber === 1 && isset($columns[0])) {
+                    $columns[0] = preg_replace('/^\xEF\xBB\xBF/', '', (string) $columns[0]) ?? (string) $columns[0];
+                }
+
+                yield $lineNumber => new ProjectCsvRow(
+                    $lineNumber,
+                    $this->column($columns, self::SAP_NUMBER_COLUMN),
+                    $this->column($columns, self::STATUS_COLUMN),
+                    $this->column($columns, self::PROJECT_NAME_COLUMN),
+                    $this->column($columns, self::CUSTOMER_SAP_ID_COLUMN),
+                    $this->column($columns, self::CUSTOMER_NAME_COLUMN),
+                );
             }
-
-            $lineNumber = $file->key() + 1;
-            if ($lineNumber === 1 && isset($columns[0])) {
-                $columns[0] = preg_replace('/^\xEF\xBB\xBF/', '', (string) $columns[0]) ?? (string) $columns[0];
-            }
-
-            yield $lineNumber => new ProjectCsvRow(
-                $lineNumber,
-                $this->column($columns, self::SAP_NUMBER_COLUMN),
-                $this->column($columns, self::STATUS_COLUMN),
-                $this->column($columns, self::PROJECT_NAME_COLUMN),
-                $this->column($columns, self::CUSTOMER_SAP_ID_COLUMN),
-                $this->column($columns, self::CUSTOMER_NAME_COLUMN),
-            );
+        } finally {
+            fclose($file);
         }
     }
 
