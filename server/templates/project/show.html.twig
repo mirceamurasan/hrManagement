@@ -13,6 +13,11 @@
             <dt>Created</dt><dd>{{ project.createdAt|date('Y-m-d H:i') }}</dd>
             <dt>Comments</dt><dd>{{ project.comments ?? '—' }}</dd>
         </dl>
+        <section aria-labelledby="milestones-heading">
+            <h2 id="milestones-heading">Milestones</h2>
+            {% if is_granted('ROLE_PM') %}<p><a href="{{ path('project_milestone_new', {projectId: project.id}) }}">Add milestone</a></p>{% endif %}
+            <ul>{% for milestone in milestones %}<li>{{ milestone.date|date('Y-m-d') }} — {{ milestone.details }}{% if is_granted('ROLE_PM') %}<form action="{{ path('project_milestone_delete', {projectId: project.id, id: milestone.id}) }}" method="post" style="display:inline"><input type="hidden" name="_token" value="{{ csrf_token('delete-milestone-' ~ milestone.id) }}"><button type="submit">Delete</button></form>{% endif %}</li>{% else %}<li>No milestones recorded.</li>{% endfor %}</ul>
+        </section>
         <section aria-labelledby="tasks-heading">
             <h2 id="tasks-heading">Tasks</h2>
             {% if is_granted('ROLE_PM') %}<p><a href="{{ path('project_task_new', {projectId: project.id}) }}">Add task</a></p>{% endif %}

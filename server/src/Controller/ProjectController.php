@@ -10,6 +10,7 @@ use App\Form\ProjectType;
 use App\Repository\CustomerRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\ProjectTaskRepository;
+use App\Repository\ProjectKeyDateRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -59,7 +60,7 @@ final class ProjectController extends AbstractController
     }
 
     #[Route('/{id}', name: 'show', requirements: ['id' => '\\d+'], methods: ['GET'])]
-    public function show(int $id, ProjectRepository $projects, ProjectTaskRepository $tasks): Response
+    public function show(int $id, ProjectRepository $projects, ProjectTaskRepository $tasks, ProjectKeyDateRepository $milestones): Response
     {
         $project = $projects->find($id);
         if ($project === null || $project->isTrashed()) {
@@ -69,6 +70,7 @@ final class ProjectController extends AbstractController
         return $this->render('project/show.html.twig', [
             'project' => $project,
             'tasks' => $tasks->findActiveByProject($project),
+            'milestones' => $milestones->findByProject($project),
         ]);
     }
 

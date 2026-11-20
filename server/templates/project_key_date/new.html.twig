@@ -1,0 +1,3 @@
+{% extends 'base.html.twig' %}
+{% block title %}Add milestone{% endblock %}
+{% block body %}<main><h1>Add milestone to {{ project.name }}</h1>{{ form_start(form) }}{{ form_widget(form) }}<button type="submit">Save milestone</button>{{ form_end(form) }}<p><a href="{{ path('project_show', {id: project.id}) }}">Cancel</a></p></main>{% endblock %}

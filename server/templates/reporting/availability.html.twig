@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block title %}Weekly availability{% endblock %}
+{% block body %}
+    <main>
+        <h1>Weekly availability</h1>
+        <form method="get">
+            <label for="start">Starting week</label>
+            <input id="start" name="start" type="date" value="{{ startDate|date('Y-m-d') }}">
+            <label for="weeks">Weeks</label>
+            <input id="weeks" name="weeks" type="number" min="1" max="12" value="{{ weeks }}">
+            <button type="submit">Show report</button>
+        </form>
+        <table>
+            <thead><tr><th>Job</th><th>Week</th><th>Employee periods</th><th>Employee days available</th><th>Service provider periods</th><th>Provider days available</th></tr></thead>
+            <tbody>
+            {% for row in rows %}
+                <tr>
+                    <td>{{ row.job.label ?? 'Unnamed job' }}</td>
+                    <td>{{ row.week|date('Y-m-d') }} – {{ row.week|date_modify('+6 days')|date('Y-m-d') }}</td>
+                    <td>{{ row.employees.resourceCount }}</td>
+                    <td>{{ row.employees.availableDays|number_format(1) }}</td>
+                    <td>{{ row.providers.resourceCount }}</td>
+                    <td>{{ row.providers.availableDays|number_format(1) }}</td>
+                </tr>
+            {% else %}
+                <tr><td colspan="6">No active jobs or contract periods match this report.</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </main>
+{% endblock %}
