@@ -17,7 +17,7 @@ The new runtime targets PHP 8.6 and Symfony 7.4 LTS. The legacy application depe
 3. Replace legacy authentication, controller, template, import, and reporting flows with supported Symfony components. Sign-in, modern password hashing, login throttling, role hierarchy, and command-line creation of the first administrator are now in place; the legacy user-management screens remain to be ported.
 4. Port persistence and workflows while keeping SQLite as the no-server default. A production database server can be chosen later without changing domain behavior.
 
-The first Doctrine-mapped models are user accounts, project statuses, and public holidays. The administration pages for project statuses and public holidays use Symfony forms and a `ROLE_ADMIN` guard; holiday deletion also requires a CSRF token. Local SQLite migrations create these tables without requiring an external database service.
+The Doctrine-mapped models now include user accounts, project statuses, public holidays, customers, and projects. The administration pages for project statuses and public holidays use Symfony forms and a `ROLE_ADMIN` guard; holiday deletion also requires a CSRF token. Local SQLite migrations create these tables without requiring an external database service.
 
 ## Weekly availability calculation
 
