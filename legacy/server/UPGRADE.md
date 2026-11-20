@@ -149,7 +149,7 @@ The file has been converted to a YAML file which reads as follows:
         mailer_password:   ~
 
         locale:            en
-        secret:            ThisTokenIsNotSoSecretChangeIt
+        secret:            CHANGE_ME_LOCALLY
 
 Note that if you convert your parameters file to YAML, you must also change
 its reference in `app/config/config.yml`.

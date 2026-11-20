@@ -1,38 +1,42 @@
-#sf2 folders to exclude
-/server/web/css/
-/server/web/js/
-/server/web/bundles/
-/server/app/bootstrap.php.cache
-/server/app/cache/*
-/server/app/config/parameters.yml
-/server/app/logs/*
-/server/build/
-/server/vendor/
-/server/bin/
-/server/composer.phar
-/server/users_import_reports/
-/server/project_import/
-
-# Local config
-/server/app/config/config_local.yml
-/server/app/config/parameters_local.yml
-/server/web/app_local.php
-
-# IDE settings
-.buildpath
-.externalToolBuilders/
-.project
-.settings/
-.idea
-/server/.apdisk
-
-# Excluding unwanted files
-.DS_Store
-/nbproject
-
-# Never commit local or production credentials
+# Local environment files and secrets
 .env
 .env.*
 !.env.example
-/server/app/config/parameters_prod.yml
-/server/app/config/parameters.yml.sample
+
+# Symfony application
+/server/.env
+/server/.env.*
+!/server/.env.example
+/server/vendor/
+/server/var/
+/server/config/secrets/prod/prod.decrypt.private.php
+/server/.phpunit.cache
+
+# Legacy Symfony 2 generated files and local configuration
+/legacy/server/app/bootstrap.php.cache
+/legacy/server/app/cache/
+/legacy/server/app/logs/
+/legacy/server/app/config/config_local.yml
+/legacy/server/app/config/parameters.yml
+/legacy/server/app/config/parameters_local.yml
+/legacy/server/app/config/parameters_prod.yml
+/legacy/server/app/config/parameters.yml.sample
+/legacy/server/web/app_local.php
+/legacy/server/web/css/
+/legacy/server/web/js/
+/legacy/server/web/bundles/
+/legacy/server/build/
+/legacy/server/bin/
+/legacy/server/composer.phar
+/legacy/server/vendor/
+/legacy/server/users_import_reports/
+/legacy/server/project_import/
+
+# IDE and operating system files
+.DS_Store
+.idea/
+.settings/
+.buildpath
+.externalToolBuilders/
+.project
+/nbproject/
