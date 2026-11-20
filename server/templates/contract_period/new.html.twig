@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block title %}Contract period{% endblock %}
+{% block body %}
+    <main>
+        <h1>Contract periods for {{ contract.worker.name }}</h1>
+        <ul>{% for period in periods %}<li>{{ period.startDate|date('Y-m-d') }} – {{ period.endDate ? period.endDate|date('Y-m-d') : 'ongoing' }}{% if period.dailyRate %}; daily rate {{ period.dailyRate }}{% endif %}</li>{% else %}<li>No periods yet.</li>{% endfor %}</ul>
+        <h2>Add a period</h2>
+        {{ form_start(form) }}{{ form_widget(form) }}<button type="submit">Save period</button>{{ form_end(form) }}
+        <p><a href="{{ path('admin_contract_index') }}">Back to contracts</a></p>
+    </main>
+{% endblock %}
