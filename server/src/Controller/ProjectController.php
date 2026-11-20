@@ -9,6 +9,7 @@ use App\Entity\UserAccount;
 use App\Form\ProjectType;
 use App\Repository\CustomerRepository;
 use App\Repository\ProjectRepository;
+use App\Repository\ProjectTaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,14 +59,17 @@ final class ProjectController extends AbstractController
     }
 
     #[Route('/{id}', name: 'show', requirements: ['id' => '\\d+'], methods: ['GET'])]
-    public function show(int $id, ProjectRepository $projects): Response
+    public function show(int $id, ProjectRepository $projects, ProjectTaskRepository $tasks): Response
     {
         $project = $projects->find($id);
         if ($project === null || $project->isTrashed()) {
             throw $this->createNotFoundException('Project not found.');
         }
 
-        return $this->render('project/show.html.twig', ['project' => $project]);
+        return $this->render('project/show.html.twig', [
+            'project' => $project,
+            'tasks' => $tasks->findActiveByProject($project),
+        ]);
     }
 
     #[Route('/{id}/edit', name: 'edit', requirements: ['id' => '\\d+'], methods: ['GET', 'POST'])]

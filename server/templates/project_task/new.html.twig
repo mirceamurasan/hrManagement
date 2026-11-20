@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}Add task{% endblock %}
+{% block body %}
+    <main>
+        <h1>Add task to {{ project.name }}</h1>
+        {{ include('project_task/_form.html.twig') }}
+        <p><a href="{{ path('project_show', {id: project.id}) }}">Cancel</a></p>
+    </main>
+{% endblock %}

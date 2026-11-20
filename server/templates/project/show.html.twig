@@ -13,6 +13,35 @@
             <dt>Created</dt><dd>{{ project.createdAt|date('Y-m-d H:i') }}</dd>
             <dt>Comments</dt><dd>{{ project.comments ?? '—' }}</dd>
         </dl>
+        <section aria-labelledby="tasks-heading">
+            <h2 id="tasks-heading">Tasks</h2>
+            {% if is_granted('ROLE_PM') %}<p><a href="{{ path('project_task_new', {projectId: project.id}) }}">Add task</a></p>{% endif %}
+            {% if tasks is empty %}
+                <p>No active tasks for this project.</p>
+            {% else %}
+                <table>
+                    <thead><tr><th>Name</th><th>State</th><th>Dates</th>{% if is_granted('ROLE_PM') %}<th>Actions</th>{% endif %}</tr></thead>
+                    <tbody>
+                    {% for task in tasks %}
+                        <tr>
+                            <td>{{ task.name }}</td>
+                            <td>{{ task.state.label ?? '—' }}</td>
+                            <td>{{ task.startDate|date('Y-m-d') }} – {{ task.endDate|date('Y-m-d') }}</td>
+                            {% if is_granted('ROLE_PM') %}
+                                <td>
+                                    <a href="{{ path('project_task_edit', {projectId: project.id, taskId: task.id}) }}">Edit</a>
+                                    <form action="{{ path('project_task_archive', {projectId: project.id, taskId: task.id}) }}" method="post" style="display:inline">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('archive-task-' ~ task.id) }}">
+                                        <button type="submit">Archive</button>
+                                    </form>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </section>
         <p><a href="{{ path('project_index') }}">Back to projects</a></p>
     </main>
 {% endblock %}

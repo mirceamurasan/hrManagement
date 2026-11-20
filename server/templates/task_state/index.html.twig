@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}Task states{% endblock %}
+{% block body %}
+    <main>
+        <h1>Task states</h1>
+        <p><a href="{{ path('admin_task_state_new') }}">Add task state</a></p>
+        <ul>{% for state in states %}<li>{{ state.label ?? 'Unnamed' }}{% if state.default %} (default){% endif %} — <a href="{{ path('admin_task_state_edit', {id: state.id}) }}">Edit</a></li>{% else %}<li>No task states.</li>{% endfor %}</ul>
+    </main>
+{% endblock %}

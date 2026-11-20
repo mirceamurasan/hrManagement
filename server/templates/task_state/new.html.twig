@@ -1,0 +1,5 @@
+{% extends 'base.html.twig' %}
+{% block title %}New task state{% endblock %}
+{% block body %}
+    <main><h1>New task state</h1>{{ include('task_state/_form.html.twig') }}<p><a href="{{ path('admin_task_state_index') }}">Back</a></p></main>
+{% endblock %}
