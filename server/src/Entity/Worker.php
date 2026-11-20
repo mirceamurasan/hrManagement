@@ -22,6 +22,14 @@ class Worker extends SoftDeletableEntity
     #[Assert\Length(max: 150)]
     private string $name;
 
+    #[ORM\Column(name: 'WorkersEmail', length: 180, nullable: true, unique: true)]
+    #[Assert\Email]
+    private ?string $externalEmail = null;
+
+    #[ORM\Column(name: 'WorkersInitials', length: 5, nullable: true)]
+    #[Assert\Length(max: 5)]
+    private ?string $initials = null;
+
     #[ORM\OneToOne(targetEntity: UserAccount::class)]
     #[ORM\JoinColumn(name: 'WorkersAccount', referencedColumnName: 'id', unique: true, nullable: true, onDelete: 'SET NULL')]
     private ?UserAccount $account = null;
@@ -56,6 +64,10 @@ class Worker extends SoftDeletableEntity
     public function getId(): ?int { return $this->id; }
     public function getName(): string { return $this->name; }
     public function setName(string $name): self { $this->name = trim($name); return $this; }
+    public function getExternalEmail(): ?string { return $this->externalEmail; }
+    public function setExternalEmail(?string $email): self { $this->externalEmail = $email === null || trim($email) === '' ? null : mb_strtolower(trim($email)); return $this; }
+    public function getInitials(): ?string { return $this->initials; }
+    public function setInitials(?string $initials): self { $this->initials = $initials === null || trim($initials) === '' ? null : mb_strtoupper(trim($initials)); return $this; }
     public function getAccount(): ?UserAccount { return $this->account; }
     public function setAccount(?UserAccount $account): self { $this->account = $account; return $this; }
     public function getJob(): ?Job { return $this->job; }

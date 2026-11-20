@@ -32,6 +32,14 @@ php bin/console app:import:projects /path/to/projects.csv --dry-run
 
 Remove `--dry-run` to write the changes to SQLite. Each completed import is recorded in the administrator's Import history page.
 
+Worker directories can be imported as semicolon-separated CSV with columns `email;first name;last name;initials` (a header row is optional):
+
+```sh
+php bin/console app:import:workers /path/to/workers.csv --dry-run
+```
+
+This creates or updates worker profiles. It links an existing local account when its email matches; it does not create sign-in accounts or require an LDAP server.
+
 Open `http://127.0.0.1:8000/health` to check that the application responds. The local SQLite file is created under `server/var/` when the database is first used. Put any real local secrets in `.env.local` or the process environment; do not commit them.
 
 ## Migration approach

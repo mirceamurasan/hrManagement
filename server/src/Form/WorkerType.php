@@ -16,6 +16,7 @@ use App\Repository\UserAccountRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,6 +27,8 @@ final class WorkerType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, ['label' => 'Full name'])
+            ->add('initials', TextType::class, ['required' => false])
+            ->add('externalEmail', EmailType::class, ['required' => false, 'label' => 'Work email'])
             ->add('account', EntityType::class, [
                 'class' => UserAccount::class,
                 'choice_label' => 'email',
