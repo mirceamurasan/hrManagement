@@ -1,0 +1,3 @@
+{% extends 'base.html.twig' %}
+{% block title %}Employers{% endblock %}
+{% block body %}<main><h1>Employers</h1><p><a href="{{ path('admin_employer_new') }}">Add employer</a></p><ul>{% for item in items %}<li>{{ item.name }}</li>{% else %}<li>No employers.</li>{% endfor %}</ul></main>{% endblock %}

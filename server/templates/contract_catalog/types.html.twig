@@ -1,0 +1,3 @@
+{% extends 'base.html.twig' %}
+{% block title %}Contract types{% endblock %}
+{% block body %}<main><h1>Contract types</h1><p><a href="{{ path('admin_contract_type_new') }}">Add contract type</a></p><ul>{% for item in items %}<li>{{ item.name }}</li>{% else %}<li>No contract types.</li>{% endfor %}</ul></main>{% endblock %}

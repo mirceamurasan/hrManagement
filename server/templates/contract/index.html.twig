@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block title %}Contracts{% endblock %}
+{% block body %}
+    <main>
+        <h1>Contracts</h1>
+        <p><a href="{{ path('admin_contract_new') }}">Add contract</a></p>
+        <table><thead><tr><th>Worker</th><th>Type</th><th>Employer</th><th>Job</th><th>Comment</th></tr></thead><tbody>
+        {% for contract in contracts %}<tr><td>{{ contract.worker.name }}</td><td>{{ contract.type.name }}</td><td>{{ contract.employer.name }}</td><td>{{ contract.job.label ?? '—' }}</td><td>{{ contract.comment ?? '—' }}</td></tr>{% else %}<tr><td colspan="5">No contracts.</td></tr>{% endfor %}
+        </tbody></table>
+    </main>
+{% endblock %}
