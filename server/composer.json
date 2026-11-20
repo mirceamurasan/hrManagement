@@ -9,6 +9,7 @@
         "ext-iconv": "*",
         "ext-pdo_sqlite": "*",
         "doctrine/doctrine-bundle": "^2.18",
+        "doctrine/doctrine-migrations-bundle": "^3.4",
         "doctrine/orm": "^3.8",
         "symfony/asset": "^7.4",
         "symfony/console": "7.4.*",

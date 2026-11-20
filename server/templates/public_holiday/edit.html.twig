@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit public holiday{% endblock %}
+
+{% block body %}
+    <main>
+        <h1>Edit public holiday</h1>
+        {{ include('public_holiday/_form.html.twig', {button_label: 'Save changes'}) }}
+        <p><a href="{{ path('admin_public_holiday_index') }}">Back to list</a></p>
+    </main>
+{% endblock %}

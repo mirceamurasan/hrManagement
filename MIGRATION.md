@@ -17,6 +17,8 @@ The new runtime targets PHP 8.6 and Symfony 7.4 LTS. The legacy application depe
 3. Replace legacy authentication, controller, template, import, and reporting flows with supported Symfony components.
 4. Port persistence and workflows while keeping SQLite as the no-server default. A production database server can be chosen later without changing domain behavior.
 
+The first Doctrine-mapped models are project statuses and public holidays. The administration page for public holidays uses Symfony forms, CSRF-protected deletion, and a `ROLE_ADMIN` guard. The local SQLite migration creates those tables without requiring an external database service.
+
 ## Weekly availability calculation
 
 `AvailabilityCalculator` accepts `AvailabilityPeriod` and `VacationPeriod` value objects plus public holidays, so it can be used without Doctrine or a configured database. Callers select periods for a job and resource type before passing them in. Employee calculations subtract non-trashed vacation coefficients on working days. Service-provider calculations count active periods without subtracting employee vacation. Both calculations treat the date range as inclusive and exclude weekends and supplied holidays.

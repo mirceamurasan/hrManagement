@@ -8,14 +8,10 @@ use App\Repository\PublicHolidayRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PublicHolidayRepository::class)]
-#[ORM\Table(name: 'DaysoffsGlobal', indexes: [
-    new ORM\Index(name: 'date_idx', columns: ['DaysoffsGlobalDate']),
-], uniqueConstraints: [
-    new ORM\UniqueConstraint(name: 'uniq_public_holiday_date', columns: ['DaysoffsGlobalDate']),
-    new ORM\UniqueConstraint(name: 'uniq_public_holiday_name', columns: ['DaysoffsGlobalName']),
-])]
+#[ORM\Table(name: 'DaysoffsGlobal')]
 #[UniqueEntity(fields: ['date'], message: 'A public holiday already exists on this date.')]
 #[UniqueEntity(fields: ['name'], message: 'A public holiday with this name already exists.')]
 class PublicHoliday
@@ -25,10 +21,12 @@ class PublicHoliday
     #[ORM\Column(name: 'id', type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column(name: 'DaysoffsGlobalDate', type: 'date_immutable')]
+    #[ORM\Column(name: 'DaysoffsGlobalDate', type: 'date_immutable', unique: true)]
     private DateTimeImmutable $date;
 
-    #[ORM\Column(name: 'DaysoffsGlobalName', type: 'string', length: 100)]
+    #[ORM\Column(name: 'DaysoffsGlobalName', type: 'string', length: 100, unique: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 100)]
     private string $name;
 
     public function __construct(DateTimeImmutable $date, string $name)
@@ -54,6 +52,11 @@ class PublicHoliday
         return $this;
     }
 
+    public function setDate(DateTimeImmutable $date): self
+    {
+        return $this->reschedule($date);
+    }
+
     public function getName(): string
     {
         return $this->name;
@@ -64,6 +67,11 @@ class PublicHoliday
         $this->name = trim($name);
 
         return $this;
+    }
+
+    public function setName(string $name): self
+    {
+        return $this->rename($name);
     }
 
     public function __toString(): string

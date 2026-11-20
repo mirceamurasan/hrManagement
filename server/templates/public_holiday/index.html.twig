@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Public holidays{% endblock %}
+
+{% block body %}
+    <main>
+        <h1>Public holidays</h1>
+
+        {% for message in app.flashes('success') %}
+            <p role="status">{{ message }}</p>
+        {% endfor %}
+
+        <p><a href="{{ path('admin_public_holiday_new') }}">Add a public holiday</a></p>
+
+        {% if holidays is empty %}
+            <p>No public holidays have been added.</p>
+        {% else %}
+            <table>
+                <thead><tr><th>Date</th><th>Name</th><th>Actions</th></tr></thead>
+                <tbody>
+                {% for holiday in holidays %}
+                    <tr>
+                        <td>{{ holiday.date|date('Y-m-d') }}</td>
+                        <td>{{ holiday.name }}</td>
+                        <td>
+                            <a href="{{ path('admin_public_holiday_edit', {id: holiday.id}) }}">Edit</a>
+                            <form method="post" action="{{ path('admin_public_holiday_delete', {id: holiday.id}) }}" style="display:inline">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete-public-holiday-' ~ holiday.id) }}">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </main>
+{% endblock %}

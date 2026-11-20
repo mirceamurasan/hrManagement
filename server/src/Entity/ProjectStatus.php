@@ -8,11 +8,10 @@ use App\Repository\ProjectStatusRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProjectStatusRepository::class)]
-#[ORM\Table(name: 'ProjectStatuses', uniqueConstraints: [
-    new ORM\UniqueConstraint(name: 'uniq_project_status_label', columns: ['ProjectStatusesLabel']),
-])]
+#[ORM\Table(name: 'ProjectStatuses')]
 #[ORM\HasLifecycleCallbacks]
 #[UniqueEntity(fields: ['label'], message: 'A project status with this label already exists.')]
 class ProjectStatus extends SoftDeletableEntity
@@ -22,7 +21,9 @@ class ProjectStatus extends SoftDeletableEntity
     #[ORM\Column(name: 'Id', type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column(name: 'ProjectStatusesLabel', type: 'string', length: 45)]
+    #[ORM\Column(name: 'ProjectStatusesLabel', type: 'string', length: 45, unique: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 45)]
     private string $label;
 
     #[ORM\Column(name: 'ProjectStatusesCreated', type: 'datetime_immutable')]
