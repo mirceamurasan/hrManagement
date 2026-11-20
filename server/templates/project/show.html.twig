@@ -20,13 +20,30 @@
                 <p>No active tasks for this project.</p>
             {% else %}
                 <table>
-                    <thead><tr><th>Name</th><th>State</th><th>Dates</th>{% if is_granted('ROLE_PM') %}<th>Actions</th>{% endif %}</tr></thead>
+                    <thead><tr><th>Name</th><th>State</th><th>Dates</th><th>Allocations</th>{% if is_granted('ROLE_PM') %}<th>Actions</th>{% endif %}</tr></thead>
                     <tbody>
                     {% for task in tasks %}
                         <tr>
                             <td>{{ task.name }}</td>
                             <td>{{ task.state.label ?? '—' }}</td>
                             <td>{{ task.startDate|date('Y-m-d') }} – {{ task.endDate|date('Y-m-d') }}</td>
+                            <td>
+                                <ul>
+                                {% for allocation in task.allocations %}
+                                    {% if not allocation.trashed %}
+                                        <li>{{ allocation.job.label ?? 'Unnamed job' }}: {{ allocation.volume }}{% if allocation.provider %} ({{ allocation.provider.name }}){% endif %}
+                                            {% if is_granted('ROLE_PM') %}
+                                                <form action="{{ path('task_allocation_archive', {projectId: project.id, taskId: task.id, allocationId: allocation.id}) }}" method="post" style="display:inline">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('archive-allocation-' ~ allocation.id) }}">
+                                                    <button type="submit">Remove</button>
+                                                </form>
+                                            {% endif %}
+                                        </li>
+                                    {% endif %}
+                                {% else %}<li>No allocations.</li>{% endfor %}
+                                </ul>
+                                {% if is_granted('ROLE_PM') %}<a href="{{ path('task_allocation_new', {projectId: project.id, taskId: task.id}) }}">Add allocation</a>{% endif %}
+                            </td>
                             {% if is_granted('ROLE_PM') %}
                                 <td>
                                     <a href="{{ path('project_task_edit', {projectId: project.id, taskId: task.id}) }}">Edit</a>

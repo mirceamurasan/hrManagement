@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}Add allocation{% endblock %}
+{% block body %}
+    <main>
+        <h1>Add allocation to {{ task.name }}</h1>
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit">Save allocation</button>
+        {{ form_end(form) }}
+        <p><a href="{{ path('project_show', {id: task.project.id}) }}">Cancel</a></p>
+    </main>
+{% endblock %}
