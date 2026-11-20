@@ -31,6 +31,7 @@ class Project extends SoftDeletableEntity
     private int $createdById;
 
     #[ORM\Column(name: 'ProjectsName', type: 'string', length: 250, nullable: true)]
+    #[Assert\NotBlank]
     #[Assert\Length(max: 250)]
     private ?string $name;
 

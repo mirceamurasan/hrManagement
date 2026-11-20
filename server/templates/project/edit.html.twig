@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit project{% endblock %}
+
+{% block body %}
+    <main>
+        <h1>Edit project: {{ project.name ?? 'Untitled project' }}</h1>
+        {{ include('project/_form.html.twig', {button_label: 'Save changes'}) }}
+        <p><a href="{{ path('project_show', {id: project.id}) }}">Cancel</a></p>
+    </main>
+{% endblock %}

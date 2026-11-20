@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Customers{% endblock %}
+
+{% block body %}
+    <main>
+        <h1>Customers</h1>
+        {% for message in app.flashes('success') %}<p role="status">{{ message }}</p>{% endfor %}
+        {% for message in app.flashes('warning') %}<p role="status">{{ message }}</p>{% endfor %}
+        {% if is_granted('ROLE_ADMIN') %}<p><a href="{{ path('customer_new') }}">Add a customer</a></p>{% endif %}
+        <p><a href="{{ path('project_index') }}">Projects</a></p>
+        {% if customers is empty %}
+            <p>No active customers.</p>
+        {% else %}
+            <table>
+                <thead><tr><th>Customer</th><th>Created</th><th>Actions</th></tr></thead>
+                <tbody>
+                {% for customer in customers %}
+                    <tr>
+                        <td>{{ customer.name }}</td>
+                        <td>{{ customer.createdAt|date('Y-m-d') }}</td>
+                        <td>{% if is_granted('ROLE_ADMIN') %}<a href="{{ path('customer_edit', {id: customer.id}) }}">Edit</a>{% endif %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </main>
+{% endblock %}

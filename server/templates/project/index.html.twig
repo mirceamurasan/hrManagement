@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projects{% endblock %}
+
+{% block body %}
+    <main>
+        <h1>Projects</h1>
+        {% for message in app.flashes('success') %}<p role="status">{{ message }}</p>{% endfor %}
+        {% if is_granted('ROLE_PM') %}<p><a href="{{ path('project_new') }}">Add a project</a></p>{% endif %}
+        <p><a href="{{ path('customer_index') }}">Customers</a></p>
+        {% if projects is empty %}
+            <p>No active projects.</p>
+        {% else %}
+            <table>
+                <thead><tr><th>Project</th><th>Customer</th><th>Status</th><th>SAP number</th><th>Actions</th></tr></thead>
+                <tbody>
+                {% for project in projects %}
+                    <tr>
+                        <td>{{ project.name ?? 'Untitled project' }}</td>
+                        <td>{{ project.customer.name }}</td>
+                        <td>{{ project.status ? project.status.label : '—' }}</td>
+                        <td>{{ project.sapNumber ?? '—' }}</td>
+                        <td><a href="{{ path('project_show', {id: project.id}) }}">View</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </main>
+{% endblock %}

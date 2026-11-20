@@ -22,6 +22,7 @@ class Customer extends SoftDeletableEntity
     private ?int $id = null;
 
     #[ORM\Column(name: 'CustomersName', type: 'string', length: 50, nullable: true, unique: true)]
+    #[Assert\NotBlank]
     #[Assert\Length(max: 50)]
     private ?string $name;
 

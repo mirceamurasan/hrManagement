@@ -1,0 +1,12 @@
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.sapNumber) }}
+    {{ form_row(form.customer) }}
+    {{ form_row(form.status) }}
+    {{ form_row(form.comments) }}
+    {{ form_row(form.outsourcing) }}
+    {{ form_row(form.generalInfo) }}
+    {{ form_row(form.technicalInfo) }}
+    <button type="submit">{{ button_label }}</button>
+{{ form_end(form) }}

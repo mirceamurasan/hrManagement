@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ project.name ?? 'Project' }}{% endblock %}
+
+{% block body %}
+    <main>
+        <h1>{{ project.name ?? 'Untitled project' }}</h1>
+        {% if is_granted('ROLE_PM') %}<p><a href="{{ path('project_edit', {id: project.id}) }}">Edit project</a></p>{% endif %}
+        <dl>
+            <dt>Customer</dt><dd>{{ project.customer.name }}</dd>
+            <dt>Status</dt><dd>{{ project.status ? project.status.label : '—' }}</dd>
+            <dt>SAP number</dt><dd>{{ project.sapNumber ?? '—' }}</dd>
+            <dt>Created</dt><dd>{{ project.createdAt|date('Y-m-d H:i') }}</dd>
+            <dt>Comments</dt><dd>{{ project.comments ?? '—' }}</dd>
+        </dl>
+        <p><a href="{{ path('project_index') }}">Back to projects</a></p>
+    </main>
+{% endblock %}
