@@ -19,6 +19,6 @@ The new runtime targets PHP 8.5 and Symfony 7.4 LTS. The legacy application depe
 
 ## Weekly availability calculation
 
-`AvailabilityCalculator` accepts contract periods and public holidays as data, so it can be used without Doctrine or a configured database. Callers select periods for a job and resource type before passing them in. Employee calculations subtract non-trashed vacation coefficients on working days. Service-provider calculations count active periods without subtracting employee vacation. Both calculations treat the date range as inclusive and exclude weekends and supplied holidays.
+`AvailabilityCalculator` accepts `AvailabilityPeriod` and `VacationPeriod` value objects plus public holidays, so it can be used without Doctrine or a configured database. Callers select periods for a job and resource type before passing them in. Employee calculations subtract non-trashed vacation coefficients on working days. Service-provider calculations count active periods without subtracting employee vacation. Both calculations treat the date range as inclusive and exclude weekends and supplied holidays.
 
 The legacy directory is temporary migration material. It should only be removed after its required behavior has been migrated and reviewed.

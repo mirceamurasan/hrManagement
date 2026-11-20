@@ -17,17 +17,7 @@ use InvalidArgumentException;
 final class AvailabilityCalculator
 {
     /**
-     * @param list<array{
-     *     id: int|string,
-     *     startDate: DateTimeInterface,
-     *     endDate: DateTimeInterface|null,
-     *     vacations?: list<array{
-     *         startDate: DateTimeInterface,
-     *         endDate: DateTimeInterface,
-     *         coefficient: int|float|string,
-     *         trashed?: bool
-     *     }>
-     * }> $periods Periods already filtered for the requested job and employee type.
+     * @param list<AvailabilityPeriod> $periods Periods already filtered for the requested job and employee type.
      * @param list<DateTimeInterface|string> $holidays Legal holidays to exclude.
      */
     public function forEmployees(
@@ -49,18 +39,19 @@ final class AvailabilityCalculator
             }
 
             ++$businessDays;
-            $activePeriods = array_filter($periods, fn (array $period): bool =>
+            $activePeriods = array_filter($periods, fn (AvailabilityPeriod $period): bool =>
                 $this->isActiveOn($period, $day)
             );
             $dayCapacity = count($activePeriods);
-            $activePeriodIds = array_merge($activePeriodIds, array_column($activePeriods, 'id'));
+            foreach ($activePeriods as $period) {
+                $activePeriodIds[] = $period->id;
+            }
             $dayOff = 0.0;
 
             foreach ($activePeriods as $period) {
-                foreach ($period['vacations'] ?? [] as $vacation) {
-                    if (($vacation['trashed'] ?? false) === false
-                        && $this->contains($vacation['startDate'], $vacation['endDate'], $day)) {
-                        $dayOff += (float) $vacation['coefficient'];
+                foreach ($period->vacations as $vacation) {
+                    if (!$vacation->trashed && $this->contains($vacation->startDate, $vacation->endDate, $day)) {
+                        $dayOff += $vacation->coefficient;
                     }
                 }
             }
@@ -84,7 +75,7 @@ final class AvailabilityCalculator
      * Service-provider capacity follows the legacy rule: each active period
      * contributes one available day and does not subtract employee vacations.
      *
-     * @param list<array{id: int|string, startDate: DateTimeInterface, endDate: DateTimeInterface|null}> $periods
+     * @param list<AvailabilityPeriod> $periods
      * @param list<DateTimeInterface|string> $holidays
      */
     public function forServiceProviders(
@@ -107,7 +98,7 @@ final class AvailabilityCalculator
             foreach ($periods as $period) {
                 if ($this->isActiveOn($period, $day)) {
                     ++$availableDays;
-                    $activePeriodIds[] = $period['id'];
+                    $activePeriodIds[] = $period->id;
                 }
             }
         }
@@ -160,10 +151,9 @@ final class AvailabilityCalculator
         return $day->format('N') >= 6 || isset($holidayKeys[$day->format('Y-m-d')]);
     }
 
-    /** @param array{startDate: DateTimeInterface, endDate: DateTimeInterface|null} $period */
-    private function isActiveOn(array $period, DateTimeImmutable $day): bool
+    private function isActiveOn(AvailabilityPeriod $period, DateTimeImmutable $day): bool
     {
-        return $this->contains($period['startDate'], $period['endDate'], $day);
+        return $this->contains($period->startDate, $period->endDate, $day);
     }
 
     private function contains(
