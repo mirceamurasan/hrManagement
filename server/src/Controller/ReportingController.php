@@ -7,10 +7,13 @@ namespace App\Controller;
 use App\Availability\AvailabilityCalculator;
 use App\Availability\AvailabilityPeriod;
 use App\Availability\VacationPeriod;
+use App\Entity\Worker;
+use App\Repository\TaskAllocationRepository;
 use App\Repository\ContractPeriodRepository;
 use App\Repository\JobRepository;
 use App\Repository\PublicHolidayRepository;
 use App\Repository\WorkerVacationRepository;
+use App\Repository\WorkerRepository;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -91,6 +94,37 @@ final class ReportingController extends AbstractController
             'rows' => $rows,
             'startDate' => $startDate,
             'weeks' => $weeks,
+        ]);
+    }
+
+    #[Route('/weekly-review', name: 'weekly_review', methods: ['GET'])]
+    public function weeklyReview(
+        Request $request,
+        WorkerRepository $workers,
+        TaskAllocationRepository $allocations,
+        WorkerVacationRepository $vacations,
+    ): Response {
+        $rawStart = (string) $request->query->get('start', (new DateTimeImmutable('monday this week'))->format('Y-m-d'));
+        $selectedDate = DateTimeImmutable::createFromFormat('!Y-m-d', $rawStart);
+        $dateErrors = DateTimeImmutable::getLastErrors();
+        if ($selectedDate === false || ($dateErrors !== false && ($dateErrors['warning_count'] > 0 || $dateErrors['error_count'] > 0))) {
+            $selectedDate = new DateTimeImmutable('monday this week');
+        }
+        $startDate = $selectedDate->modify('monday this week')->setTime(0, 0);
+        $endDate = $startDate->modify('+6 days');
+        $workerId = $request->query->getInt('worker') ?: null;
+        $worker = $workerId === null ? null : $workers->find($workerId);
+        if ($workerId !== null && (!$worker instanceof Worker || $worker->isTrashed())) {
+            throw $this->createNotFoundException('Worker not found.');
+        }
+
+        return $this->render('reporting/weekly_review.html.twig', [
+            'workers' => $workers->findActive(),
+            'selectedWorker' => $worker,
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'allocations' => $allocations->findForWeek($startDate, $endDate, $worker),
+            'vacations' => $vacations->findOverlapping($startDate, $endDate, $worker),
         ]);
     }
 }

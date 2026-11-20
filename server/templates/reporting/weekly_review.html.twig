@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block title %}Weekly project review{% endblock %}
+{% block body %}
+    <main>
+        <h1>Weekly project review</h1>
+        <p>{{ startDate|date('Y-m-d') }} – {{ endDate|date('Y-m-d') }}</p>
+        <form method="get">
+            <label for="start">Week</label>
+            <input id="start" name="start" type="date" value="{{ startDate|date('Y-m-d') }}">
+            <label for="worker">Worker</label>
+            <select id="worker" name="worker">
+                <option value="">All workers</option>
+                {% for worker in workers %}<option value="{{ worker.id }}"{% if selectedWorker and selectedWorker.id == worker.id %} selected{% endif %}>{{ worker.name }}</option>{% endfor %}
+            </select>
+            <button type="submit">Show review</button>
+        </form>
+        <h2>Task allocations</h2>
+        <table><thead><tr><th>Project</th><th>Task</th><th>State</th><th>Period</th><th>Job</th><th>Assigned to</th><th>Provider</th><th>Volume</th></tr></thead><tbody>
+        {% for allocation in allocations %}
+            <tr><td>{{ allocation.task.project.name }}</td><td>{{ allocation.task.name }}</td><td>{{ allocation.task.state.label ?? '—' }}</td><td>{{ allocation.task.startDate|date('Y-m-d') }} – {{ allocation.task.endDate|date('Y-m-d') }}</td><td>{{ allocation.job.label ?? '—' }}</td><td>{{ allocation.worker ? allocation.worker.name : 'Unassigned' }}</td><td>{{ allocation.provider ? allocation.provider.name : '—' }}</td><td>{{ allocation.volume }}</td></tr>
+        {% else %}<tr><td colspan="8">No task allocations for this week.</td></tr>{% endfor %}
+        </tbody></table>
+        <h2>Vacations</h2>
+        <ul>{% for vacation in vacations %}<li>{{ vacation.worker.name }} — {{ vacation.startDate|date('Y-m-d') }}–{{ vacation.endDate|date('Y-m-d') }} ({{ vacation.coefficient }})</li>{% else %}<li>No vacations in this period.</li>{% endfor %}</ul>
+    </main>
+{% endblock %}

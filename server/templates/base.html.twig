@@ -19,7 +19,7 @@
     </head>
     <body>
         {% if app.user %}
-            {% if is_granted('ROLE_FORECAST_USER') %}<nav aria-label="Main"><a href="{{ path('project_index') }}">Projects</a>{% if is_granted('ROLE_PM') %} <a href="{{ path('reporting_availability') }}">Weekly availability</a>{% endif %}</nav>{% endif %}
+            {% if is_granted('ROLE_FORECAST_USER') %}<nav aria-label="Main"><a href="{{ path('project_index') }}">Projects</a>{% if is_granted('ROLE_PM') %} <a href="{{ path('reporting_availability') }}">Weekly availability</a> <a href="{{ path('reporting_weekly_review') }}">Weekly review</a>{% endif %}</nav>{% endif %}
             <form action="{{ path('app_logout') }}" method="post">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
                 <button type="submit">Sign out</button>
