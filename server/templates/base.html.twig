@@ -18,6 +18,12 @@
         {% endif %}
     </head>
     <body>
+        {% if app.user %}
+            <form action="{{ path('app_logout') }}" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+                <button type="submit">Sign out</button>
+            </form>
+        {% endif %}
         {% block body %}{% endblock %}
     </body>
 </html>

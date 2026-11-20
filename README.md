@@ -17,8 +17,12 @@ The new application lives in [`server/`](server/). The original Symfony 2 applic
 cd server
 cp .env.example .env
 composer install
+php bin/console doctrine:migrations:migrate
+php bin/console app:user:create admin@example.com
 php -S 127.0.0.1:8000 -t public public/index.php
 ```
+
+The account command asks for a password without displaying it and creates an administrator account using Symfony's configured password hasher.
 
 Open `http://127.0.0.1:8000/health` to check that the application responds. The local SQLite file is created under `server/var/` when the database is first used. Put any real local secrets in `.env.local` or the process environment; do not commit them.
 
