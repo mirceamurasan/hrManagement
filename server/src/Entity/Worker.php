@@ -30,6 +30,14 @@ class Worker extends SoftDeletableEntity
     #[ORM\JoinColumn(name: 'WorkersJob', referencedColumnName: 'Id', nullable: true, onDelete: 'SET NULL')]
     private ?Job $job = null;
 
+    #[ORM\ManyToOne(targetEntity: Team::class)]
+    #[ORM\JoinColumn(name: 'WorkersTeam', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
+    private ?Team $team = null;
+
+    #[ORM\ManyToOne(targetEntity: WorkLocation::class)]
+    #[ORM\JoinColumn(name: 'WorkersLocation', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
+    private ?WorkLocation $location = null;
+
     #[ORM\Column(name: 'StartWorkingDate', type: 'date_immutable', nullable: true)]
     private ?DateTimeImmutable $startDate = null;
 
@@ -52,6 +60,10 @@ class Worker extends SoftDeletableEntity
     public function setAccount(?UserAccount $account): self { $this->account = $account; return $this; }
     public function getJob(): ?Job { return $this->job; }
     public function setJob(?Job $job): self { $this->job = $job; return $this; }
+    public function getTeam(): ?Team { return $this->team; }
+    public function setTeam(?Team $team): self { $this->team = $team; return $this; }
+    public function getLocation(): ?WorkLocation { return $this->location; }
+    public function setLocation(?WorkLocation $location): self { $this->location = $location; return $this; }
     public function getStartDate(): ?DateTimeImmutable { return $this->startDate; }
     public function setStartDate(?DateTimeImmutable $date): self { $this->startDate = $date; return $this; }
     public function getEndDate(): ?DateTimeImmutable { return $this->endDate; }
